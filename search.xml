@@ -1,364 +1,38 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>hexo+github搭建个人博客</title>
+    <url>/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）"><a href="#hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）" class="headerlink" title="hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）"></a>hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）</h3><span id="more"></span>
 
+<h4 id="1、前提条件"><a href="#1、前提条件" class="headerlink" title="1、前提条件"></a>1、前提条件</h4><p>（1）windows系统上安装node.js，自行百度。检验是否安装成功如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<p><img src="/../images/1.PNG" alt="1"></p>
+<p>（2）安装hexo框架，检验是否安装成功如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i -g hexo #安装hexo</span><br><span class="line">hexo -v	#查看版本</span><br><span class="line">hexo init #初始化命令</span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/main.css">
+<p><img src="/../images/2.PNG" alt="2"></p>
+<p>（3）Git安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
 
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"tzd-tzd.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="Redis小试牛刀">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Redis">
-<meta property="og:url" content="http://tzd-tzd.github.io/2021/05/02/Redis/index.html">
-<meta property="og:site_name" content="菜登的学习畅想录">
-<meta property="og:description" content="Redis小试牛刀">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618160003509.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618160101040.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618162745983.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618163018649.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203434868.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203449210.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618205641992.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618205920332.png">
-<meta property="og:image" content="http://tzd-tzd.github.io/.io//image-20210618212534639.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211300027.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211401669.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211907299.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618212029799.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211941020.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093306171.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093617872.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093741383.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093941172.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094058710.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094201203.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094341090.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094633896.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094741479.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619095200164.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619095633057.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100129431.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100138313.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100303067.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100339429.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100941862.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101004992.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101322601.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101853376.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619103155712.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619103558260.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619104039665.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619104309571.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619104813563.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110418254.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110452361.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110629704.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619111652745.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619112440704.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619154258222.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619154850009.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619162020586.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619163643698.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619165201337.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619165505113.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619170416116.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619170456227.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619213926122.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619215600452.png">
-<meta property="article:published_time" content="2021-05-02T13:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-02T10:43:31.127Z">
-<meta property="article:author" content="田泽登">
-<meta property="article:tag" content="Redis">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618160003509.png">
-
-
-<link rel="canonical" href="http://tzd-tzd.github.io/2021/05/02/Redis/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tzd-tzd.github.io/2021/05/02/Redis/","path":"2021/05/02/Redis/","title":"Redis"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Redis | 菜登的学习畅想录</title>
-  
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">菜登的学习畅想录</p>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-主页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a></li>
-        <li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-存档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>存档</a></li>
-        <li class="menu-item menu-item-日常"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日常</a></li>
-        <li class="menu-item menu-item-站点"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点</a></li>
-        <li class="menu-item menu-item-公益404"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益404</a></li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-        
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E5%B0%8F%E8%AF%95%E7%89%9B%E5%88%80"><span class="nav-number">1.</span> <span class="nav-text">Redis小试牛刀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">Redis概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.1.</span> <span class="nav-text">Redis介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.3.</span> <span class="nav-text">相关技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">Redis数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E5%AD%97%E7%AC%A6%E4%B8%B2-String"><span class="nav-number">1.2.1.</span> <span class="nav-text">Redis字符串(String)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E5%88%97%E8%A1%A8%EF%BC%88List"><span class="nav-number">1.2.2.</span> <span class="nav-text">Redis列表（List)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">Redis集合（Set）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-2"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E5%93%88%E5%B8%8C%EF%BC%88Hash%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">Redis哈希（Hash）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-3"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88Zset%EF%BC%88Sorted-set%EF%BC%89"><span class="nav-number">1.2.5.</span> <span class="nav-text">Redis有序集合Zset（Sorted set）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-4"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-4"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%B3%E8%B7%83%E8%A1%A8"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">跳跃表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-Bitmaps"><span class="nav-number">1.2.6.</span> <span class="nav-text">Redis Bitmaps</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-5"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bitmaps%E4%B8%8Eset%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">Bitmaps与set对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HyperLogLog"><span class="nav-number">1.2.7.</span> <span class="nav-text">HyperLogLog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geospatial"><span class="nav-number">1.2.8.</span> <span class="nav-text">Geospatial</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E7%9A%84%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85"><span class="nav-number">1.3.</span> <span class="nav-text">Redis的发布和订阅</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85"><span class="nav-number">1.3.1.</span> <span class="nav-text">什么是发布和订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E7%9A%84%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">Redis的发布和订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">发布订阅命令行实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E6%9C%BA%E5%88%B6%E7%A7%92%E6%9D%80"><span class="nav-number">1.4.</span> <span class="nav-text">Redis事务、锁机制秒杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E4%BA%8B%E5%8A%A1%E5%AE%9A%E4%B9%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">Redis事务定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi%E3%80%81Exec%E3%80%81discard"><span class="nav-number">1.4.2.</span> <span class="nav-text">Multi、Exec、discard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">1.4.3.</span> <span class="nav-text">事务的错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E6%88%90%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.4.4.</span> <span class="nav-text">为什么要做成事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.5.</span> <span class="nav-text">事务冲突的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E4%BA%8B%E5%8A%A1%E4%B8%89%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.6.</span> <span class="nav-text">Redis事务三特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E4%BA%8B%E5%8A%A1%E7%A7%92%E6%9D%80%E6%A1%88%E4%BE%8B"><span class="nav-number">1.5.</span> <span class="nav-text">Redis_事务秒杀案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E8%AE%A1%E6%95%B0%E5%99%A8%E5%92%8C%E4%BA%BA%E5%91%98%E8%AE%B0%E5%BD%95%E7%9A%84%E4%BA%8B%E5%8A%A1%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.1.</span> <span class="nav-text">解决计数器和人员记录的事务操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E4%BA%8B%E5%8A%A1%E2%80%94%E7%A7%92%E6%9D%80%E5%B9%B6%E5%8F%91%E6%A8%A1%E6%8B%9F"><span class="nav-number">1.5.2.</span> <span class="nav-text">Redis事务—秒杀并发模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.3.</span> <span class="nav-text">超卖问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E7%BB%AD%E5%A2%9E%E5%8A%A0%E5%B9%B6%E5%8F%91%E6%B5%8B%E8%AF%95"><span class="nav-number">1.5.4.</span> <span class="nav-text">继续增加并发测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%BA%93%E5%AD%98%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.5.</span> <span class="nav-text">解决库存遗留问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%8C%81%E4%B9%85%E5%8C%96%E4%B9%8BRDB"><span class="nav-number">1.6.</span> <span class="nav-text">Redis持久化之RDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.6.1.</span> <span class="nav-text">总体介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB"><span class="nav-number">1.6.2.</span> <span class="nav-text">RDB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">备份是如何执行的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fork"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">Fork</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDB%E6%8C%81%E4%B9%85%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.2.4.</span> <span class="nav-text">RDB持久化流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dump-rdb%E6%96%87%E4%BB%B6"><span class="nav-number">1.6.2.5.</span> <span class="nav-text">dump.rdb文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A6%E5%8F%91RDB%E5%BF%AB%E7%85%A7%EF%BC%9B%E4%BF%9D%E6%8C%81%E7%AD%96%E7%95%A5"><span class="nav-number">1.6.2.6.</span> <span class="nav-text">如何触发RDB快照；保持策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-number">1.6.2.7.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A3%E5%8A%BF"><span class="nav-number">1.6.2.8.</span> <span class="nav-text">劣势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%81%9C%E6%AD%A2"><span class="nav-number">1.6.2.9.</span> <span class="nav-text">如何停止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.2.10.</span> <span class="nav-text">小总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%8C%81%E4%B9%85%E5%8C%96%E4%B9%8BAOF"><span class="nav-number">1.7.</span> <span class="nav-text">Redis持久化之AOF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF%EF%BC%88Append-Only-File%EF%BC%89"><span class="nav-number">1.7.1.</span> <span class="nav-text">AOF（Append Only File）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF%E6%8C%81%E4%B9%85%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">AOF持久化流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF%E9%BB%98%E8%AE%A4%E4%B8%8D%E5%BC%80%E5%90%AF"><span class="nav-number">1.7.1.2.</span> <span class="nav-text">AOF默认不开启</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF%E5%92%8CRDB%E5%90%8C%E6%97%B6%E5%BC%80%E5%90%AF%EF%BC%8Credis%E5%90%AC%E8%B0%81%E7%9A%84%EF%BC%9F"><span class="nav-number">1.7.1.3.</span> <span class="nav-text">AOF和RDB同时开启，redis听谁的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF%E5%90%AF%E5%8A%A8%E3%80%81%E4%BF%AE%E5%A4%8D%E3%80%81%E6%81%A2%E5%A4%8D"><span class="nav-number">1.7.1.4.</span> <span class="nav-text">AOF启动、修复、恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF%E5%90%8C%E6%AD%A5%E9%A2%91%E7%8E%87%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.7.1.5.</span> <span class="nav-text">AOF同步频率设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rewrite%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.7.1.6.</span> <span class="nav-text">Rewrite压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF-1"><span class="nav-number">1.7.1.7.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A3%E5%8A%BF-1"><span class="nav-number">1.7.1.8.</span> <span class="nav-text">劣势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93-1"><span class="nav-number">1.7.1.9.</span> <span class="nav-text">小总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-Which-one"><span class="nav-number">1.7.2.</span> <span class="nav-text">总结(Which one)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E5%93%AA%E4%B8%AA%E5%A5%BD"><span class="nav-number">1.7.2.1.</span> <span class="nav-text">用哪个好</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%98%E7%BD%91%E5%BB%BA%E8%AE%AE"><span class="nav-number">1.7.2.2.</span> <span class="nav-text">官网建议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="nav-number">1.8.</span> <span class="nav-text">Redis主从复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-number">1.8.1.</span> <span class="nav-text">复制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F-sentinel"><span class="nav-number">1.8.2.</span> <span class="nav-text">哨兵模式(sentinel)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E9%9B%86%E7%BE%A4%EF%BC%88cluster%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-number">1.9.</span> <span class="nav-text">Redis集群（cluster模式）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.9.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.9.2.</span> <span class="nav-text">集群连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-cluster-%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E8%BF%99%E5%85%AD%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="nav-number">1.9.3.</span> <span class="nav-text">redis cluster 如何分配这六个节点?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFslots"><span class="nav-number">1.9.4.</span> <span class="nav-text">什么是slots</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%BD%95%E5%85%A5%E5%80%BC"><span class="nav-number">1.9.5.</span> <span class="nav-text">在集群中录入值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D"><span class="nav-number">1.9.6.</span> <span class="nav-text">故障恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-%E9%9B%86%E7%BE%A4%E4%BC%98%E7%82%B9"><span class="nav-number">1.9.7.</span> <span class="nav-text">Redis 集群优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-%E9%9B%86%E7%BE%A4%E4%B8%8D%E8%B6%B3"><span class="nav-number">1.9.8.</span> <span class="nav-text">Redis 集群不足</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">1.10.</span> <span class="nav-text">Redis应用问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">1.10.1.</span> <span class="nav-text">缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.10.1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.10.1.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-number">1.10.2.</span> <span class="nav-text">缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">1.10.2.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-number">1.10.2.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.10.3.</span> <span class="nav-text">缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-2"><span class="nav-number">1.10.3.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="nav-number">1.10.3.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">1.10.4.</span> <span class="nav-text">分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-3"><span class="nav-number">1.10.4.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BD%BF%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">1.10.4.2.</span> <span class="nav-text">解决方案：使用redis实现分布式锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RedLock"><span class="nav-number">1.10.5.</span> <span class="nav-text">RedLock</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-IO%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.11.</span> <span class="nav-text">Redis IO多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="nav-number">1.11.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E6%9E%B6%E6%9E%84"><span class="nav-number">1.11.2.</span> <span class="nav-text">原理架构</span></a></li></ol></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="田泽登"
-      src="/images/pig.jpg">
-  <p class="site-author-name" itemprop="name">田泽登</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">2</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-          <a href="/categories/">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-          <a href="/tags/">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author site-overview-item animated">
-      <span class="links-of-author-item">
-        <a href="https://github.com/tzd-TZD" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tzd-TZD" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:18772650978@163.com" title="邮箱 → mailto:18772650978@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮箱</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://weibo.com/yourname" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
-      </span>
-  </div>
-
-
-
-        </div>
-      </div>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
-
-    
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tzd-tzd.github.io/2021/05/02/Redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/pig.jpg">
-      <meta itemprop="name" content="田泽登">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="菜登的学习畅想录">
-      <meta itemprop="description" content="">
-    </span>
-    
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Redis | 菜登的学习畅想录">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Redis
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-02 21:00:00" itemprop="dateCreated datePublished" datetime="2021-05-02T21:00:00+08:00">2021-05-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-02 18:43:31" itemprop="dateModified" datetime="2022-03-02T18:43:31+08:00">2022-03-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>18k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>17 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="Redis小试牛刀"><a href="#Redis小试牛刀" class="headerlink" title="Redis小试牛刀"></a>Redis小试牛刀</h1><span id="more"></span>
+<p><img src="/../images/3.PNG" alt="3"></p>
+<h4 id="2、准备注册号的github账号，创建本地仓库（https-username-github-io）"><a href="#2、准备注册号的github账号，创建本地仓库（https-username-github-io）" class="headerlink" title="2、准备注册号的github账号，创建本地仓库（https://username.github.io）"></a>2、准备注册号的github账号，创建本地仓库（<a href="https://username.github.io)/">https://username.github.io）</a></h4><p>由于github是国外网站，这一步就得看运气了！</p>
+<p>（1）创建本地仓库</p>
+<p><img src="/../images/4.png" alt="4"></p>
+<p><img src="/../images/5.png" alt="5"></p>
+<h4 id="3、生成SSH秘钥（须记住）"><a href="#3、生成SSH秘钥（须记住）" class="headerlink" title="3、生成SSH秘钥（须记住）"></a>3、生成SSH秘钥（须记住）</h4><h4 id="4、生成个人博客"><a href="#4、生成个人博客" class="headerlink" title="4、生成个人博客"></a>4、生成个人博客</h4><h4 id="5、修改及配置博客主题（NEXT）"><a href="#5、修改及配置博客主题（NEXT）" class="headerlink" title="5、修改及配置博客主题（NEXT）"></a>5、修改及配置博客主题（NEXT）</h4>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis</title>
+    <url>/2021/05/02/Redis/</url>
+    <content><![CDATA[<h1 id="Redis小试牛刀"><a href="#Redis小试牛刀" class="headerlink" title="Redis小试牛刀"></a>Redis小试牛刀</h1><span id="more"></span>
 
 <h2 id="Redis概述"><a href="#Redis概述" class="headerlink" title="Redis概述"></a>Redis概述</h2><h3 id="Redis介绍"><a href="#Redis介绍" class="headerlink" title="Redis介绍"></a>Redis介绍</h3><ul>
 <li>Redis是一个开源的key-value存储系统。</li>
@@ -698,7 +372,7 @@
 <p>im postfile 模拟表单提交参数， 以&amp;符号结尾，存放当前目录。</p>
 <p>内容：prodid&#x3D;0101&amp;</p>
 <p>执行：ab -n 2000 -c 200 -k -p ~&#x2F;postfile -T application&#x2F;x-www-form-urlencoded</p>
-<p>访问：<a target="_blank" rel="noopener" href="http://192.168.2.115:8081/Seckill/doseckill">http://192.168.2.115:8081/Seckill/doseckill</a></p>
+<p>访问：<a href="http://192.168.2.115:8081/Seckill/doseckill">http://192.168.2.115:8081/Seckill/doseckill</a></p>
 <p><strong>超卖</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100129431.png" alt="image-20210619100129431" style="zoom:120%;"><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100138313.png" alt="image-20210619100138313" style="zoom:120%;"></p>
 <h3 id="超卖问题"><a href="#超卖问题" class="headerlink" title="超卖问题"></a>超卖问题</h3><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100303067.png" alt="image-20210619100303067" style="zoom:130%;">
@@ -707,7 +381,7 @@
 <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100339429.png" alt="image-20210619100339429" style="zoom:130%;">
 
 <p><strong>主要代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecKill_redis</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">Jedis</span>(<span class="string">&quot;192.168.44.168&quot;</span>,<span class="number">6379</span>);</span><br><span class="line">		System.out.println(jedis.ping());</span><br><span class="line">		jedis.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//秒杀过程</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">doSecKill</span><span class="params">(String uid,String prodid)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">		<span class="comment">//1 uid和prodid非空判断</span></span><br><span class="line">		<span class="keyword">if</span>(uid == <span class="literal">null</span> || prodid == <span class="literal">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//2 连接redis</span></span><br><span class="line">		<span class="comment">//Jedis jedis = new Jedis(&quot;192.168.44.168&quot;,6379);</span></span><br><span class="line">		<span class="comment">//通过连接池得到jedis对象</span></span><br><span class="line">		<span class="type">JedisPool</span> <span class="variable">jedisPoolInstance</span> <span class="operator">=</span> JedisPoolUtil.getJedisPoolInstance();</span><br><span class="line">		<span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> jedisPoolInstance.getResource();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//3 拼接key</span></span><br><span class="line">		<span class="comment">// 3.1 库存key</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">kcKey</span> <span class="operator">=</span> <span class="string">&quot;sk:&quot;</span>+prodid+<span class="string">&quot;:qt&quot;</span>;</span><br><span class="line">		<span class="comment">// 3.2 秒杀成功用户key</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">&quot;sk:&quot;</span>+prodid+<span class="string">&quot;:user&quot;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//监视库存</span></span><br><span class="line">		jedis.watch(kcKey);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//4 获取库存，如果库存null，秒杀还没有开始</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">kc</span> <span class="operator">=</span> jedis.get(kcKey);</span><br><span class="line">		<span class="keyword">if</span>(kc == <span class="literal">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀还没有开始，请等待&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 5 判断用户是否重复秒杀操作</span></span><br><span class="line">		<span class="keyword">if</span>(jedis.sismember(userKey, uid)) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;已经秒杀成功了，不能重复秒杀&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//6 判断如果商品数量，库存数量小于1，秒杀结束</span></span><br><span class="line">		<span class="keyword">if</span>(Integer.parseInt(kc)&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀已经结束了&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//7 秒杀过程</span></span><br><span class="line">		<span class="comment">//使用事务</span></span><br><span class="line">		<span class="type">Transaction</span> <span class="variable">multi</span> <span class="operator">=</span> jedis.multi();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//组队操作</span></span><br><span class="line">		multi.decr(kcKey);</span><br><span class="line">		multi.sadd(userKey,uid);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//执行</span></span><br><span class="line">		List&lt;Object&gt; results = multi.exec();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(results == <span class="literal">null</span> || results.size()==<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀失败了....&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//7.1 库存-1</span></span><br><span class="line">		<span class="comment">//jedis.decr(kcKey);</span></span><br><span class="line">		<span class="comment">//7.2 把秒杀成功用户添加清单里面</span></span><br><span class="line">		<span class="comment">//jedis.sadd(userKey,uid);</span></span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">&quot;秒杀成功了..&quot;</span>);</span><br><span class="line">		jedis.close();</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecKill_redis</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">Jedis</span>(<span class="string">&quot;192.168.44.168&quot;</span>,<span class="number">6379</span>);</span><br><span class="line">		System.out.println(jedis.ping());</span><br><span class="line">		jedis.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//秒杀过程</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">doSecKill</span><span class="params">(String uid,String prodid)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">		<span class="comment">//1 uid和prodid非空判断</span></span><br><span class="line">		<span class="keyword">if</span>(uid == <span class="literal">null</span> || prodid == <span class="literal">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//2 连接redis</span></span><br><span class="line">		<span class="comment">//Jedis jedis = new Jedis(&quot;192.168.44.168&quot;,6379);</span></span><br><span class="line">		<span class="comment">//通过连接池得到jedis对象</span></span><br><span class="line">		<span class="type">JedisPool</span> <span class="variable">jedisPoolInstance</span> <span class="operator">=</span> JedisPoolUtil.getJedisPoolInstance();</span><br><span class="line">		<span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> jedisPoolInstance.getResource();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//3 拼接key</span></span><br><span class="line">		<span class="comment">// 3.1 库存key</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">kcKey</span> <span class="operator">=</span> <span class="string">&quot;sk:&quot;</span>+prodid+<span class="string">&quot;:qt&quot;</span>;</span><br><span class="line">		<span class="comment">// 3.2 秒杀成功用户key</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">&quot;sk:&quot;</span>+prodid+<span class="string">&quot;:user&quot;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//监视库存</span></span><br><span class="line">		jedis.watch(kcKey);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//4 获取库存，如果库存null，秒杀还没有开始</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">kc</span> <span class="operator">=</span> jedis.get(kcKey);</span><br><span class="line">		<span class="keyword">if</span>(kc == <span class="literal">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀还没有开始，请等待&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 5 判断用户是否重复秒杀操作</span></span><br><span class="line">		<span class="keyword">if</span>(jedis.sismember(userKey, uid)) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;已经秒杀成功了，不能重复秒杀&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//6 判断如果商品数量，库存数量小于1，秒杀结束</span></span><br><span class="line">		<span class="keyword">if</span>(Integer.parseInt(kc)&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀已经结束了&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//7 秒杀过程</span></span><br><span class="line">		<span class="comment">//使用事务</span></span><br><span class="line">		<span class="type">Transaction</span> <span class="variable">multi</span> <span class="operator">=</span> jedis.multi();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//组队操作</span></span><br><span class="line">		multi.decr(kcKey);</span><br><span class="line">		multi.sadd(userKey,uid);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//执行</span></span><br><span class="line">		List&lt;Object&gt; results = multi.exec();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(results == <span class="literal">null</span> || results.size()==<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀失败了....&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//7.1 库存-1</span></span><br><span class="line">		<span class="comment">//jedis.decr(kcKey);</span></span><br><span class="line">		<span class="comment">//7.2 把秒杀成功用户添加清单里面</span></span><br><span class="line">		<span class="comment">//jedis.sadd(userKey,uid);</span></span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">&quot;秒杀成功了..&quot;</span>);</span><br><span class="line">		jedis.close();</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100941862.png" alt="image-20210619100941862" style="zoom:100%;"><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101004992.png" alt="image-20210619101004992"></p>
 <h3 id="继续增加并发测试"><a href="#继续增加并发测试" class="headerlink" title="继续增加并发测试"></a>继续增加并发测试</h3><p> <strong>连接有限制</strong></p>
@@ -743,7 +417,7 @@
 <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101853376.png" alt="image-20210619101853376" style="zoom:130%;">
 
 <h2 id="Redis持久化之RDB"><a href="#Redis持久化之RDB" class="headerlink" title="Redis持久化之RDB"></a><strong>Redis</strong>持久化之RDB</h2><h3 id="总体介绍"><a href="#总体介绍" class="headerlink" title="总体介绍"></a><strong>总体介绍</strong></h3><blockquote>
-<p>官网介绍：<a target="_blank" rel="noopener" href="http://www.redis.io/">http://www.redis.io</a></p>
+<p>官网介绍：<a href="http://www.redis.io/">http://www.redis.io</a></p>
 </blockquote>
 <p>Redis 提供了2个不同形式的持久化方式：</p>
 <ul>
@@ -1163,106 +837,12 @@
 <li><p>io-threads 4</p>
 </li>
 </ul>
-
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Redis/" rel="tag"># Redis</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-            </div>
-            <div class="post-nav-item">
-                <a href="/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="hexo+github搭建个人博客">
-                  hexo+github搭建个人博客 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
-
-
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">田泽登</span>
-</div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-      <span>站点总字数：</span>
-    <span title="站点总字数">18k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">17 分钟</span>
-  </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
-
-<div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<span id="busuanzi_container_site_pv" style='display:none'>
-    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    <span class="post-meta-divider">|</span>
-</span>
-<span id="busuanzi_container_site_uv" style='display:none'>
-    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
-</span>
-</div>
-
-    </div>
-  </footer>
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
-  
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-  <script src="/js/third-party/fancybox.js"></script>
-
-
-  
-
-
-
-
-
-</body>
-</html>
+]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+</search>
