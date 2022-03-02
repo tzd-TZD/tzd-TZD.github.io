@@ -30,6 +30,17 @@
       </tags>
   </entry>
   <entry>
+    <title>数据库优化</title>
+    <url>/2022/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h3 id="数据库的优化（常见八种方法）"><a href="#数据库的优化（常见八种方法）" class="headerlink" title="数据库的优化（常见八种方法）"></a>数据库的优化（常见八种方法）</h3><span id="more"></span>]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis</title>
     <url>/2021/05/02/Redis/</url>
     <content><![CDATA[<h1 id="Redis小试牛刀"><a href="#Redis小试牛刀" class="headerlink" title="Redis小试牛刀"></a>Redis小试牛刀</h1><span id="more"></span>
