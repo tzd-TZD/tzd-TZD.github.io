@@ -138,12 +138,14 @@
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">分类</span>
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -221,7 +223,16 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-03-02 11:04:45 / 修改时间：15:19:28" itemprop="dateCreated datePublished" datetime="2022-03-02T11:04:45+08:00">2022-03-02</time>
+      <time title="创建时间：2022-03-02 15:35:00 / 修改时间：15:36:22" itemprop="dateCreated datePublished" datetime="2022-03-02T15:35:00+08:00">2022-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
     </span>
 
   
@@ -528,19 +539,19 @@
 </li>
 </ol>
 <h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)，是可以修改的字符串，内部结构实现上类似于Java的ArrayList，采用预分配冗余空间的方式来减少内存的频繁分配.</p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618162745983.png" alt="image-20210618162745983" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618162745983.png" alt="image-20210618162745983" style="zoom:120%;" />
 
 <p>如图中所示，内部为当前字符串实际分配的空间capacity一般要高于实际字符串长度len。当字符串长度小于1M时，扩容都是加倍现有的空间，如果超过1M，扩容时一次只会多扩1M的空间。需要注意的是字符串最大长度为512M。</p>
 <h3 id="Redis列表（List"><a href="#Redis列表（List" class="headerlink" title="Redis列表（List)"></a>Redis列表（List)</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>单键多值：Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。它的底</p>
 <p>层实际是个<strong>双向链表</strong>，对两端的操作性能很高，通过索引下标的操作中间的节点性能会较差。</p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618163018649.png" alt="image-20210618163018649" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618163018649.png" alt="image-20210618163018649" style="zoom:120%;" />
 
 <h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
 <li>List的数据结构为快速链表quickList。</li>
 <li>首先在列表元素较少的情况下会使用一块连续的内存存储，这个结构是ziplist，也即是压缩列表。它将所有的元素紧挨着一起存储，分配的是一块连续的内存。</li>
 <li>当数据量比较多的时候才会改成quicklist。因为普通的链表需要的附加指针空间太大，会比较浪费空间。比如这个列表里存的只是int类型的数据，结构上还需要两个额外的指针prev和next。</li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png" alt="image-20210618164459005" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png" alt="image-20210618164459005" style="zoom:120%;" />
 
 <ul>
 <li>Redis将链表和ziplist结合起来组成了quicklist。也就是将多个ziplist使用双向指针串起来使用。这样既满足了快速的插入删除性能，又不会出现太大的空间冗余。</li>
@@ -565,12 +576,12 @@
 <li><p>类似Java里面的Map&lt;String,Object&gt;。</p>
 </li>
 <li><p>用户ID为查找的key，存储的value用户对象包含姓名，年龄，生日等信息，如果用普通的key&#x2F;value结构来存储，主要有以下2种存储方式：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203434868.png" alt="image-20210618203434868" style="zoom:120%;">                    <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203449210.png" alt="image-20210618203449210" style="zoom:120%;"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203434868.png" alt="image-20210618203434868" style="zoom:120%;" />                    <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203449210.png" alt="image-20210618203449210" style="zoom:120%;" /></p>
 <p>方法一：每次修改用户的某个属性需要，先反序列化改好后再序列化回去。开销较大。</p>
 <p>方法二：用户ID数据冗余。</p>
 </li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png" alt="image-20210618203718979" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png" alt="image-20210618203718979" style="zoom:120%;" />
 
 <p>通过 key(用户ID) + field(属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。</p>
 <h4 id="数据结构-3"><a href="#数据结构-3" class="headerlink" title="数据结构"></a>数据结构</h4><p>Hash类型对应的数据结构是两种：ziplist（压缩列表），hashtable（哈希表）。当field-value长度较短且个数较少时，使用ziplist，否则使用hashtable。</p>
@@ -599,13 +610,13 @@
 <ol>
 <li>有序链表</li>
 </ol>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618205641992.png" alt="image-20210618205641992" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618205641992.png" alt="image-20210618205641992" style="zoom:120%;" />
 
 <p>​       要查找值为51的元素，需要从第一个元素开始依次查找、比较才能找到。共需要6次比较。</p>
 <ol start="2">
 <li>跳跃表</li>
 </ol>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618205920332.png" alt="image-20210618205920332" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618205920332.png" alt="image-20210618205920332" style="zoom:120%;" />
 
 <ul>
 <li><p>从第2层开始，1节点比51节点小，向后比较；</p>
@@ -623,7 +634,7 @@
 <li><p>Bitmaps本身不是一种数据类型， 实际上它就是字符串（key-value） ， 但是它可以对字符串的位进行操作。</p>
 </li>
 <li><p>Bitmaps单独提供了一套命令， 所以在Redis中使用Bitmaps和使用字符串的方法不太相同。 可以把Bitmaps想象成一个以位为单位的数组， 数组的每个单元只能存储0和1， 数组的下标在Bitmaps中叫做偏移量。</p>
- <img src="/.io//image-20210618212534639.png" alt="image-20210618212534639" style="zoom:120%;"></li>
+ <img src="img/image-20210618212534639.png" alt="image-20210618212534639" style="zoom:120%;" /></li>
 </ul>
 <h4 id="Bitmaps与set对比"><a href="#Bitmaps与set对比" class="headerlink" title="Bitmaps与set对比"></a><strong>Bitmaps</strong>与set对比</h4><p>假设网站有1亿用户， 每天独立访问的用户有5千万， 如果每天用集合类型和Bitmaps分别存储活跃用户可以得到表：</p>
 <table>
@@ -741,47 +752,47 @@
 <h3 id="Redis的发布和订阅-1"><a href="#Redis的发布和订阅-1" class="headerlink" title="Redis的发布和订阅"></a><strong>Redis</strong>的发布和订阅</h3><ol>
 <li>客户端可以订阅频道如下图：</li>
 </ol>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211300027.png" alt="image-20210618211300027" style="zoom:150%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211300027.png" alt="image-20210618211300027" style="zoom:150%;" />
 
 <ol start="2">
 <li>当给这个频道发布消息后，消息就会发送给订阅的客户端：</li>
 </ol>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211401669.png" alt="image-20210618211401669" style="zoom:150%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211401669.png" alt="image-20210618211401669" style="zoom:150%;" />
 
 <h3 id="发布订阅命令行实现"><a href="#发布订阅命令行实现" class="headerlink" title="发布订阅命令行实现"></a><strong>发布订阅命令行实现</strong></h3><ol>
 <li><p>打开一个客户端订阅channel1：</p>
-  <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211907299.png" alt="image-20210618211907299" style="zoom: 60%;">
+  <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211907299.png" alt="image-20210618211907299" style="zoom: 60%;" />
 </li>
 <li><p>打开另一个客户端，给channel1发布消息hello：</p>
-  <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618212029799.png" alt="image-20210618212029799" style="zoom:50%;">
+  <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618212029799.png" alt="image-20210618212029799" style="zoom:50%;" />
 </li>
 <li><p>打开第一个客户端可以看到发送的消息：</p>
 </li>
 </ol>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211941020.png" alt="image-20210618211941020" style="zoom: 55%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618211941020.png" alt="image-20210618211941020" style="zoom: 55%;" />
 
 
 
 <h2 id="Redis事务、锁机制秒杀"><a href="#Redis事务、锁机制秒杀" class="headerlink" title="Redis事务、锁机制秒杀"></a>Redis事务、锁机制秒杀</h2><h3 id="Redis事务定义"><a href="#Redis事务定义" class="headerlink" title="Redis事务定义"></a>Redis事务定义</h3><p>Redis事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</p>
 <p>Redis事务的主要作用就是<strong>串联多个命令</strong>防止别的命令插队。</p>
 <h3 id="Multi、Exec、discard"><a href="#Multi、Exec、discard" class="headerlink" title="Multi、Exec、discard"></a>Multi、Exec、discard</h3><p>Redis事务中有Multi、Exec和discard三个指令，在Redis中，从输入Multi命令开始，输入的命令都会依次进入命令队列中，但不会执行，直到输入Exec后，Redis会将之前的命令队列中的命令依次执行。而组队的过程中可以通过discard来放弃组队。</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093306171.png" alt="image-20210619093306171" style="zoom:120%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093306171.png" alt="image-20210619093306171" style="zoom:120%;" />
 
 <p>案例说明：</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093617872.png" alt="image-20210619093617872" style="zoom: 50%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093617872.png" alt="image-20210619093617872" style="zoom: 50%;" />
 
 <p>组队成功，提交成功。</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093741383.png" alt="image-20210619093741383" style="zoom: 50%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093741383.png" alt="image-20210619093741383" style="zoom: 50%;" />
 
 <p>组队阶段报错，提交失败。</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093941172.png" alt="image-20210619093941172" style="zoom:50%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619093941172.png" alt="image-20210619093941172" style="zoom:50%;" />
 
 <p>组队成功，提交有成功有失败情况。</p>
 <h3 id="事务的错误处理"><a href="#事务的错误处理" class="headerlink" title="事务的错误处理"></a>事务的错误处理</h3><p>组队中某个命令出现了报告错误，执行时整个的所有队列都会被取消。</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094058710.png" alt="image-20210619094058710" style="zoom:130%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094058710.png" alt="image-20210619094058710" style="zoom:130%;" />
 
 <p>如果执行阶段某个命令报出了错误，则只有报错的命令不会被执行，而其他的命令都会执行，不会回滚。</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094201203.png" alt="image-20210619094201203" style="zoom:130%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094201203.png" alt="image-20210619094201203" style="zoom:130%;" />
 
 <h3 id="为什么要做成事务"><a href="#为什么要做成事务" class="headerlink" title="为什么要做成事务"></a><strong>为什么要做成事务</strong></h3><p>想想一个场景：有很多人有你的账户，同时去参加双十一抢购。</p>
 <h3 id="事务冲突的问题"><a href="#事务冲突的问题" class="headerlink" title="事务冲突的问题"></a><strong>事务冲突的问题</strong></h3><p><strong>例子</strong></p>
@@ -794,19 +805,19 @@
 <p>最终我们可以发现，总共金额是10000，如果请求全部执行，那最后的金额变为-4000，很明显不合理。</p>
 </li>
 </ul>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094341090.png" alt="image-20210619094341090" style="zoom:130%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094341090.png" alt="image-20210619094341090" style="zoom:130%;" />
 
 <p><strong>悲观锁</strong></p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094633896.png" alt="image-20210619094633896" style="zoom:130%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094633896.png" alt="image-20210619094633896" style="zoom:130%;" />
 
 <p><strong>悲观锁(Pessimistic Lock)<strong>，顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。</strong>传统的关系型数据库里边就用到了很多这种锁机制</strong>，比如<strong>行锁</strong>，<strong>表锁</strong>等，<strong>读锁</strong>，<strong>写锁</strong>等，都是在做操作之前先上锁。</p>
 <p><strong>乐观锁</strong></p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094741479.png" alt="image-20210619094741479" style="zoom:130%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619094741479.png" alt="image-20210619094741479" style="zoom:130%;" />
 
 <p><strong>乐观锁(Optimistic Lock)<strong>，顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。</strong>乐观锁适用于多读的应用类型，这样可以提高吞吐量</strong>。Redis就是利用这种<strong>check-and-set机制</strong>实现事务的。</p>
 <p><strong>WATCH</strong> <strong>key</strong> <strong>[key …]</strong></p>
 <p>在执行multi之前，先执行watch key1 [key2]，可以监视一个(或多个) key ，如果在事务<strong>执行之前这个(或这些) key被其他命令所改动，那么事务将被打断。</strong></p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619095200164.png" alt="image-20210619095200164" style="zoom: 50%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619095200164.png" alt="image-20210619095200164" style="zoom: 50%;" />
 
 
 
@@ -820,7 +831,7 @@
 <li><p>不保证原子性 ：事务中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚 。</p>
 </li>
 </ul>
-<h2 id="Redis-事务秒杀案例"><a href="#Redis-事务秒杀案例" class="headerlink" title="Redis_事务秒杀案例"></a>Redis_事务秒杀案例</h2><h3 id="解决计数器和人员记录的事务操作"><a href="#解决计数器和人员记录的事务操作" class="headerlink" title="解决计数器和人员记录的事务操作"></a><strong>解决计数器和人员记录的事务操作</strong></h3><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619095633057.png" alt="image-20210619095633057" style="zoom:130%;">
+<h2 id="Redis-事务秒杀案例"><a href="#Redis-事务秒杀案例" class="headerlink" title="Redis_事务秒杀案例"></a>Redis_事务秒杀案例</h2><h3 id="解决计数器和人员记录的事务操作"><a href="#解决计数器和人员记录的事务操作" class="headerlink" title="解决计数器和人员记录的事务操作"></a><strong>解决计数器和人员记录的事务操作</strong></h3><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619095633057.png" alt="image-20210619095633057" style="zoom:130%;" />
 
 <h3 id="Redis事务—秒杀并发模拟"><a href="#Redis事务—秒杀并发模拟" class="headerlink" title="Redis事务—秒杀并发模拟"></a>Redis事务—秒杀并发模拟</h3><blockquote>
 <p><strong>使用工具ab模拟测试：</strong></p>
@@ -837,21 +848,21 @@
 <p>执行：ab -n 2000 -c 200 -k -p ~&#x2F;postfile -T application&#x2F;x-www-form-urlencoded</p>
 <p>访问：<a target="_blank" rel="noopener" href="http://192.168.2.115:8081/Seckill/doseckill">http://192.168.2.115:8081/Seckill/doseckill</a></p>
 <p><strong>超卖</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100129431.png" alt="image-20210619100129431" style="zoom:120%;"><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100138313.png" alt="image-20210619100138313" style="zoom:120%;"></p>
-<h3 id="超卖问题"><a href="#超卖问题" class="headerlink" title="超卖问题"></a>超卖问题</h3><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100303067.png" alt="image-20210619100303067" style="zoom:130%;">
+<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100129431.png" alt="image-20210619100129431" style="zoom:120%;" /><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100138313.png" alt="image-20210619100138313" style="zoom:120%;" /></p>
+<h3 id="超卖问题"><a href="#超卖问题" class="headerlink" title="超卖问题"></a>超卖问题</h3><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100303067.png" alt="image-20210619100303067" style="zoom:130%;" />
 
 <p><strong>利用乐观锁淘汰用户，解决超卖问题。</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100339429.png" alt="image-20210619100339429" style="zoom:130%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100339429.png" alt="image-20210619100339429" style="zoom:130%;" />
 
 <p><strong>主要代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecKill_redis</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">Jedis</span>(<span class="string">&quot;192.168.44.168&quot;</span>,<span class="number">6379</span>);</span><br><span class="line">		System.out.println(jedis.ping());</span><br><span class="line">		jedis.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//秒杀过程</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">doSecKill</span><span class="params">(String uid,String prodid)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">		<span class="comment">//1 uid和prodid非空判断</span></span><br><span class="line">		<span class="keyword">if</span>(uid == <span class="literal">null</span> || prodid == <span class="literal">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//2 连接redis</span></span><br><span class="line">		<span class="comment">//Jedis jedis = new Jedis(&quot;192.168.44.168&quot;,6379);</span></span><br><span class="line">		<span class="comment">//通过连接池得到jedis对象</span></span><br><span class="line">		<span class="type">JedisPool</span> <span class="variable">jedisPoolInstance</span> <span class="operator">=</span> JedisPoolUtil.getJedisPoolInstance();</span><br><span class="line">		<span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> jedisPoolInstance.getResource();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//3 拼接key</span></span><br><span class="line">		<span class="comment">// 3.1 库存key</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">kcKey</span> <span class="operator">=</span> <span class="string">&quot;sk:&quot;</span>+prodid+<span class="string">&quot;:qt&quot;</span>;</span><br><span class="line">		<span class="comment">// 3.2 秒杀成功用户key</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">&quot;sk:&quot;</span>+prodid+<span class="string">&quot;:user&quot;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//监视库存</span></span><br><span class="line">		jedis.watch(kcKey);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//4 获取库存，如果库存null，秒杀还没有开始</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">kc</span> <span class="operator">=</span> jedis.get(kcKey);</span><br><span class="line">		<span class="keyword">if</span>(kc == <span class="literal">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀还没有开始，请等待&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 5 判断用户是否重复秒杀操作</span></span><br><span class="line">		<span class="keyword">if</span>(jedis.sismember(userKey, uid)) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;已经秒杀成功了，不能重复秒杀&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//6 判断如果商品数量，库存数量小于1，秒杀结束</span></span><br><span class="line">		<span class="keyword">if</span>(Integer.parseInt(kc)&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀已经结束了&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//7 秒杀过程</span></span><br><span class="line">		<span class="comment">//使用事务</span></span><br><span class="line">		<span class="type">Transaction</span> <span class="variable">multi</span> <span class="operator">=</span> jedis.multi();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//组队操作</span></span><br><span class="line">		multi.decr(kcKey);</span><br><span class="line">		multi.sadd(userKey,uid);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//执行</span></span><br><span class="line">		List&lt;Object&gt; results = multi.exec();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(results == <span class="literal">null</span> || results.size()==<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;秒杀失败了....&quot;</span>);</span><br><span class="line">			jedis.close();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//7.1 库存-1</span></span><br><span class="line">		<span class="comment">//jedis.decr(kcKey);</span></span><br><span class="line">		<span class="comment">//7.2 把秒杀成功用户添加清单里面</span></span><br><span class="line">		<span class="comment">//jedis.sadd(userKey,uid);</span></span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">&quot;秒杀成功了..&quot;</span>);</span><br><span class="line">		jedis.close();</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100941862.png" alt="image-20210619100941862" style="zoom:100%;"><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101004992.png" alt="image-20210619101004992"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619100941862.png" alt="image-20210619100941862" style="zoom:100%;" /><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101004992.png" alt="image-20210619101004992"></p>
 <h3 id="继续增加并发测试"><a href="#继续增加并发测试" class="headerlink" title="继续增加并发测试"></a>继续增加并发测试</h3><p> <strong>连接有限制</strong></p>
 <p>增加-r参数，-r  Don’t exit on socket receive errors。</p>
 <p> <strong>已经秒光，可是还有库存</strong></p>
 <p>已经秒光，可是还有库存。原因：乐观锁导致很多请求都失败。先点的没秒到，后点的可能秒到了。</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101322601.png" alt="image-20210619101322601" style="zoom:150%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101322601.png" alt="image-20210619101322601" style="zoom:150%;" />
 
 <p><strong>连接超时，通过连接池解决</strong></p>
 <p>节省每次连接redis服务带来的消耗，把连接好的实例反复利用。通过参数管理连接的行为，代码见项目中：</p>
@@ -877,7 +888,7 @@
 <li><p>利用lua脚本淘汰用户，解决超卖问题，redis 2.6版本以后，通过lua脚本解决<strong>争抢问题</strong>，实际上是<strong>redis</strong> <strong>利用其单线程的特性，用任务队列的方式解决多任务并发问题</strong>。</p>
 </li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101853376.png" alt="image-20210619101853376" style="zoom:130%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619101853376.png" alt="image-20210619101853376" style="zoom:130%;" />
 
 <h2 id="Redis持久化之RDB"><a href="#Redis持久化之RDB" class="headerlink" title="Redis持久化之RDB"></a><strong>Redis</strong>持久化之RDB</h2><h3 id="总体介绍"><a href="#总体介绍" class="headerlink" title="总体介绍"></a><strong>总体介绍</strong></h3><blockquote>
 <p>官网介绍：<a target="_blank" rel="noopener" href="http://www.redis.io/">http://www.redis.io</a></p>
@@ -899,12 +910,12 @@
 <li><p><strong>一般情况父进程和子进程会共用同一段物理内存</strong>，只有进程空间的各段的内容要发生变化时，才会将父进程的内容复制一份给子进程。</p>
 </li>
 </ul>
-<h4 id="RDB持久化流程"><a href="#RDB持久化流程" class="headerlink" title="RDB持久化流程"></a><strong>RDB</strong>持久化流程</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619103155712.png" alt="image-20210619103155712" style="zoom:150%;">
+<h4 id="RDB持久化流程"><a href="#RDB持久化流程" class="headerlink" title="RDB持久化流程"></a><strong>RDB</strong>持久化流程</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619103155712.png" alt="image-20210619103155712" style="zoom:150%;" />
 
 <h4 id="dump-rdb文件"><a href="#dump-rdb文件" class="headerlink" title="dump.rdb文件"></a><strong>dump.rdb</strong>文件</h4><p>在redis.conf中配置文件名称，默认为dump.rdb。</p>
 <p>rdb文件的保存路径，也可以修改。默认为Redis启动时命令行所在的目录下 “dir  .&#x2F;”</p>
 <h4 id="如何触发RDB快照；保持策略"><a href="#如何触发RDB快照；保持策略" class="headerlink" title="如何触发RDB快照；保持策略"></a><strong>如何触发RDB快照；保持策略</strong></h4><p><strong>配置文件中默认的快照配置</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619103558260.png" alt="image-20210619103558260" style="zoom:130%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619103558260.png" alt="image-20210619103558260" style="zoom:130%;" />
 
 <p><strong>命令save VS bgsave</strong></p>
 <ul>
@@ -937,7 +948,7 @@
 </li>
 </ul>
 <h4 id="如何停止"><a href="#如何停止" class="headerlink" title="如何停止"></a>如何停止</h4><p>动态停止RDB：redis-cli config set save “”#save后给空值，表示禁用保存策略。</p>
-<h4 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619104309571.png" alt="image-20210619104309571" style="zoom:130%;">
+<h4 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619104309571.png" alt="image-20210619104309571" style="zoom:130%;" />
 
 
 
@@ -952,7 +963,7 @@
 <li><p>Redis服务重启时，会重新load加载AOF文件中的写操作达到数据恢复的目的。</p>
 </li>
 </ol>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619104813563.png" alt="image-20210619104813563" style="zoom:130%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619104813563.png" alt="image-20210619104813563" style="zoom:130%;" />
 
 <h4 id="AOF默认不开启"><a href="#AOF默认不开启" class="headerlink" title="AOF默认不开启"></a><strong>AOF</strong>默认不开启</h4><p>可以在redis.conf中配置文件名称默认为 appendonly.aof文件中开启，AOF文件的保存路径，同RDB的路径一致。</p>
 <h4 id="AOF和RDB同时开启，redis听谁的？"><a href="#AOF和RDB同时开启，redis听谁的？" class="headerlink" title="AOF和RDB同时开启，redis听谁的？"></a>AOF和RDB同时开启，redis听谁的？</h4><p>AOF和RDB同时开启，系统默认取AOF的数据（数据不会存在丢失）。</p>
@@ -1022,9 +1033,9 @@
 <li><p>使用新的AOF文件覆盖旧的AOF文件，完成AOF重写。</p>
 </li>
 </ol>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110418254.png" alt="image-20210619110418254" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110418254.png" alt="image-20210619110418254" style="zoom:120%;" />
 
-<h4 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110452361.png" alt="image-20210619110452361" style="zoom:120%;">
+<h4 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110452361.png" alt="image-20210619110452361" style="zoom:120%;" />
 
 <ul>
 <li><p>备份机制更稳健，丢失数据概率更低。</p>
@@ -1042,7 +1053,7 @@
 <li><p>存在个别Bug，造成恢复不能。</p>
 </li>
 </ul>
-<h4 id="小总结-1"><a href="#小总结-1" class="headerlink" title="小总结"></a>小总结</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110629704.png" alt="image-20210619110629704" style="zoom:120%;">
+<h4 id="小总结-1"><a href="#小总结-1" class="headerlink" title="小总结"></a>小总结</h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619110629704.png" alt="image-20210619110629704" style="zoom:120%;" />
 
 <h3 id="总结-Which-one"><a href="#总结-Which-one" class="headerlink" title="总结(Which one)"></a><strong>总结</strong>(Which one)</h3><h4 id="用哪个好"><a href="#用哪个好" class="headerlink" title="用哪个好"></a><strong>用哪个好</strong></h4><p>官方推荐两个都启用：</p>
 <ul>
@@ -1085,7 +1096,7 @@
 <li><p>容灾快速恢复</p>
 </li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619111652745.png" alt="image-20210619111652745" style="zoom:150%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619111652745.png" alt="image-20210619111652745" style="zoom:150%;" />
 
 <h3 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a><strong>复制原理</strong></h3><ul>
 <li><p>Slave启动成功连接到master后会发送一个sync命令；</p>
@@ -1099,10 +1110,10 @@
 <li><p>但是只要是重新连接master，一次完全同步（全量复制)将被自动执行。</p>
 </li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619112440704.png" alt="image-20210619112440704" style="zoom:150%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619112440704.png" alt="image-20210619112440704" style="zoom:150%;" />
 
 <h3 id="哨兵模式-sentinel"><a href="#哨兵模式-sentinel" class="headerlink" title="哨兵模式(sentinel)"></a><strong>哨兵模式</strong>(sentinel)</h3><p>反客为主：当一个master宕机后，后面的slave可以立刻升为master，其后面的slave不用做任何修改。用 slaveof no one 指令将从机变为主机。而哨兵模式是<strong>反客为主的自动版</strong>，能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库。</p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619154258222.png" alt="image-20210619154258222" style="zoom:130%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619154258222.png" alt="image-20210619154258222" style="zoom:130%;" />
 
 <p> <strong>当主机挂掉，从机选举产生新的主机</strong></p>
 <ul>
@@ -1115,7 +1126,7 @@
 <p>由于所有的写操作都是先在Master上操作，然后同步更新到Slave上，所以从Master同步到Slave机器有一定的延迟，当系统很繁忙的时</p>
 <p>候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重。</p>
 <p><strong>故障恢复</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619154850009.png" alt="image-20210619154850009" style="zoom:130%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619154850009.png" alt="image-20210619154850009" style="zoom:130%;" />
 
 <p>优先级：在redis.conf中默认 slave-priority 100，值越小优先级越高。</p>
 <p>偏移量：指获得原主机数据最全的概率。</p>
@@ -1134,7 +1145,7 @@
 </li>
 </ol>
 <h3 id="集群连接"><a href="#集群连接" class="headerlink" title="集群连接"></a>集群连接</h3><p>普通方式登录：可能直接进入读主机，存储数据时，会出现MOVED重定向操作，所以，应该以集群方式登录。</p>
- <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619162020586.png" alt="image-20210619162020586" style="zoom:150%;">
+ <img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619162020586.png" alt="image-20210619162020586" style="zoom:150%;" />
 
 <p>集群登录：redis-cli -c -p 6379  采用集群策略连接，设置数据会自动切换到相应的写主机.</p>
 <h3 id="redis-cluster-如何分配这六个节点"><a href="#redis-cluster-如何分配这六个节点" class="headerlink" title="redis cluster 如何分配这六个节点?"></a><strong>redis cluster</strong> <strong>如何分配这六个节点?</strong></h3><ul>
@@ -1190,7 +1201,7 @@
 </ol>
 <p>其实redis在这个过程中一直平稳运行，崩溃的是我们的数据库（如MySQL）。</p>
 <p>缓存穿透发生的原因：黑客或者其他非正常用户频繁进行很多非正常的url访问，使得redis查询不到数据库。</p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619163643698.png" alt="image-20210619163643698" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619163643698.png" alt="image-20210619163643698" style="zoom:120%;" />
 
 <h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
 <li><p><strong>对空值缓存：</strong>如果一个查询返回的数据为空（不管是数据是否不存在），我们仍然把这个空结果（null）进行缓存，设置空结果的过期时间会很短，最长不超过五分钟。</p>
@@ -1210,7 +1221,7 @@
 <li>redis正常运行</li>
 </ol>
 <p>缓存击穿发生的原因：redis某个key过期了，大量访问使用这个key（热门key）。</p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619165201337.png" alt="image-20210619165201337" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619165201337.png" alt="image-20210619165201337" style="zoom:120%;" />
 
 <h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>key可能会在某些时间点被超高并发地访问，是一种非常“热点”的数据。</p>
 <ol>
@@ -1227,14 +1238,14 @@
 </ol>
 </li>
 </ol>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619165505113.png" alt="image-20210619165505113" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619165505113.png" alt="image-20210619165505113" style="zoom:120%;" />
 
 <h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><h4 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h4><p>key对应的数据存在，但在redis中过期，此时若有大量并发请求过来，这些请求发现缓存过期一般都会从后端数据库加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端数据库压垮。</p>
 <p>缓存雪崩与缓存击穿的区别在于这里针对很多key缓存，前者则是某一个key正常访问。</p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619170416116.png" alt="image-20210619170416116" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619170416116.png" alt="image-20210619170416116" style="zoom:120%;" />
 
 <p><strong>缓存失效瞬间：</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619170456227.png" alt="image-20210619170456227" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619170456227.png" alt="image-20210619170456227" style="zoom:120%;" />
 
 <h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
 <li><p><strong>构建多级缓存架构：</strong>nginx缓存 + redis缓存 +其他缓存（ehcache等）。</p>
@@ -1268,7 +1279,7 @@
 <li><p>可靠性：zookeeper最高</p>
 </li>
 </ol>
-<h4 id="解决方案：使用redis实现分布式锁"><a href="#解决方案：使用redis实现分布式锁" class="headerlink" title="解决方案：使用redis实现分布式锁"></a><strong>解决方案：使用redis实现分布式锁</strong></h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619213926122.png" alt="image-20210619213926122" style="zoom:120%;">
+<h4 id="解决方案：使用redis实现分布式锁"><a href="#解决方案：使用redis实现分布式锁" class="headerlink" title="解决方案：使用redis实现分布式锁"></a><strong>解决方案：使用redis实现分布式锁</strong></h4><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619213926122.png" alt="image-20210619213926122" style="zoom:120%;" />
 
 <p>setnx：通过该命令尝试获得锁，没有获得锁的线程会不断等待尝试。</p>
 <p>set key ex 3000nx：设置过期时间，自动释放锁，解决当某一个业务异常而导致锁无法释放的问题。但是当业务运行超过过期时间时，开辟监控线程增加该业务的运行时间，直到运行结束，释放锁。</p>
@@ -1291,7 +1302,7 @@
 <h2 id="Redis-IO多线程"><a href="#Redis-IO多线程" class="headerlink" title="Redis IO多线程"></a>Redis IO多线程</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><p>Redis6终于支撑多线程了，告别单线程了吗？</p>
 <p>IO多线程其实指<strong>客户端交互部分</strong>的<strong>网络IO</strong>交互处理模块<strong>多线程</strong>，而非<strong>执行命令多线程</strong>。Redis6执行命令依然是单线程。</p>
 <h3 id="原理架构"><a href="#原理架构" class="headerlink" title="原理架构"></a><strong>原理架构</strong></h3><p>Redis 6 加入多线程，但跟 Memcached 这种从 IO处理到数据访问多线程的实现模式有些差异。Redis 的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程。之所以这么设计是不想因为多线程而变得复杂，需要去控制 key、lua、事务，LPUSH&#x2F;LPOP 等等的并发问题。整体的设计大体如下:</p>
-<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619215600452.png" alt="image-20210619215600452" style="zoom:120%;">
+<img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210619215600452.png" alt="image-20210619215600452" style="zoom:120%;" />
 
 <p>另外，多线程IO默认也是不开启的，需要再配置文件中配置：</p>
 <ul>
