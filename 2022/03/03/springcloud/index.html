@@ -22,23 +22,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tzd-tzd.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="菜登的学习畅想录">
-<meta property="og:url" content="http://tzd-tzd.github.io/categories/%E6%95%99%E7%A8%8B/index.html">
+    <meta name="description" content="SpringCloud五大核心组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springcloud五大核心组件">
+<meta property="og:url" content="http://tzd-tzd.github.io/2022/03/03/springcloud/index.html">
 <meta property="og:site_name" content="菜登的学习畅想录">
+<meta property="og:description" content="SpringCloud五大核心组件">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/6.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/7.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/8.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/9.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/10.png">
+<meta property="article:published_time" content="2022-03-03T06:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-03T06:37:17.629Z">
 <meta property="article:author" content="田泽登">
+<meta property="article:tag" content="springcloud">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tzd-tzd.github.io/images/6.png">
 
 
-<link rel="canonical" href="http://tzd-tzd.github.io/categories/%E6%95%99%E7%A8%8B/">
+<link rel="canonical" href="http://tzd-tzd.github.io/2022/03/03/springcloud/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/教程/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tzd-tzd.github.io/2022/03/03/springcloud/","path":"2022/03/03/springcloud/","title":"springcloud五大核心组件"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类: 教程 | 菜登的学习畅想录</title>
+<title>springcloud五大核心组件 | 菜登的学习畅想录</title>
   
 
 
@@ -135,7 +146,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -148,6 +159,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCloud%E4%BA%94%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">SpringCloud五大核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81Eureka%EF%BC%88%E4%B8%8E%E4%B9%8B%E5%AF%B9%E5%BA%94%E7%9A%84%E6%98%AFDubbo%E6%A1%86%E6%9E%B6%E7%9A%84zookeeper%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">1、Eureka（与之对应的是Dubbo框架的zookeeper）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81Ribbon"><span class="nav-number">1.2.</span> <span class="nav-text">2、Ribbon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81Hystrix"><span class="nav-number">1.3.</span> <span class="nav-text">3、Hystrix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81Zuul"><span class="nav-number">1.4.</span> <span class="nav-text">4、Zuul</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81Config"><span class="nav-number">1.5.</span> <span class="nav-text">5、Config</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -215,50 +227,142 @@
 </noscript>
 
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">教程
-          <small>分类</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tzd-tzd.github.io/2022/03/03/springcloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/pig.jpg">
+      <meta itemprop="name" content="田泽登">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菜登的学习畅想录">
+      <meta itemprop="description" content="">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="springcloud五大核心组件 | 菜登的学习畅想录">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          springcloud五大核心组件
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+
+      <time title="创建时间：2022-03-03 14:00:00 / 修改时间：14:37:17" itemprop="dateCreated datePublished" datetime="2022-03-03T14:00:00+08:00">2022-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/springcloud/" itemprop="url" rel="index"><span itemprop="name">springcloud</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="SpringCloud五大核心组件"><a href="#SpringCloud五大核心组件" class="headerlink" title="SpringCloud五大核心组件"></a>SpringCloud五大核心组件</h3><span id="more"></span>
+
+<h4 id="1、Eureka（与之对应的是Dubbo框架的zookeeper）"><a href="#1、Eureka（与之对应的是Dubbo框架的zookeeper）" class="headerlink" title="1、Eureka（与之对应的是Dubbo框架的zookeeper）"></a>1、Eureka（与之对应的是Dubbo框架的zookeeper）</h4><p>作用：实现服务治理（服务注册与发现）</p>
+<p>简介：Spring Cloud Eureka是Spring Cloud Netflix项目下的服务治理模块。</p>
+<p>由两个组件组成：Eureka服务端和Eureka客户端。</p>
+<p>Eureka服务端用作服务注册中心。支持集群部署。</p>
+<p>Eureka客户端是一个java客户端，用来处理服务注册和发现。</p>
+<p>在应用启动时，Eureka客户端向服务端注册自己的服务信息，同时将服务端的服务信息缓存在本地。客户端和服务端周期性的进行心跳交互，以更新服务租约和服务信息。</p>
+<p><img src="/../images/6.png" alt="6"></p>
+<h4 id="2、Ribbon"><a href="#2、Ribbon" class="headerlink" title="2、Ribbon"></a>2、Ribbon</h4><p>作用：Ribbon，主要提供客户侧的软件负载均衡算法。</p>
+<p>简介：Spring Cloud Ribbon是一个基于HTTP和TCP的客户端负载均衡工具，它基于Netflix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST模版请求自动转换成客户端负载均衡的服务调用。</p>
+<p>注意，关键点就是将外界的rest调用，根据负载均衡策略转换为微服务调用。Ribbon有比较多的负载均衡策略。</p>
+<p><img src="/../images/7.png" alt="7"></p>
+<h4 id="3、Hystrix"><a href="#3、Hystrix" class="headerlink" title="3、Hystrix"></a>3、Hystrix</h4><p>作用：断路器，保护系统，控制故障范围。</p>
+<p>简介：为了保证其高可用，单个服务通常会集群部署。由于网络原因或者自身的原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会出现线程阻塞，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。</p>
+<p><img src="/../images/8.png" alt="8"></p>
+<h4 id="4、Zuul"><a href="#4、Zuul" class="headerlink" title="4、Zuul"></a>4、Zuul</h4><p>作用：api网关，路由，负载均衡等多种作用</p>
+<p>简介：类似nginx，反向代理的功能，不过netflix自己增加了一些配合其他组件的特性。</p>
+<p>在微服务架构中，后端服务往往不直接开放给调用端，而是通过一个API网关根据请求的url，路由到相应的服务。当添加API网关后，在第三方调用端和服务提供方之间就创建了一面墙，这面墙直接与调用方通信进行权限控制，后将请求均衡分发给后台服务端。</p>
+<p><img src="/../images/9.png" alt="9"></p>
+<h4 id="5、Config"><a href="#5、Config" class="headerlink" title="5、Config"></a>5、Config</h4><p>作用：配置管理</p>
+<p>简介：SpringCloud Config提供服务器端和客户端。服务器存储后端的默认实现使用git，因此它轻松支持标签版本的配置环境，以及可以访问用于管理内容的各种工具。</p>
+<p>这个还是静态的，得配合Spring Cloud Bus实现动态的配置更新。</p>
+<p><img src="/../images/10.png" alt="10"></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-03-02T15:35:00+08:00"
-              content="2022-03-02">
-          03-02
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" itemprop="url">
-            <span itemprop="name">hexo+github搭建个人博客</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/springcloud/" rel="tag"># springcloud</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/" rel="prev" title="数据库优化">
+                  <i class="fa fa-chevron-left"></i> 数据库优化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/03/%E6%B5%85%E8%B0%88%E5%BE%AE%E6%9C%8D%E5%8A%A1%E3%80%81Spring-Cloud%E3%80%81Spring-Boot%E4%B8%89%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/" rel="next" title="浅谈微服务、Spring Cloud、Spring Boot三者之间的关系">
+                  浅谈微服务、Spring Cloud、Spring Boot三者之间的关系 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 
 </div>
   </main>

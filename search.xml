@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>springcloud五大核心组件</title>
+    <url>/2022/03/03/springcloud/</url>
+    <content><![CDATA[<h3 id="SpringCloud五大核心组件"><a href="#SpringCloud五大核心组件" class="headerlink" title="SpringCloud五大核心组件"></a>SpringCloud五大核心组件</h3><span id="more"></span>
+
+<h4 id="1、Eureka（与之对应的是Dubbo框架的zookeeper）"><a href="#1、Eureka（与之对应的是Dubbo框架的zookeeper）" class="headerlink" title="1、Eureka（与之对应的是Dubbo框架的zookeeper）"></a>1、Eureka（与之对应的是Dubbo框架的zookeeper）</h4><p>作用：实现服务治理（服务注册与发现）</p>
+<p>简介：Spring Cloud Eureka是Spring Cloud Netflix项目下的服务治理模块。</p>
+<p>由两个组件组成：Eureka服务端和Eureka客户端。</p>
+<p>Eureka服务端用作服务注册中心。支持集群部署。</p>
+<p>Eureka客户端是一个java客户端，用来处理服务注册和发现。</p>
+<p>在应用启动时，Eureka客户端向服务端注册自己的服务信息，同时将服务端的服务信息缓存在本地。客户端和服务端周期性的进行心跳交互，以更新服务租约和服务信息。</p>
+<p><img src="/../images/6.png" alt="6"></p>
+<h4 id="2、Ribbon"><a href="#2、Ribbon" class="headerlink" title="2、Ribbon"></a>2、Ribbon</h4><p>作用：Ribbon，主要提供客户侧的软件负载均衡算法。</p>
+<p>简介：Spring Cloud Ribbon是一个基于HTTP和TCP的客户端负载均衡工具，它基于Netflix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST模版请求自动转换成客户端负载均衡的服务调用。</p>
+<p>注意，关键点就是将外界的rest调用，根据负载均衡策略转换为微服务调用。Ribbon有比较多的负载均衡策略。</p>
+<p><img src="/../images/7.png" alt="7"></p>
+<h4 id="3、Hystrix"><a href="#3、Hystrix" class="headerlink" title="3、Hystrix"></a>3、Hystrix</h4><p>作用：断路器，保护系统，控制故障范围。</p>
+<p>简介：为了保证其高可用，单个服务通常会集群部署。由于网络原因或者自身的原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会出现线程阻塞，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。</p>
+<p><img src="/../images/8.png" alt="8"></p>
+<h4 id="4、Zuul"><a href="#4、Zuul" class="headerlink" title="4、Zuul"></a>4、Zuul</h4><p>作用：api网关，路由，负载均衡等多种作用</p>
+<p>简介：类似nginx，反向代理的功能，不过netflix自己增加了一些配合其他组件的特性。</p>
+<p>在微服务架构中，后端服务往往不直接开放给调用端，而是通过一个API网关根据请求的url，路由到相应的服务。当添加API网关后，在第三方调用端和服务提供方之间就创建了一面墙，这面墙直接与调用方通信进行权限控制，后将请求均衡分发给后台服务端。</p>
+<p><img src="/../images/9.png" alt="9"></p>
+<h4 id="5、Config"><a href="#5、Config" class="headerlink" title="5、Config"></a>5、Config</h4><p>作用：配置管理</p>
+<p>简介：SpringCloud Config提供服务器端和客户端。服务器存储后端的默认实现使用git，因此它轻松支持标签版本的配置环境，以及可以访问用于管理内容的各种工具。</p>
+<p>这个还是静态的，得配合Spring Cloud Bus实现动态的配置更新。</p>
+<p><img src="/../images/10.png" alt="10"></p>
+]]></content>
+      <categories>
+        <category>springcloud</category>
+      </categories>
+      <tags>
+        <tag>springcloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo+github搭建个人博客</title>
     <url>/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h3 id="hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）"><a href="#hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）" class="headerlink" title="hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）"></a>hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）</h3><span id="more"></span>
@@ -38,6 +73,23 @@
       </categories>
       <tags>
         <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈微服务、Spring Cloud、Spring Boot三者之间的关系</title>
+    <url>/2022/03/03/%E6%B5%85%E8%B0%88%E5%BE%AE%E6%9C%8D%E5%8A%A1%E3%80%81Spring-Cloud%E3%80%81Spring-Boot%E4%B8%89%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[<h3 id="微服务、Spring-Cloud、Spring-Boot三者之间的关系"><a href="#微服务、Spring-Cloud、Spring-Boot三者之间的关系" class="headerlink" title="微服务、Spring Cloud、Spring Boot三者之间的关系"></a>微服务、Spring Cloud、Spring Boot三者之间的关系</h3><span id="more"></span>
+
+<p>1、SpringBoot专注于快速方便的开发单个个体微服务。</p>
+<p>2、SpringCloud是关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来。</p>
+<p>3、为各个服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、精选决策、分布式会话等集成服务。</p>
+<p>4、SpringBoot可以离开SpringCloud独立开发项目，但是SpringCloud离不开SpringBoot，属于依赖关系。</p>
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
       </tags>
   </entry>
   <entry>
