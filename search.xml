@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo+github搭建个人博客</title>
+    <url>/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）"><a href="#hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）" class="headerlink" title="hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）"></a>hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）</h3><span id="more"></span>
+
+<h4 id="1、前提条件"><a href="#1、前提条件" class="headerlink" title="1、前提条件"></a>1、前提条件</h4><p>（1）windows系统上安装node.js，自行百度。检验是否安装成功如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/1.PNG" alt="1"></p>
+<p>（2）安装hexo框架，检验是否安装成功如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i -g hexo #安装hexo</span><br><span class="line">hexo -v	#查看版本</span><br><span class="line">hexo init #初始化命令</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/2.PNG" alt="2"></p>
+<p>（3）Git安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/3.PNG" alt="3"></p>
+<h4 id="2、准备注册号的github账号，创建本地仓库（https-username-github-io）"><a href="#2、准备注册号的github账号，创建本地仓库（https-username-github-io）" class="headerlink" title="2、准备注册号的github账号，创建本地仓库（https://username.github.io）"></a>2、准备注册号的github账号，创建本地仓库（<a href="https://username.github.io)/">https://username.github.io）</a></h4><p>由于github是国外网站，这一步就得看运气了！</p>
+<p>（1）创建本地仓库</p>
+<p><img src="/../images/4.png" alt="4"></p>
+<p><img src="/../images/5.png" alt="5"></p>
+<h4 id="3、生成SSH秘钥（须记住）"><a href="#3、生成SSH秘钥（须记住）" class="headerlink" title="3、生成SSH秘钥（须记住）"></a>3、生成SSH秘钥（须记住）</h4><h4 id="4、生成个人博客"><a href="#4、生成个人博客" class="headerlink" title="4、生成个人博客"></a>4、生成个人博客</h4><h4 id="5、修改及配置博客主题（NEXT）"><a href="#5、修改及配置博客主题（NEXT）" class="headerlink" title="5、修改及配置博客主题（NEXT）"></a>5、修改及配置博客主题（NEXT）</h4>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>springcloud五大核心组件</title>
     <url>/2022/03/03/springcloud/</url>
     <content><![CDATA[<h3 id="SpringCloud五大核心组件"><a href="#SpringCloud五大核心组件" class="headerlink" title="SpringCloud五大核心组件"></a>SpringCloud五大核心组件</h3><span id="more"></span>
@@ -33,35 +62,6 @@
       </categories>
       <tags>
         <tag>springcloud</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo+github搭建个人博客</title>
-    <url>/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）"><a href="#hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）" class="headerlink" title="hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）"></a>hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）</h3><span id="more"></span>
-
-<h4 id="1、前提条件"><a href="#1、前提条件" class="headerlink" title="1、前提条件"></a>1、前提条件</h4><p>（1）windows系统上安装node.js，自行百度。检验是否安装成功如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/1.PNG" alt="1"></p>
-<p>（2）安装hexo框架，检验是否安装成功如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i -g hexo #安装hexo</span><br><span class="line">hexo -v	#查看版本</span><br><span class="line">hexo init #初始化命令</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/2.PNG" alt="2"></p>
-<p>（3）Git安装。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/3.PNG" alt="3"></p>
-<h4 id="2、准备注册号的github账号，创建本地仓库（https-username-github-io）"><a href="#2、准备注册号的github账号，创建本地仓库（https-username-github-io）" class="headerlink" title="2、准备注册号的github账号，创建本地仓库（https://username.github.io）"></a>2、准备注册号的github账号，创建本地仓库（<a href="https://username.github.io)/">https://username.github.io）</a></h4><p>由于github是国外网站，这一步就得看运气了！</p>
-<p>（1）创建本地仓库</p>
-<p><img src="/../images/4.png" alt="4"></p>
-<p><img src="/../images/5.png" alt="5"></p>
-<h4 id="3、生成SSH秘钥（须记住）"><a href="#3、生成SSH秘钥（须记住）" class="headerlink" title="3、生成SSH秘钥（须记住）"></a>3、生成SSH秘钥（须记住）</h4><h4 id="4、生成个人博客"><a href="#4、生成个人博客" class="headerlink" title="4、生成个人博客"></a>4、生成个人博客</h4><h4 id="5、修改及配置博客主题（NEXT）"><a href="#5、修改及配置博客主题（NEXT）" class="headerlink" title="5、修改及配置博客主题（NEXT）"></a>5、修改及配置博客主题（NEXT）</h4>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
