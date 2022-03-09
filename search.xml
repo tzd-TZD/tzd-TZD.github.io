@@ -3,7 +3,7 @@
   <entry>
     <title>Redis常见面试题</title>
     <url>/2022/03/09/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h3 id="Redis-常见面试题"><a href="#Redis-常见面试题" class="headerlink" title="Redis-常见面试题"></a>Redis-常见面试题</h3><span id="more"></span>
 
 <h3 id="1、什么是Redis？（Remote-Dictionary-Server）"><a href="#1、什么是Redis？（Remote-Dictionary-Server）" class="headerlink" title="1、什么是Redis？（Remote Dictionary Server）"></a>1、什么是Redis？（Remote Dictionary Server）</h3><p>Redis是一个使用C语言编写的，开源的高性能非关系型（NoSQL）的key-value数据库。</p>
 <p>Redis可以存储键和五种不同类型的值之间的映射。键的类型只能是字符串，值支持五种数据类型：字符串、列表、集合、散列表、有序集合。</p>
