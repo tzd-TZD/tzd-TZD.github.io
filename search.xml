@@ -1,6 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Redis常见面试题</title>
+    <url>/2022/03/09/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="1、什么是Redis？（Remote-Dictionary-Server）"><a href="#1、什么是Redis？（Remote-Dictionary-Server）" class="headerlink" title="1、什么是Redis？（Remote Dictionary Server）"></a>1、什么是Redis？（Remote Dictionary Server）</h3><p>Redis是一个使用C语言编写的，开源的高性能非关系型（NoSQL）的key-value数据库。</p>
+<p>Redis可以存储键和五种不同类型的值之间的映射。键的类型只能是字符串，值支持五种数据类型：字符串、列表、集合、散列表、有序集合。</p>
+<p>与传统数据库不同的是：</p>
+<p>（1）Redis的数据是存储在内存中的，所以读写速度非常快。因此Redis被广泛应用于缓存方向，每秒可以处理超过10万次读写操作，是已知最快的key-value数据库。</p>
+<p>（2）另外，Redis也经常用来做分布式锁。</p>
+<p>（3）除此之外，Redis支持事务、持久化、LUA脚本、LRU驱动事件、多种集群方案。</p>
+<hr>
+<h3 id="2、Redis有哪些优缺点？"><a href="#2、Redis有哪些优缺点？" class="headerlink" title="2、Redis有哪些优缺点？"></a>2、Redis有哪些优缺点？</h3><p>优点</p>
+<ul>
+<li>读写性能优异，Redis读的速度是110000次&#x2F;s，写的速度是81000&#x2F;s。</li>
+<li>支持数据持久化，支持AOF和RDB两种持久化方式。</li>
+<li>支持事务，Redis的所有操作都是原子性的，同时Redis还支持对几个操作合并后的原子性执行。</li>
+<li>数据结构丰富，除了支持string类型的value，还支持hash、set、zset、list等数据结构。</li>
+<li>支持主从复制，主机会自动将数据同步到从机，可以进行读写分离。</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li><p>数据库容量受到物理内存的限制，不能用作海量数据的高性能读写，因此Redis适合的场景主要局限在较小数据量的高性能操作和运算上。</p>
+</li>
+<li><p>Redis不具备自动容错和恢复功能，主机从机的宕机都会导致前端部分读写请求失败，需要等待机器重启或手动切换前端的ip才能恢复。</p>
+</li>
+<li><p>主机宕机，宕机前有部分数据未能同步到从机，切换ip后还会引入数据不一致问题，降低了系统的可用性。</p>
+</li>
+<li><p>Redi较难支持在线扩容，在集群容量达到上限时，在线扩容会变得很复杂。为避免这一问题，运维人员在系统上线时必须确保有足够的空间，这对资源造成很大的浪费。</p>
+</li>
+</ul>
+<hr>
+<h3 id="3、为什么要用Redis-x2F-为什么要用缓存？"><a href="#3、为什么要用Redis-x2F-为什么要用缓存？" class="headerlink" title="3、为什么要用Redis&#x2F;为什么要用缓存？"></a>3、为什么要用Redis&#x2F;为什么要用缓存？</h3><p>主要从”高性能”和”高并发”两点来看待这个问题。</p>
+<h4 id="高性能："><a href="#高性能：" class="headerlink" title="高性能："></a>高性能：</h4><p>加入用户第一次访问数据库的某些数据，这个过程会比较慢，因为是从硬盘上读取的。将该用户访问的数据存在缓存中，这样下一次访问这些数据的时候就可以直接从缓存中获取。操作缓存就是直接操作内存，所以速度很快。如果数据库中对应的数据改变后，同步改变缓存中相应的数据即可。</p>
+<p><img src="/../images/11.png" alt="11"></p>
+<h4 id="高并发："><a href="#高并发：" class="headerlink" title="高并发："></a>高并发：</h4><p>直接操作缓存能够承受的请求是远远大于直接访问数据库的，所以我们可以考虑把数据库中的部分数据转移到缓存中去，这样用户的一部分请求会直接到缓存这里而不经过数据库。</p>
+<p><img src="/../images/12.png" alt="12"></p>
+<hr>
+<h3 id="4、为什么要用Redis而不用map-x2F-guava做缓存？"><a href="#4、为什么要用Redis而不用map-x2F-guava做缓存？" class="headerlink" title="4、为什么要用Redis而不用map&#x2F;guava做缓存？"></a>4、为什么要用Redis而不用map&#x2F;guava做缓存？</h3><p>缓存分为本地缓存和分布式缓存。以JAVA为例，使用自带的map或者guava实现的是本地缓存，最主要的特点是轻量以及快速，生命周期随着JVM的销毁而结束，并且在多实例的情况下，每个实例都需要各自保存一份缓存，缓存不具有一致性。</p>
+<p>使用Redis或者memcached之类的称为分布式缓存，在多实例的情况下，各实例公用一份缓存数据，缓存具有一致性。缺点就是需要保持redis或memcached服务的高可用，整个程序架构上较为复杂。</p>
+<hr>
+<h3 id="5、Redis为什么这么快？"><a href="#5、Redis为什么这么快？" class="headerlink" title="5、Redis为什么这么快？"></a>5、Redis为什么这么快？</h3><ol>
+<li><p>完全基于内存，绝大部分请求是纯粹的内存操作，非常快速。数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O（1）。</p>
+</li>
+<li><p>数据结构简单，对数据操作也简单，Redis中的数据结构是专门进行设计的。</p>
+</li>
+<li><p>采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程和多线程导致的切换而消耗CPU，不用去考虑各种锁的问题，不存在加锁释放锁的操作，没有因为出现死锁而导致的性能消耗。</p>
+</li>
+<li><p>使用多路复用I&#x2F;O模型，非阻塞IO。</p>
+</li>
+<li><p>使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM机制，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求。</p>
+</li>
+</ol>
+<hr>
+<h3 id="6、Redis常见的数据类型"><a href="#6、Redis常见的数据类型" class="headerlink" title="6、Redis常见的数据类型"></a>6、Redis常见的数据类型</h3><p>Redis主要有5种数据类型，包括String，List，Set，Zset，Hash。</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">可存储的值</th>
+<th align="center">操作</th>
+<th align="center">应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">String</td>
+<td align="center">字符串、整数或者浮点数</td>
+<td align="center">对整个字符串或者字符串的其中一部分执行操作</td>
+<td align="center">做简单的键值对缓存</td>
+</tr>
+<tr>
+<td align="center">List</td>
+<td align="center">列表</td>
+<td align="center">从两端压入或者弹出元素，对单个或者多个元素进行修剪，只保留一个范围内的元素</td>
+<td align="center">存储一些列表型的数据结构，类似粉丝列表、文章的评论列表之类的数据</td>
+</tr>
+<tr>
+<td align="center">Set</td>
+<td align="center">无序集合</td>
+<td align="center">添加、获取、移除单个元素，检查一个元素是否存在于集合中，计算交集、并集、差集，从集合里面随机获取元素</td>
+<td align="center">交集，并集，差集的操作，比如交集，可以把两个人的粉丝列表整一个交集</td>
+</tr>
+<tr>
+<td align="center">Hash</td>
+<td align="center">包含键值对的无序散列表</td>
+<td align="center">添加、获取、移除单个键值对，获取所有键值对，检查某个键是否存在</td>
+<td align="center">结构化的数据，比如一个对象</td>
+</tr>
+<tr>
+<td align="center">Zset</td>
+<td align="center">有序集合</td>
+<td align="center">添加、获取、删除元素，根据分值范围或者成员来获取元素，计算一个键的排名</td>
+<td align="center">去重但可以排序，如获取排名前几名的用户</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="7、Redis的应用场景"><a href="#7、Redis的应用场景" class="headerlink" title="7、Redis的应用场景"></a>7、Redis的应用场景</h3><ol>
+<li><p>缓存</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例如：热点数据缓存（报表、明星出轨）、对象缓存、全页缓存、可以提升热点数据的访问数据。</li>
+</ul>
+</li>
+<li><p>数据共享分布式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String类型，因为Redis是分布式的独立服务，可以在多个应用之间共享</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>例如：分布式session</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.session<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-session-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>分布式锁</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String类型setnx方法，只有不存在时才能添加成功，返回true</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">getLock</span><span class="params">(String key)</span> &#123;</span><br><span class="line">    <span class="type">Long</span> <span class="variable">flag</span> <span class="operator">=</span> jedis.setnx(key, <span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (flag == <span class="number">1</span>) &#123;</span><br><span class="line">        jedis.expire(key, <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">return</span> <span class="variable">flag</span> <span class="operator">=</span>= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">releaseLock</span><span class="params">(String key)</span> &#123;</span><br><span class="line">    jedis.del(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局ID</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">incrby userid <span class="number">1000</span>  #<span class="type">int</span>类型，incrby，利用原子性</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>计数器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int类型，incr方法</span><br></pre></td></tr></table></figure>
+
+<p>例如：文章的阅读量、微博点赞数、允许一定的延迟，先写入Redis再定时同步到数据库</p>
+</li>
+<li><p>限流</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int类型。incr方法</span><br></pre></td></tr></table></figure>
+
+<p>以访问者的ip和其他信息作为key，访问一次增加一次计数，超过次数则返回false</p>
+</li>
+<li><p>位统计</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String类型的bitcount</span><br><span class="line">字符是以8位二进制存储的</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> k1 a</span><br><span class="line">setbit k1 <span class="number">6</span> <span class="number">1</span></span><br><span class="line">setbit k1 <span class="number">7</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">get</span> k1 </span><br><span class="line"><span class="comment">/* 6 7 代表的a的二进制位的修改</span></span><br><span class="line"><span class="comment">a 对应的ASCII码是97，转换为二进制数据是01100001</span></span><br><span class="line"><span class="comment">b 对应的ASCII码是98，转换为二进制数据是01100010</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">因为bit非常节省空间（1 MB=8388608 bit），可以用来做大数据量的统计。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>例如：在线用户统计、留存用户统计</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">setbit onlineusers <span class="number">01</span> </span><br><span class="line">setbit onlineusers <span class="number">11</span> </span><br><span class="line">setbit onlineusers <span class="number">20</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>购物车</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String或hash。所有String可以做的hash都可以做</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/13.png" alt="13"></p>
+<p>key：用户id；</p>
+<p>filed：商品id；</p>
+<p>value：商品数量；</p>
+<p>+1：hincr；</p>
+<p>-1：hdecr；</p>
+<p>全选：hgetall；</p>
+<p>商品数：hlen。</p>
+</li>
+<li><p>用户消息时间线</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">list，双向链表，直接作为timeline。插入有序。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消息队列</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">List提供了两个阻塞的弹出操作：blpop/brpop 可以设置超时时间</span><br></pre></td></tr></table></figure>
+
+<p>blpop：blpop key1 timeout 移除并获取列表的第一个元素，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</p>
+<p>brpop：brpop key1 timeout 移除并获取列表的最后一个元素，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</p>
+<p>上面的操作。其实就是java的阻塞队列。学习的东西越多。学习成本越低</p>
+<p>队列：先进先除：rpush blpop，左头右尾，右边进入队列，左边出队列</p>
+<p>栈：先进后出：rpush brpop</p>
+</li>
+<li><p>抽奖</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">spop myset	#自带一个随机获得值</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>点赞、签到、打卡</p>
+<p><img src="/../images/14.png" alt="14"></p>
+<ul>
+<li>假如上面微博id是t1001，用户id是u3001</li>
+<li>用like：t1001来维护t1001这条微博的所有点赞用户</li>
+<li>点赞了这条微博：sadd like：t1001 u3001</li>
+<li>取消点赞：srem like :t1001 u3001</li>
+<li>是否点赞：sismember like：t1001 u3001</li>
+<li>点赞的所有用户：smembers like：t1001</li>
+<li>点赞数：scard like：t1001</li>
+</ul>
+</li>
+<li><p>商品标签</p>
+<p><img src="/../images/15.png" alt="15"></p>
+<p>用tags：i5001来维护商品的所有标签。</p>
+<ul>
+<li>sadd tags：i5001 画面清晰细腻</li>
+<li>sadd tags：i5001 真彩清晰显示屏</li>
+<li>sadd tags：i5001 流程至极</li>
+</ul>
+</li>
+<li><p>商品筛选</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 获取差集</span><br><span class="line">sdiff set1 set2</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 获取交集（<span class="keyword">intersection</span> ）</span><br><span class="line">sinter set1 set2</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 获取并集</span><br><span class="line">sunion set1 set2</span><br></pre></td></tr></table></figure>
+
+<p>假如：iphone 11上市</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sadd brand:apple iPhone11</span><br><span class="line"></span><br><span class="line">sadd brand:ios iPhone11</span><br><span class="line"></span><br><span class="line">sad screensize:<span class="number">6.0</span><span class="number">-6.24</span> iPhone11</span><br><span class="line"></span><br><span class="line">sad screentype:lcd iPhone <span class="number">11</span></span><br><span class="line"></span><br><span class="line">#筛选商品，苹果的、ios的、屏幕在<span class="number">6.0</span><span class="number">-6.24</span>之间的，屏幕材质是LCD屏幕</span><br><span class="line">sinter brand:apple brand:ios screensize:<span class="number">6.0</span><span class="number">-6.24</span> screentype:lcd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用户关注、推荐模型</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">follow 关注 fans 粉丝</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>相互关注：<ul>
+<li>sadd 1：follow 2</li>
+<li>sadd 2：fans 1</li>
+<li>sadd 1：fans 2</li>
+<li>sadd 2：follow 1</li>
+</ul>
+</li>
+<li>我关注的人也关注了他：<ul>
+<li>sinter：follow 2：fans</li>
+</ul>
+</li>
+<li>可能认识的人：<ul>
+<li>用户1可能认识的人（差集）：sdiff 2：follow 1：follow</li>
+<li>用户2可能认识的人（差集）：sdiff 1：follow 2：follow</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>排行榜</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">zincrby hotNews	：20190926 1 n6001	#id为6001的新闻点击数加1</span><br><span class="line">zrevrange hotNews:20190926 0 15 withscores	#获取今天点击最多的15条</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h3 id="8、Redis持久化（RDB和AOF）"><a href="#8、Redis持久化（RDB和AOF）" class="headerlink" title="8、Redis持久化（RDB和AOF）"></a>8、Redis持久化（RDB和AOF）</h3>]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据库优化</title>
     <url>/2022/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h3 id="数据库的优化（常见方法）"><a href="#数据库的优化（常见方法）" class="headerlink" title="数据库的优化（常见方法）"></a>数据库的优化（常见方法）</h3><span id="more"></span>
