@@ -365,7 +365,7 @@
 <li>基于中间标记变量，通过另外的标记变量来标识事务是否完成，读取数据时先读取该标记变量，判断是否事务执行完成。但这样会需要额外写代码实现，比较繁琐。</li>
 </ul>
 <hr>
-<h3 id="集群方案"><a href="#集群方案" class="headerlink" title="集群方案"></a>集群方案</h3><h3 id="1、哨兵模式（sentinel）"><a href="#1、哨兵模式（sentinel）" class="headerlink" title="1、哨兵模式（sentinel）"></a>1、哨兵模式（sentinel）</h3><p><img src="/../images/19.png" alt="19"></p>
+<h3 id="集群方案"><a href="#集群方案" class="headerlink" title="集群方案"></a>集群方案</h3><h3 id="14、哨兵模式（sentinel）"><a href="#14、哨兵模式（sentinel）" class="headerlink" title="14、哨兵模式（sentinel）"></a>14、哨兵模式（sentinel）</h3><p><img src="/../images/19.png" alt="19"></p>
 <ol>
 <li><p>哨兵的介绍</p>
 <p>sentinel，中文名是哨兵。哨兵是redis集群机构中非常重要的一个组件，主要有一下功能：</p>
@@ -376,8 +376,22 @@
 <li>配置中心：如果故障转移发生了，通知client客户端新的master地址。</li>
 </ul>
 </li>
-<li></li>
+<li><p>哨兵用于实现redis集群的高可用，本身也是分布式的，作为一个哨兵集群去运行，互相协同工作</p>
+<ul>
+<li>故障转移时，判断一个master node是否宕机了，需要大部分的哨兵都同意才行，涉及到了分布式选举的问题。</li>
+<li>即使部分哨兵节点挂掉了，哨兵集群还是能正常工作的，因为如果一个作为高可用机制重要组成成分的故障转移系统本身是单点的，那就很坑了。</li>
+</ul>
+</li>
+<li><p>哨兵的核心知识</p>
+<ul>
+<li>哨兵至少需要3个实例，来保证自己的健壮性。</li>
+<li>哨兵+redis主从的部署架构，是不保证数据零丢失的，只能保证集群的高可用性。</li>
+<li>对于哨兵+redis主从这种复杂的部署结构，尽量在测试环境和生产环境，都进行充足的测试和演练。</li>
+</ul>
+</li>
 </ol>
+<hr>
+<h3 id="15、官方Redis-Cluster方案（服务端路由查询）"><a href="#15、官方Redis-Cluster方案（服务端路由查询）" class="headerlink" title="15、官方Redis Cluster方案（服务端路由查询）"></a>15、官方Redis Cluster方案（服务端路由查询）</h3><p><img src="/../images/20.png" alt="20"></p>
 ]]></content>
       <categories>
         <category>Redis</category>
