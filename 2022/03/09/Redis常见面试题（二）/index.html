@@ -29,14 +29,13 @@
 <meta property="og:site_name" content="菜登の博客">
 <meta property="og:description" content="Redis-常见面试题（二）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://tzd-tzd.github.io/images/19.png">
-<meta property="og:image" content="http://tzd-tzd.github.io/images/20.png">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/11/redis.gif">
 <meta property="article:published_time" content="2022-03-09T11:17:00.000Z">
-<meta property="article:modified_time" content="2022-03-10T09:01:45.303Z">
+<meta property="article:modified_time" content="2022-03-11T08:03:39.644Z">
 <meta property="article:author" content="田泽登">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://tzd-tzd.github.io/images/19.png">
+<meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2014/11/redis.gif">
 
 
 <link rel="canonical" href="http://tzd-tzd.github.io/2022/03/09/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/">
@@ -157,7 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Redis-常见面试题（二）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">内存相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81MySQL%E9%87%8C%E6%9C%892000w%E6%95%B0%E6%8D%AE%EF%BC%8Credis%E4%B8%AD%E5%8F%AA%E5%AD%9820w%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81redis%E7%9A%84%E6%95%B0%E6%8D%AE%E9%83%BD%E6%98%AF%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81Redis%E7%9A%84%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">2、Redis的内存淘汰策略有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81Redis%E4%B8%BB%E8%A6%81%E6%B6%88%E8%80%97%E4%BB%80%E4%B9%88%E7%89%A9%E7%90%86%E8%B5%84%E6%BA%90%EF%BC%9F%EF%BC%88%E5%86%85%E5%AD%98%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">3、Redis主要消耗什么物理资源？（内存）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81Redis%E7%9A%84%E5%86%85%E5%AD%98%E7%94%A8%E5%AE%8C%E4%BA%86%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">4、Redis的内存用完了会发生什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81Redis%E5%A6%82%E4%BD%95%E5%81%9A%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">5、Redis如何做内存优化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">8.</span> <span class="nav-text">线程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81Redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">9.</span> <span class="nav-text">6、Redis线程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">10.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">7、什么是事务？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">12.</span> <span class="nav-text">8、Redis事务的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">13.</span> <span class="nav-text">9、Redis事务的三个阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0%EF%BC%88ACID%EF%BC%89"><span class="nav-number">14.</span> <span class="nav-text">10、事务管理概述（ACID）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%E9%9A%94%E7%A6%BB%E6%80%A7%E5%90%97%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">11、Redis事务支持隔离性吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E4%BF%9D%E8%AF%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%90%97%EF%BC%9F%E6%94%AF%E6%8C%81%E5%9B%9E%E6%BB%9A%E5%90%97%EF%BC%9F"><span class="nav-number">16.</span> <span class="nav-text">12、Redis事务保证原子性吗？支持回滚吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E5%85%B6%E5%AE%83%E5%AE%9E%E7%8E%B0"><span class="nav-number">17.</span> <span class="nav-text">13、Redis事务其它实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88"><span class="nav-number">18.</span> <span class="nav-text">集群方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14%E3%80%81%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%EF%BC%88sentinel%EF%BC%89"><span class="nav-number">19.</span> <span class="nav-text">14、哨兵模式（sentinel）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15%E3%80%81%E5%AE%98%E6%96%B9Redis-Cluster%E6%96%B9%E6%A1%88%EF%BC%88%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%B7%AF%E7%94%B1%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">20.</span> <span class="nav-text">15、官方Redis Cluster方案（服务端路由查询）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Redis-常见面试题（二）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">内存相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81MySQL%E9%87%8C%E6%9C%892000w%E6%95%B0%E6%8D%AE%EF%BC%8Credis%E4%B8%AD%E5%8F%AA%E5%AD%9820w%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81redis%E7%9A%84%E6%95%B0%E6%8D%AE%E9%83%BD%E6%98%AF%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81Redis%E7%9A%84%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">2、Redis的内存淘汰策略有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81Redis%E4%B8%BB%E8%A6%81%E6%B6%88%E8%80%97%E4%BB%80%E4%B9%88%E7%89%A9%E7%90%86%E8%B5%84%E6%BA%90%EF%BC%9F%EF%BC%88%E5%86%85%E5%AD%98%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">3、Redis主要消耗什么物理资源？（内存）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81Redis%E7%9A%84%E5%86%85%E5%AD%98%E7%94%A8%E5%AE%8C%E4%BA%86%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">4、Redis的内存用完了会发生什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81Redis%E5%A6%82%E4%BD%95%E5%81%9A%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">5、Redis如何做内存优化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">8.</span> <span class="nav-text">线程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81Redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">9.</span> <span class="nav-text">6、Redis线程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">10.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">7、什么是事务？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">12.</span> <span class="nav-text">8、Redis事务的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">13.</span> <span class="nav-text">9、Redis事务的三个阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0%EF%BC%88ACID%EF%BC%89"><span class="nav-number">14.</span> <span class="nav-text">10、事务管理概述（ACID）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%E9%9A%94%E7%A6%BB%E6%80%A7%E5%90%97%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">11、Redis事务支持隔离性吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E4%BF%9D%E8%AF%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%90%97%EF%BC%9F%E6%94%AF%E6%8C%81%E5%9B%9E%E6%BB%9A%E5%90%97%EF%BC%9F"><span class="nav-number">16.</span> <span class="nav-text">12、Redis事务保证原子性吗？支持回滚吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13%E3%80%81Redis%E4%BA%8B%E5%8A%A1%E5%85%B6%E5%AE%83%E5%AE%9E%E7%8E%B0"><span class="nav-number">17.</span> <span class="nav-text">13、Redis事务其它实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88"><span class="nav-number">18.</span> <span class="nav-text">集群方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14%E3%80%81%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%EF%BC%88sentinel%EF%BC%89"><span class="nav-number">19.</span> <span class="nav-text">14、哨兵模式（sentinel）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15%E3%80%81%E5%AE%98%E6%96%B9Redis-Cluster%E6%96%B9%E6%A1%88%EF%BC%88%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%B7%AF%E7%94%B1%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">20.</span> <span class="nav-text">15、官方Redis Cluster方案（服务端路由查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">20.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E8%AF%B4%E6%98%8E"><span class="nav-number">20.2.</span> <span class="nav-text">方案说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E9%97%B4%E7%9A%84%E5%86%85%E9%83%A8%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6"><span class="nav-number">20.3.</span> <span class="nav-text">节点间的内部通信机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16%E3%80%81%E5%9F%BA%E4%BA%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%88%86%E9%85%8D"><span class="nav-number">21.</span> <span class="nav-text">16、基于客户端分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="nav-number">21.1.</span> <span class="nav-text">简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17%E3%80%81%E5%9F%BA%E4%BA%8E%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%86%E7%89%87"><span class="nav-number">22.</span> <span class="nav-text">17、基于代理服务器分片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="nav-number">22.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81"><span class="nav-number">22.2.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%BC%80%E6%BA%90%E6%96%B9%E6%A1%88"><span class="nav-number">22.3.</span> <span class="nav-text">业务开源方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18%E3%80%81Redis%E7%9A%84%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84"><span class="nav-number">23.</span> <span class="nav-text">18、Redis的主从架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-replication%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6"><span class="nav-number">23.1.</span> <span class="nav-text">redis replication的核心机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">23.2.</span> <span class="nav-text">redis主从复制的核心原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19%E3%80%81Redis%E9%9B%86%E7%BE%A4%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">24.</span> <span class="nav-text">19、Redis集群的主从复制模型是怎样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20%E3%80%81%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%B8%ADredis%E6%98%AF%E6%80%8E%E4%B9%88%E9%83%A8%E7%BD%B2%E7%9A%84%EF%BC%9F"><span class="nav-number">25.</span> <span class="nav-text">20、生产环境中redis是怎么部署的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21%E3%80%81%E8%AF%B4%E8%AF%B4Redis%E5%93%88%E5%B8%8C%E6%A7%BD%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9F"><span class="nav-number">26.</span> <span class="nav-text">21、说说Redis哈希槽的概念？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22%E3%80%81Redis%E9%9B%86%E7%BE%A4%E4%BC%9A%E6%9C%89%E5%86%99%E6%93%8D%E4%BD%9C%E4%B8%A2%E5%A4%B1%E5%90%97%EF%BC%9F"><span class="nav-number">27.</span> <span class="nav-text">22、Redis集群会有写操作丢失吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23%E3%80%81Redis%E9%9B%86%E7%BE%A4%E4%B9%8B%E9%97%B4%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%B6%E7%9A%84%EF%BC%9F"><span class="nav-number">28.</span> <span class="nav-text">23、Redis集群之间是如何复制的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24%E3%80%81Redis%E9%9B%86%E7%BE%A4%E6%9C%80%E5%A4%A7%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="nav-number">29.</span> <span class="nav-text">24、Redis集群最大节点个数是多少？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25%E3%80%81Redis%E9%9B%86%E7%BE%A4%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9F"><span class="nav-number">30.</span> <span class="nav-text">25、Redis集群如何选择数据库？</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -233,7 +232,12 @@
 
 <div class="post-block">
   
-  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://www.runoob.com/wp-content/uploads/2014/11/redis.gif" itemprop="contentUrl">
+    </div>
+    </div>
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://tzd-tzd.github.io/2022/03/09/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/">
@@ -281,7 +285,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-10 17:01:45" itemprop="dateModified" datetime="2022-03-10T17:01:45+08:00">2022-03-10</time>
+      <time title="修改时间：2022-03-11 16:03:39" itemprop="dateModified" datetime="2022-03-11T16:03:39+08:00">2022-03-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -300,14 +304,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>6.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -321,7 +325,6 @@
         <h3 id="Redis-常见面试题（二）"><a href="#Redis-常见面试题（二）" class="headerlink" title="Redis-常见面试题（二）"></a>Redis-常见面试题（二）</h3><span id="more"></span>
 
 <h3 id="内存相关"><a href="#内存相关" class="headerlink" title="内存相关"></a>内存相关</h3><h3 id="1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？"><a href="#1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？" class="headerlink" title="1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？"></a>1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？</h3><p>redis内存数据集大小上升到一定大小的时候，就会施行数据淘汰策略。</p>
-<hr>
 <h3 id="2、Redis的内存淘汰策略有哪些？"><a href="#2、Redis的内存淘汰策略有哪些？" class="headerlink" title="2、Redis的内存淘汰策略有哪些？"></a>2、Redis的内存淘汰策略有哪些？</h3><p>Redis的内存淘汰策略是指在Redis的用于缓存的内存不足时，怎么处理需要重新写入且需要申请额外空间的数据。</p>
 <p>全局的键空间选择性移除：</p>
 <ul>
@@ -412,6 +415,94 @@
 </ol>
 <hr>
 <h3 id="15、官方Redis-Cluster方案（服务端路由查询）"><a href="#15、官方Redis-Cluster方案（服务端路由查询）" class="headerlink" title="15、官方Redis Cluster方案（服务端路由查询）"></a>15、官方Redis Cluster方案（服务端路由查询）</h3><p><img src="/../images/20.png" alt="20"></p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>Redis Cluster是一种服务算sharding技术。Redis Cluster并没有使用一致性hash，而是采用slot（槽）的概念，一共分成16384个槽。将求情发送到任意节点，接收到请求的节点会将查询请求发送到正确的节点上执行。</p>
+<h4 id="方案说明"><a href="#方案说明" class="headerlink" title="方案说明"></a>方案说明</h4><ol>
+<li>通过hash的方式，将数据分片，每个节点均分存储一定哈希槽的数据，默认分配了16384个槽位。</li>
+<li>每份数据分片会存储在多个互为主从的多节点上。</li>
+<li>数据写入先写主节点，在同步到从节点（支持配置为阻塞同步）。</li>
+<li>同一分片多个节点的数据不保持一致性。</li>
+<li>读取数据时，当客户端的key没有分配在该节点时，redis会返回转向指令，指向正确的节点。</li>
+<li>扩容时需要把旧节点的数据迁移到新节点。</li>
+</ol>
+<p>在redis cluster架构下，每个redis要放开两个端口号，比如一个是6379，另一个是加1w的端口号，比如16379。</p>
+<p>16379端口号是用来进行节点间通信的，也就是cluster bus的东西，cluster bus的通信，用来进行故障检测，配置更新，故障转移授权。cluster bus用了另外一种二进制的协议，gossip协议，用于节点间进行高效的数据交换，占用更少的网络带宽和处理时间。</p>
+<h4 id="节点间的内部通信机制"><a href="#节点间的内部通信机制" class="headerlink" title="节点间的内部通信机制"></a>节点间的内部通信机制</h4><p>基本通信原理</p>
+<p>集群元数据的维护有两种方式：集中式、Gossip式。</p>
+<p>分布式寻址算法</p>
+<ul>
+<li>hash算法（大量缓存重建）</li>
+<li>一致性hash算法（自动缓存迁移）+虚拟节点（自动负载均衡）</li>
+<li>redis cluster的hash slot算法</li>
+</ul>
+<p>优点</p>
+<ul>
+<li>无中心结构，支持动态扩容，对业务透明</li>
+<li>只能使用0号数据库</li>
+<li>不支持批量操作（pipeline管道操作）</li>
+<li>分布式逻辑和存储模块耦合</li>
+</ul>
+<h3 id="16、基于客户端分配"><a href="#16、基于客户端分配" class="headerlink" title="16、基于客户端分配"></a>16、基于客户端分配</h3><p><img src="/../images/21.jpeg" alt="21"></p>
+<h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>Redis Sharding是Redis Cluster出来之前，业界普遍使用的多Redis实例集群方法。其主要思想是采用哈希算法将Redis数据的key进行散列，通过hash函数，特定的key会映射到特定的Redis节点上。java redis客户端驱动jedis，支持Redis Sharding功能。</p>
+<p>优点</p>
+<ul>
+<li>优势在于非常简单，服务端的Redis实例彼此独立，相互关联，每个Redis实例像单服务器一样运行，非常容易线性扩展，系统的灵活性很强。</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>由于sharding处理放到客户端，规模进一步扩大时给运维带来挑战。</li>
+<li>客户端sharding不支持动态增删节点。服务端Redis实例群拓扑结构有变化时，每个客户都需要更新调整。连接不能共享，当应用规模增大时，资源浪费制约优化。</li>
+</ul>
+<h3 id="17、基于代理服务器分片"><a href="#17、基于代理服务器分片" class="headerlink" title="17、基于代理服务器分片"></a>17、基于代理服务器分片</h3><p><img src="/../images/22.jpeg" alt="22"></p>
+<h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>客户端发送请求到一个代理组件，代理解析客户端的数据，并将请求转发至正确的节点，最后将结果回复给客户端。</p>
+<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><ul>
+<li>透明接入，业务程序不用关心后端Redis实例，切换成本低</li>
+<li>Proxy的逻辑和存储的逻辑是隔离的</li>
+<li>代理层多了一次转发，性能有所损耗</li>
+</ul>
+<h4 id="业务开源方案"><a href="#业务开源方案" class="headerlink" title="业务开源方案"></a>业务开源方案</h4><ul>
+<li>Twitter开源的Twenproxy</li>
+<li>豌豆荚开源的Codis</li>
+</ul>
+<h3 id="18、Redis的主从架构"><a href="#18、Redis的主从架构" class="headerlink" title="18、Redis的主从架构"></a>18、Redis的主从架构</h3><p>单机的redis，能够承载的QPS大概就在上千万到几万不等。对于缓存来说，一般都支持读高并发的。因此架构做成主从（master-slave）架构，一主多从，主负责写，并且将数据复制到其他的slave节点，从节点负责读。所有的读请求全部走从节点。这样也可以很轻松实现水平扩容，支持读高并发。</p>
+<p><img src="/../images/23.png" alt="23"></p>
+<p>redis replication-&gt;主从架构-&gt;读写分离-&gt;水平扩容支持读高并发</p>
+<h4 id="redis-replication的核心机制"><a href="#redis-replication的核心机制" class="headerlink" title="redis replication的核心机制"></a>redis replication的核心机制</h4><ul>
+<li>redis采用异步方式复制数据到slave节点，不过从redis2.8开始，slave node会周期性地确认自己每次复制的数据量。</li>
+<li>一个master node是可以配置多个slave node的。</li>
+<li>slave node可以连接其他的slave node。</li>
+<li>slave node做复制的时候，不会block master node的正常工作。</li>
+<li>slave node在做复制的时候，也不会对自己的查询的操作，他会用旧的数据集来提供服务；但是复制完成的时候，需要删除数据集，加载新的数据集，这个时候，就会暂停对外服务。</li>
+<li>slave node主要用来进行横向扩容，做读写分离，扩容的slave node可以提纲哦吞吐量。</li>
+</ul>
+<p>注意，如果采用了主从架构，那么建议必须开启 master node 的持久化，不建议用 slave node 作为 master node 的数据热备，因为那样的话，如果你关掉 master 的持久化，可能在 master 宕机重启的时候数据是空的，然后可能一经过复制， slave node 的数据也丢了。</p>
+<p>另外，master 的各种备份方案，也需要做。万一本地的所有文件丢失了，从备份中挑选一份 rdb 去恢复master，这样才能确保启动的时候，是有数据的，即使采用了后续讲解的高可用机制，slave node 可以自动接管 master node，但也可能 sentinel 还没检测到 master failure，master node 就自动重启了，还是可能导致上面所有的 slave node 数据被清空。</p>
+<h4 id="redis主从复制的核心原理"><a href="#redis主从复制的核心原理" class="headerlink" title="redis主从复制的核心原理"></a>redis主从复制的核心原理</h4><p>当启动一个slave node的时候，它会发送一个<code>PSYNC</code>命令给master node。</p>
+<p>如果这是slave node初次连接到master node，那么会触发一次<code>full resynchronization</code>全量复制。此时，master会启动一个后台程序，开始生成一份<code>RDB</code>快照文件，同时还会将从客户端client新收到的所有写命令缓存在内存中。<code>RDB</code>文件生成完毕后，master会将这个<code>RDB</code>发送给slave，slave会写入本地磁盘，然后再从本地磁盘加载到内存中，接着master会将内存中缓存的写命令发送给slave，slave也会同步这些数据。slave node如果跟master node有网络故障，断开了连接，会自动重连，连接之后master node仅会复制给slave部分缺失的数据。</p>
+<p><img src="/../images/24.png" alt="24"></p>
+<p>过程原理</p>
+<ul>
+<li>当从库和主库建立MS关系后，会向主数据库发送<code>SYNC</code>命令。</li>
+<li>主库接收到SYNC命令后，会开始在后台保存快照（RDB持久化过程），并将期间接收到的命令缓存起来。</li>
+<li>当快照完成后，主Redis会将快照文件和所有缓存的写命令发送给从Redis。</li>
+<li>从Redis接收到后，会载入快照文件并且执行收到的缓存命令。</li>
+<li>主Redis每当接收到写命令时就会将命令发送给从Redis，从而保证数据的一致。</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>所有的slave节点数据的复制和同步都由master节点处理，会造成master节点压力过大。</li>
+</ul>
+<h3 id="19、Redis集群的主从复制模型是怎样的？"><a href="#19、Redis集群的主从复制模型是怎样的？" class="headerlink" title="19、Redis集群的主从复制模型是怎样的？"></a>19、Redis集群的主从复制模型是怎样的？</h3><p>为了使在部分节点失败或者大部分节点无法通信的情况下集群仍然可用，所以集群使用了主从复制模型，每个节点都会有N-1个复制品。</p>
+<h3 id="20、生产环境中redis是怎么部署的？"><a href="#20、生产环境中redis是怎么部署的？" class="headerlink" title="20、生产环境中redis是怎么部署的？"></a>20、生产环境中redis是怎么部署的？</h3><p>redis cluster，10 台机器，5 台机器部署了 redis 主实例，另外 5 台机器部署了 redis 的从实例，每个主实例挂了一个从实例，5 个节点对外提供读写服务，每个节点的读写高峰qps可能可以达到每秒 5 万，5 台机器最多是 25 万读写请求&#x2F;s。</p>
+<p>机器是什么配置？32G 内存+ 8 核 CPU + 1T 磁盘，但是分配给 redis 进程的是10g内存，一般线上生产环境，redis 的内存尽量不要超过 10g，超过 10g 可能会有问题。</p>
+<p>5 台机器对外提供读写，一共有 50g 内存。</p>
+<p>因为每个主实例都挂了一个从实例，所以是高可用的，任何一个主实例宕机，都会自动故障迁移，redis 从实例会自动变成主实例继续提供读写服务。</p>
+<p>你往内存里写的是什么数据？每条数据的大小是多少？商品数据，每条数据是 10kb。100 条数据是 1mb，10 万条数据是 1g。常驻内存的是 200 万条商品数据，占用内存是 20g，仅仅不到总内存的 50%。目前高峰期每秒就是 3500 左右的请求量。</p>
+<p>其实大型的公司，会有基础架构的 team 负责缓存集群的运维。</p>
+<h3 id="21、说说Redis哈希槽的概念？"><a href="#21、说说Redis哈希槽的概念？" class="headerlink" title="21、说说Redis哈希槽的概念？"></a>21、说说Redis哈希槽的概念？</h3><p>Redis集群没有使用一致性hash,而是引入了哈希槽的概念，Redis集群有16384个哈希槽，每个key通过CRC16校验后对16384取模来决定放置哪个槽，集群的每个节点负责一部分hash槽。</p>
+<h3 id="22、Redis集群会有写操作丢失吗？"><a href="#22、Redis集群会有写操作丢失吗？" class="headerlink" title="22、Redis集群会有写操作丢失吗？"></a>22、Redis集群会有写操作丢失吗？</h3><p>Redis并不能保证数据的强一致性，这意味这在实际中集群在特定的条件下可能会丢失写操作。</p>
+<h3 id="23、Redis集群之间是如何复制的？"><a href="#23、Redis集群之间是如何复制的？" class="headerlink" title="23、Redis集群之间是如何复制的？"></a>23、Redis集群之间是如何复制的？</h3><p>异步复制。</p>
+<h3 id="24、Redis集群最大节点个数是多少？"><a href="#24、Redis集群最大节点个数是多少？" class="headerlink" title="24、Redis集群最大节点个数是多少？"></a>24、Redis集群最大节点个数是多少？</h3><p>16384个。</p>
+<h3 id="25、Redis集群如何选择数据库？"><a href="#25、Redis集群如何选择数据库？" class="headerlink" title="25、Redis集群如何选择数据库？"></a>25、Redis集群如何选择数据库？</h3><p>Redis集群目前无法做数据库选择，默认在0数据库。</p>
 
     </div>
 
@@ -468,14 +559,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">31k</span>
+    <span title="站点总字数">34k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">28 分钟</span>
+    <span title="站点阅读时长">31 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
