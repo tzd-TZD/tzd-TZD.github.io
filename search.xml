@@ -412,17 +412,6 @@
       </tags>
   </entry>
   <entry>
-    <title>反向代理-Nginx</title>
-    <url>/2022/03/10/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Nginx/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Nginx</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据库优化</title>
     <url>/2022/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h3 id="数据库的优化（常见方法）"><a href="#数据库的优化（常见方法）" class="headerlink" title="数据库的优化（常见方法）"></a>数据库的优化（常见方法）</h3><span id="more"></span>
@@ -476,6 +465,18 @@
       <tags>
         <tag>设计模式</tag>
       </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/03/10/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Nginx/</url>
+    <content><![CDATA[<hr>
+<p>title: 反向代理-Nginx<br>tags:</p>
+<ul>
+<li>Nginx<br>keywords: Nginx<br>categories:</li>
+<li>Nginx<br>date: 2022-03-10 16:50:00<br>top: 70<br>photos: <img src="/../images/nginx.jpg" alt="nginx"></li>
+</ul>
+<hr>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3>]]></content>
   </entry>
   <entry>
     <title>浅谈微服务、Spring Cloud、Spring Boot三者之间的关系</title>
