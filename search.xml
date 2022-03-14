@@ -490,7 +490,7 @@
   <entry>
     <title>Redis常见面试题（三）</title>
     <url>/2022/03/11/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%B8%89%EF%BC%89/</url>
-    <content><![CDATA[<h3 id="Redis-常见面试题（三）"><a href="#Redis-常见面试题（三）" class="headerlink" title="Redis-常见面试题（三）"></a>Redis-常见面试题（三）</h3><!--more--->
+    <content><![CDATA[<h3 id="Redis-常见面试题（三）"><a href="#Redis-常见面试题（三）" class="headerlink" title="Redis-常见面试题（三）"></a>Redis-常见面试题（三）</h3><span id="more"></span>
 
 <h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><h3 id="1、Redis是单线程的，如何提高多核CPU的利用率？"><a href="#1、Redis是单线程的，如何提高多核CPU的利用率？" class="headerlink" title="1、Redis是单线程的，如何提高多核CPU的利用率？"></a>1、Redis是单线程的，如何提高多核CPU的利用率？</h3><p>可以在同一个服务器部署多个Redis的实例，并把它们当做不同的服务器来使用，在某些时候，无论如何一个服务器是不够的，所以，如果你想使用多个CPU，你可以考虑一下分片（shard）。</p>
 <h3 id="2、为什么要做Redis分区？"><a href="#2、为什么要做Redis分区？" class="headerlink" title="2、为什么要做Redis分区？"></a>2、为什么要做Redis分区？</h3><p>分区可以让Redis管理更大的内存，Redis将可以使用所有机器的内存。如果没有分区，你最多使用一台机器的内存。分区使Redis的计算能力通过简单地增加计算机得到成倍提升，Redis的网络带宽也会随着计算机和网卡的增加而成倍增长。</p>
@@ -705,6 +705,17 @@
       </categories>
       <tags>
         <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JVM-程序计数器</title>
+    <url>/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
