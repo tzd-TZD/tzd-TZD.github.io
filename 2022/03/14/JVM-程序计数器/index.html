@@ -24,28 +24,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tzd-tzd.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="善良滴伢！">
+    <meta name="description" content="JVM内存模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM内存模型">
+<meta property="og:title" content="JVM概述">
 <meta property="og:url" content="http://tzd-tzd.github.io/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/index.html">
 <meta property="og:site_name" content="菜登の博客">
-<meta property="og:description" content="善良滴伢！">
+<meta property="og:description" content="JVM内存模型">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/26.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/27.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/28.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/29.png">
+<meta property="og:image" content="http://tzd-tzd.github.io/images/30.png">
 <meta property="article:published_time" content="2022-03-14T08:15:00.000Z">
-<meta property="article:modified_time" content="2022-03-14T13:04:14.024Z">
+<meta property="article:modified_time" content="2022-03-15T02:02:16.809Z">
 <meta property="article:author" content="田泽登">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tzd-tzd.github.io/images/26.png">
 
 
 <link rel="canonical" href="http://tzd-tzd.github.io/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tzd-tzd.github.io/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/","path":"2022/03/14/JVM-程序计数器/","title":"JVM内存模型"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tzd-tzd.github.io/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/","path":"2022/03/14/JVM-程序计数器/","title":"JVM概述"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>JVM内存模型 | 菜登の博客</title>
+<title>JVM概述 | 菜登の博客</title>
   
 
 
@@ -143,7 +149,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -156,6 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">JVM内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJVM%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">1、什么是JVM？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81JDK%E3%80%81JRE%E3%80%81JVM%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">2、JDK、JRE、JVM是什么关系？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81JVM%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">3、JVM原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81JVM%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">4、JVM执行程序的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81JVM%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">6.</span> <span class="nav-text">5、JVM的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">6、JVM内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81JVM%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">8.</span> <span class="nav-text">7、JVM内存溢出的情况</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -170,18 +177,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -250,7 +257,7 @@
     </span>
     
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="JVM内存模型 | 菜登の博客">
+      <meta itemprop="name" content="JVM概述 | 菜登の博客">
       <meta itemprop="description" content="">
     </span>
     <span class='post-time'>
@@ -264,7 +271,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JVM内存模型
+          JVM概述
         </h1>
 
         <div class="post-meta-container">
@@ -274,9 +281,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-03-14 16:15:00 / 修改时间：21:04:14" itemprop="dateCreated datePublished" datetime="2022-03-14T16:15:00+08:00">2022-03-14</time>
+      <time title="创建时间：2022-03-14 16:15:00" itemprop="dateCreated datePublished" datetime="2022-03-14T16:15:00+08:00">2022-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-03-15 10:02:16" itemprop="dateModified" datetime="2022-03-15T10:02:16+08:00">2022-03-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -295,14 +308,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -313,7 +326,110 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><span id="more"></span>
+
+<h3 id="1、什么是JVM？"><a href="#1、什么是JVM？" class="headerlink" title="1、什么是JVM？"></a>1、什么是JVM？</h3><ul>
+<li>JVM是一种用于计算设备的规范，它是一个虚构出来的机器，是通过在实际的计算机上仿真模拟各种功能实现的。</li>
+<li>JVM包含一套字节码指令集，一组寄存器，一个栈，一个垃圾回收堆和一个存储方法域。</li>
+<li>JVM屏蔽了与具体操作系统平台相关的信息，使java程序只需要生成在java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。</li>
+</ul>
+<p>JVM在执行字节码时，实际上最终还是把字节码解释成具体平台上的机器指令执行。</p>
+<h3 id="2、JDK、JRE、JVM是什么关系？"><a href="#2、JDK、JRE、JVM是什么关系？" class="headerlink" title="2、JDK、JRE、JVM是什么关系？"></a>2、JDK、JRE、JVM是什么关系？</h3><ul>
+<li>JRE（Java Runtime Environment），也就是java平台。所有的java程序都要在JRE环境下才能运行。</li>
+<li>JDK（Java Development  Kit），是开发者用来编译、调试程序用的开发包。JDK也是JAVA程序需要在JRE上运行的。</li>
+<li>JVM（Java Virtual Machine），是JRE的一部分。它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。</li>
+</ul>
+<p>JVM有自己完善的硬件架构，如处理器、堆栈、寄存器等，还具有相应的指令系统。</p>
+<p>Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台。</p>
+<h3 id="3、JVM原理"><a href="#3、JVM原理" class="headerlink" title="3、JVM原理"></a>3、JVM原理</h3><ul>
+<li>jvm是java的核心和基础，在java编译器和os平台之间的虚拟处理器，可在上面执行字节码程序。</li>
+<li>java编译器只要面向jvm，生成jvm能理解的字节码文件。java源文件经编译成字节码程序，通过jvm将每条指令翻译成不同的机器码，通过特定平台运行。</li>
+</ul>
+<p><img src="/../images/26.png" alt="26"></p>
+<h3 id="4、JVM执行程序的过程"><a href="#4、JVM执行程序的过程" class="headerlink" title="4、JVM执行程序的过程"></a>4、JVM执行程序的过程</h3><ul>
+<li>加载.class文件</li>
+<li>管理并分配内存</li>
+<li>执行垃圾收集</li>
+</ul>
+<p>JRE（java运行时环境）由JVM构造的java程序的运行环，也是Java程序运行的环境，但是他同时一个操作系统的一个应用程序一个进程，因此他也有他自己的运行的生命周期，也有自己的代码和数据空间。JVM在整个jdk中处于最底层，负责于操作系统的交互，用来屏蔽操作系统环境，提供一个完整的Java运行环境，因此也就虚拟计算机。</p>
+<p>操作系统装入JVM是通过jdk中Java.exe来完成，<br>通过下面4步来完成JVM环境：</p>
+<ul>
+<li>创建JVM装载环境和配置</li>
+<li>装载JVM.dll</li>
+<li>初始化JVM.dll并挂界到JNIENV(JNI调用接口)实例</li>
+<li>调用JNIEnv实例装载并处理class类。</li>
+</ul>
+<h3 id="5、JVM的生命周期"><a href="#5、JVM的生命周期" class="headerlink" title="5、JVM的生命周期"></a>5、JVM的生命周期</h3><ul>
+<li><p>JVM实例对应了一个独立运行的java程序它是进程级别</p>
+<p>a) 启动。启动一个Java程序时，一个JVM实例就产生了，任何一个拥有public static void<br>main(String[] args)函数的class都可以作为JVM实例运行的起点。<br>b) 运行。main()作为该程序初始线程的起点，任何其他线程均由该线程启动。JVM内部有两种线程：守护线程和非守护线程，main()属于非守护线程，守护线程通常由JVM自己使用，java程序也可以表明自己创建的线程是守护线程。<br>c) 消亡。当程序中的所有非守护线程都终止时，JVM才退出；若安全管理器允许，程序也可以使用Runtime类或者System.exit()来退出。</p>
+</li>
+<li><p>JVM执行引擎实例则对应了属于用户运行程序的线程它是线程级别的。</p>
+</li>
+</ul>
+<h3 id="6、JVM内存模型"><a href="#6、JVM内存模型" class="headerlink" title="6、JVM内存模型"></a>6、JVM内存模型</h3><ul>
+<li>java代码具体执行过程如下图，</li>
+</ul>
+<p><img src="/../images/27.png" alt="27"></p>
+<ul>
+<li>运行时数据区，即jvm内存结构图如下图，</li>
+</ul>
+<p><img src="/../images/28.png" alt="28"></p>
+<ul>
+<li><p>运行时数据区存储了哪些数据？</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+程序计数器(PC寄存器)</p>
+<p>由于在JVM中，多线程是通过线程轮流切换来获得CPU执行时间的，因此，在任一具体时刻，一个CPU的内核只会执行一条线程中的指令，</p>
+<p>因此，为了能够使得每个线程都在线程切换后能够恢复在切换之前的程序执行位置，每个线程都需要有自己独立的程序计数器，并且不能互相被干扰，</p>
+<p>否则就会影响到程序的正常执行次序。因此，可以这么说，程序计数器是每个线程所私有的。由于程序计数器中存储的数据所占空间的大小不会随程序的执行而发生改变，</p>
+<p>因此，对于程序计数器是不会发生内存溢出现象(OutOfMemory)的。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+java栈</p>
+<p>Java栈中存放的是一个个的栈帧，每个栈帧对应一个被调用的方法，在栈帧中包括局部变量表(Local Variables)、操作数栈(Operand Stack)、</p>
+<p>指向当前方法所属的类的运行时常量池（运行时常量池的概念在方法区部分会谈到）的引用(Reference to runtime constant pool)、</p>
+</li>
+</ul>
+<p>**方法返回地址(Return Address)**和一些额外的附加信息。当线程执行一个方法时，就会随之创建一个对应的栈帧，并将建立的栈帧压栈。当方法执行完毕之后，便会将栈帧出栈。</p>
+<p><img src="/../images/29.png" alt="29"></p>
+<ul>
+<li><p><input disabled type="checkbox"> 
+本地方法栈</p>
+<p>本地方法栈与Java栈的作用和原理非常相似。区别只不过是Java栈是为执行Java方法服务的，而本地方法栈则是为执行本地方法（Native Method）服务的。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+堆</p>
+<p>Java中的堆是用来存储对象本身的以及数组（数组引用是存放在Java栈中的）。堆是被所有线程共享的，在JVM中只有一个堆。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+方法区</p>
+<p>与堆一样，是被线程共享的区域。在方法区中，存储了每个类的信息（包括类的名称、方法信息、字段信息）、静态变量、常量以及编译器编译后的代码等。</p>
+<p>在Class文件中除了类的字段、方法、接口等描述信息外，还有一项信息是常量池，用来存储编译期间生成的字面量和符号引用。</p>
+</li>
+</ul>
+<p>在方法区中有一个非常重要的部分就是运行时常量池，它是每一个类或接口的常量池的运行时表示形式，在类和接口被加载到JVM后，</p>
+<p>对应的运行时常量池就被创建出来。当然并非Class文件常量池中的内容才能进入运行时常量池，在运行期间也可将新的常量放入运行时常量池中，比如String的intern方法。</p>
+<h3 id="7、JVM内存溢出的情况"><a href="#7、JVM内存溢出的情况" class="headerlink" title="7、JVM内存溢出的情况"></a>7、JVM内存溢出的情况</h3><p><img src="/../images/30.png" alt="30"></p>
+<ul>
+<li><p>程序计数器（Program Counter Register）</p>
+<p>每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p>
+</li>
+<li><p>java虚拟机栈（Java Virtual Machine Stacks）</p>
+<p>在Java虚拟机规范中，对这个区域规定了两种异常情况：</p>
+<p>1、如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。</p>
+<p>2、如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。这两种情况存在着一些互相重叠的地方：当栈空间无法继续分配时，到底是内存太小，还是已使用的栈空间太大，其本质上只是对同一件事情的两种描述而已。</p>
+<p>在单线程的操作中，无论是由于栈帧太大，还是虚拟机栈空间太小，当栈空间无法分配时，虚拟机抛出的都是StackOverflowError异常，而不会得到OutOfMemoryError异常。</p>
+<p>而在多线程环境下，则会抛出OutOfMemoryError异常。</p>
+</li>
+<li><p>堆（Java Heap）</p>
+<p>Java Heap是Java虚拟机所管理的内存中最大的一块，它是所有线程共享的一块内存区域。几乎所有的对象实例和数组都在这类分配内存。Java Heap是垃圾收集器管理的主要区域，因此很多时候也被称为“GC堆”。</p>
+<p>根据Java虚拟机规范的规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可。如果在堆中没有内存可分配时，并且堆也无法扩展时，将会抛出OutOfMemoryError异常。   </p>
+</li>
+<li><p>方法区域（Method Area）</p>
+<p>方法区域，又被称为“永久代”，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p>
+</li>
+</ul>
+
     </div>
 
     
@@ -359,7 +475,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://tzd-tzd.github.io/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" title="JVM内存模型">http://tzd-tzd.github.io/2022/03/14/JVM-程序计数器/</a>
+      <a href="http://tzd-tzd.github.io/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" title="JVM概述">http://tzd-tzd.github.io/2022/03/14/JVM-程序计数器/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -380,6 +496,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2022/03/15/Spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="next" title="Spring源码解析">
+                  Spring源码解析 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -412,14 +531,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">56k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">38 分钟</span>
+    <span title="站点阅读时长">51 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

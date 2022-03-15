@@ -708,9 +708,112 @@
       </tags>
   </entry>
   <entry>
-    <title>JVM内存模型</title>
+    <title>JVM概述</title>
     <url>/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><span id="more"></span>
+
+<h3 id="1、什么是JVM？"><a href="#1、什么是JVM？" class="headerlink" title="1、什么是JVM？"></a>1、什么是JVM？</h3><ul>
+<li>JVM是一种用于计算设备的规范，它是一个虚构出来的机器，是通过在实际的计算机上仿真模拟各种功能实现的。</li>
+<li>JVM包含一套字节码指令集，一组寄存器，一个栈，一个垃圾回收堆和一个存储方法域。</li>
+<li>JVM屏蔽了与具体操作系统平台相关的信息，使java程序只需要生成在java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。</li>
+</ul>
+<p>JVM在执行字节码时，实际上最终还是把字节码解释成具体平台上的机器指令执行。</p>
+<h3 id="2、JDK、JRE、JVM是什么关系？"><a href="#2、JDK、JRE、JVM是什么关系？" class="headerlink" title="2、JDK、JRE、JVM是什么关系？"></a>2、JDK、JRE、JVM是什么关系？</h3><ul>
+<li>JRE（Java Runtime Environment），也就是java平台。所有的java程序都要在JRE环境下才能运行。</li>
+<li>JDK（Java Development  Kit），是开发者用来编译、调试程序用的开发包。JDK也是JAVA程序需要在JRE上运行的。</li>
+<li>JVM（Java Virtual Machine），是JRE的一部分。它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。</li>
+</ul>
+<p>JVM有自己完善的硬件架构，如处理器、堆栈、寄存器等，还具有相应的指令系统。</p>
+<p>Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台。</p>
+<h3 id="3、JVM原理"><a href="#3、JVM原理" class="headerlink" title="3、JVM原理"></a>3、JVM原理</h3><ul>
+<li>jvm是java的核心和基础，在java编译器和os平台之间的虚拟处理器，可在上面执行字节码程序。</li>
+<li>java编译器只要面向jvm，生成jvm能理解的字节码文件。java源文件经编译成字节码程序，通过jvm将每条指令翻译成不同的机器码，通过特定平台运行。</li>
+</ul>
+<p><img src="/../images/26.png" alt="26"></p>
+<h3 id="4、JVM执行程序的过程"><a href="#4、JVM执行程序的过程" class="headerlink" title="4、JVM执行程序的过程"></a>4、JVM执行程序的过程</h3><ul>
+<li>加载.class文件</li>
+<li>管理并分配内存</li>
+<li>执行垃圾收集</li>
+</ul>
+<p>JRE（java运行时环境）由JVM构造的java程序的运行环，也是Java程序运行的环境，但是他同时一个操作系统的一个应用程序一个进程，因此他也有他自己的运行的生命周期，也有自己的代码和数据空间。JVM在整个jdk中处于最底层，负责于操作系统的交互，用来屏蔽操作系统环境，提供一个完整的Java运行环境，因此也就虚拟计算机。</p>
+<p>操作系统装入JVM是通过jdk中Java.exe来完成，<br>通过下面4步来完成JVM环境：</p>
+<ul>
+<li>创建JVM装载环境和配置</li>
+<li>装载JVM.dll</li>
+<li>初始化JVM.dll并挂界到JNIENV(JNI调用接口)实例</li>
+<li>调用JNIEnv实例装载并处理class类。</li>
+</ul>
+<h3 id="5、JVM的生命周期"><a href="#5、JVM的生命周期" class="headerlink" title="5、JVM的生命周期"></a>5、JVM的生命周期</h3><ul>
+<li><p>JVM实例对应了一个独立运行的java程序它是进程级别</p>
+<p>a) 启动。启动一个Java程序时，一个JVM实例就产生了，任何一个拥有public static void<br>main(String[] args)函数的class都可以作为JVM实例运行的起点。<br>b) 运行。main()作为该程序初始线程的起点，任何其他线程均由该线程启动。JVM内部有两种线程：守护线程和非守护线程，main()属于非守护线程，守护线程通常由JVM自己使用，java程序也可以表明自己创建的线程是守护线程。<br>c) 消亡。当程序中的所有非守护线程都终止时，JVM才退出；若安全管理器允许，程序也可以使用Runtime类或者System.exit()来退出。</p>
+</li>
+<li><p>JVM执行引擎实例则对应了属于用户运行程序的线程它是线程级别的。</p>
+</li>
+</ul>
+<h3 id="6、JVM内存模型"><a href="#6、JVM内存模型" class="headerlink" title="6、JVM内存模型"></a>6、JVM内存模型</h3><ul>
+<li>java代码具体执行过程如下图，</li>
+</ul>
+<p><img src="/../images/27.png" alt="27"></p>
+<ul>
+<li>运行时数据区，即jvm内存结构图如下图，</li>
+</ul>
+<p><img src="/../images/28.png" alt="28"></p>
+<ul>
+<li><p>运行时数据区存储了哪些数据？</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+程序计数器(PC寄存器)</p>
+<p>由于在JVM中，多线程是通过线程轮流切换来获得CPU执行时间的，因此，在任一具体时刻，一个CPU的内核只会执行一条线程中的指令，</p>
+<p>因此，为了能够使得每个线程都在线程切换后能够恢复在切换之前的程序执行位置，每个线程都需要有自己独立的程序计数器，并且不能互相被干扰，</p>
+<p>否则就会影响到程序的正常执行次序。因此，可以这么说，程序计数器是每个线程所私有的。由于程序计数器中存储的数据所占空间的大小不会随程序的执行而发生改变，</p>
+<p>因此，对于程序计数器是不会发生内存溢出现象(OutOfMemory)的。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+java栈</p>
+<p>Java栈中存放的是一个个的栈帧，每个栈帧对应一个被调用的方法，在栈帧中包括局部变量表(Local Variables)、操作数栈(Operand Stack)、</p>
+<p>指向当前方法所属的类的运行时常量池（运行时常量池的概念在方法区部分会谈到）的引用(Reference to runtime constant pool)、</p>
+</li>
+</ul>
+<p>**方法返回地址(Return Address)**和一些额外的附加信息。当线程执行一个方法时，就会随之创建一个对应的栈帧，并将建立的栈帧压栈。当方法执行完毕之后，便会将栈帧出栈。</p>
+<p><img src="/../images/29.png" alt="29"></p>
+<ul>
+<li><p><input disabled type="checkbox"> 
+本地方法栈</p>
+<p>本地方法栈与Java栈的作用和原理非常相似。区别只不过是Java栈是为执行Java方法服务的，而本地方法栈则是为执行本地方法（Native Method）服务的。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+堆</p>
+<p>Java中的堆是用来存储对象本身的以及数组（数组引用是存放在Java栈中的）。堆是被所有线程共享的，在JVM中只有一个堆。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+方法区</p>
+<p>与堆一样，是被线程共享的区域。在方法区中，存储了每个类的信息（包括类的名称、方法信息、字段信息）、静态变量、常量以及编译器编译后的代码等。</p>
+<p>在Class文件中除了类的字段、方法、接口等描述信息外，还有一项信息是常量池，用来存储编译期间生成的字面量和符号引用。</p>
+</li>
+</ul>
+<p>在方法区中有一个非常重要的部分就是运行时常量池，它是每一个类或接口的常量池的运行时表示形式，在类和接口被加载到JVM后，</p>
+<p>对应的运行时常量池就被创建出来。当然并非Class文件常量池中的内容才能进入运行时常量池，在运行期间也可将新的常量放入运行时常量池中，比如String的intern方法。</p>
+<h3 id="7、JVM内存溢出的情况"><a href="#7、JVM内存溢出的情况" class="headerlink" title="7、JVM内存溢出的情况"></a>7、JVM内存溢出的情况</h3><p><img src="/../images/30.png" alt="30"></p>
+<ul>
+<li><p>程序计数器（Program Counter Register）</p>
+<p>每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p>
+</li>
+<li><p>java虚拟机栈（Java Virtual Machine Stacks）</p>
+<p>在Java虚拟机规范中，对这个区域规定了两种异常情况：</p>
+<p>1、如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。</p>
+<p>2、如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。这两种情况存在着一些互相重叠的地方：当栈空间无法继续分配时，到底是内存太小，还是已使用的栈空间太大，其本质上只是对同一件事情的两种描述而已。</p>
+<p>在单线程的操作中，无论是由于栈帧太大，还是虚拟机栈空间太小，当栈空间无法分配时，虚拟机抛出的都是StackOverflowError异常，而不会得到OutOfMemoryError异常。</p>
+<p>而在多线程环境下，则会抛出OutOfMemoryError异常。</p>
+</li>
+<li><p>堆（Java Heap）</p>
+<p>Java Heap是Java虚拟机所管理的内存中最大的一块，它是所有线程共享的一块内存区域。几乎所有的对象实例和数组都在这类分配内存。Java Heap是垃圾收集器管理的主要区域，因此很多时候也被称为“GC堆”。</p>
+<p>根据Java虚拟机规范的规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可。如果在堆中没有内存可分配时，并且堆也无法扩展时，将会抛出OutOfMemoryError异常。   </p>
+</li>
+<li><p>方法区域（Method Area）</p>
+<p>方法区域，又被称为“永久代”，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>JVM</category>
       </categories>
@@ -723,7 +826,7 @@
     <url>/2022/03/11/SpringBoot%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>SpringBoot、Spring</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
@@ -804,6 +907,185 @@
       </categories>
       <tags>
         <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JUC高并发编程</title>
+    <url>/2022/03/15/JUC%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>多线程与高并发</category>
+      </categories>
+      <tags>
+        <tag>多线程与高并发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>消息中间件-RabbitMQ</title>
+    <url>/2022/03/15/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6-RabbitMQ/</url>
+    <content><![CDATA[<h3 id="消息中间件-RabbitMQ"><a href="#消息中间件-RabbitMQ" class="headerlink" title="消息中间件-RabbitMQ"></a>消息中间件-RabbitMQ</h3><p><strong>RabbitMQ</strong>是实现了高级消息队列协议（AMQP）的开源消息代理软件（亦称面向消息的中间件）。RabbitMQ服务器是用<a href="https://baike.baidu.com/item/Erlang">Erlang</a>语言编写的，而集群和故障转移是构建在<a href="https://baike.baidu.com/item/%E5%BC%80%E6%94%BE%E7%94%B5%E4%BF%A1%E5%B9%B3%E5%8F%B0">开放电信平台</a>框架上的。所有主要的<a href="https://baike.baidu.com/item/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/9845131">编程语言</a>均有与代理接口通讯的<a href="https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/101081">客户端</a>库。</p>
+<span id="more"></span>
+
+<h3 id="1、什么是MQ？"><a href="#1、什么是MQ？" class="headerlink" title="1、什么是MQ？"></a>1、什么是MQ？</h3><p>MQ（message queue），从字面意思上看，本质是个队列，FIFO先入先出，只不过队列中存放的内容是message而已，还是一种跨进程的通信机制，用于上下游传递信息。在互联网架构中，MQ是一种非常常见的上下游“逻辑解耦+物理解耦”的消息通信服务。使用了MQ之后，消息发送上游只需要依赖MQ，不用依赖其他服务。</p>
+<h3 id="2、为什么要用MQ？"><a href="#2、为什么要用MQ？" class="headerlink" title="2、为什么要用MQ？"></a>2、为什么要用MQ？</h3><p>流量消峰（优点：防止系统宕机；缺点：访问速率偏慢）</p>
+<p><img src="/../images/31.PNG" alt="31"></p>
+<p>应用解耦（如果订单系统出现故障，就会造成任意一个子系统出现下单异常；使用MQ,即使是出现异常，在MQ已经缓存完成，依然可以正常进行下单）</p>
+<p><img src="/../images/32.PNG" alt="32"></p>
+<p>异步处理</p>
+<p><img src="/../images/33.PNG" alt="33"></p>
+<p>分类</p>
+<ul>
+<li><p><input disabled type="checkbox"> 
+ActiveMQ</p>
+<p>优点：单机吞吐量万级，时效性ms级，可用性高，基于主从架构实现高可用性，消息可靠性较低的概率丢失数据</p>
+<p>缺点：维护越来越少，高吞吐量场景较少使用。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+Kafka</p>
+<p>优点：吞吐量高，分布式，一个数据多个副本，少数机器宕机，不会丢失数据，日志采集。</p>
+<p>缺点：社区更新较慢。消费失败不支持重试。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+RocketMQ</p>
+<p>优点：单机吞吐量十万级，分布式架构，消息0丢失。java语言实现的。</p>
+<p>缺点：支持的客户端语言不多。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+RabbitMQ</p>
+<p>优点：高并发的特性，性能较好，支持多语言。</p>
+<p>缺点：商业版需要收费，学习成本比较高。</p>
+</li>
+</ul>
+<p>选择</p>
+<ul>
+<li><input disabled type="checkbox"> Kafka：大型公司，并且有日志采集功能。</li>
+<li><input disabled type="checkbox"> RocketMQ：金融互联网，适合高并发场景。</li>
+<li><input disabled type="checkbox"> RabbitMQ：中小型公司。</li>
+</ul>
+<h3 id="3、RabbitMQ"><a href="#3、RabbitMQ" class="headerlink" title="3、RabbitMQ"></a>3、RabbitMQ</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>RabbitMQ是一个消息中间件，它接受并转发消息。可以当做一个快递站点，dangni要发送包裹时，把包裹方法哦站点，最后包裹会通过快递员送到指定地方，按照这种逻辑，RabbitMQ是一个快递站点，一个快递员帮你传递快件。RabbitMQ与快递站的主要区别在于，它不处理快件而是接收，存储和转发消息数据。</p>
+<h4 id="四大核心组件（生产者、交换机、队列、消费者）"><a href="#四大核心组件（生产者、交换机、队列、消费者）" class="headerlink" title="四大核心组件（生产者、交换机、队列、消费者）"></a>四大核心组件（生产者、交换机、队列、消费者）</h4><p><img src="/../images/34.PNG" alt="34"></p>
+<h4 id="RabbitMQ核心部分"><a href="#RabbitMQ核心部分" class="headerlink" title="RabbitMQ核心部分"></a>RabbitMQ核心部分</h4><p><img src="/../images/35.PNG" alt="35"></p>
+<h4 id="RabbitMQ的工作原理"><a href="#RabbitMQ的工作原理" class="headerlink" title="RabbitMQ的工作原理"></a>RabbitMQ的工作原理</h4><p><img src="/../images/36.PNG" alt="36"></p>
+<p>Broker：接收和分发消息的应用，，RabbitMQ server就是Message Broker。</p>
+<p>Virtual host：出于多租户和安全因素设计的，把AMQP的基本组件划分到一个虚拟的分组中，类似于网络中的namespace概念。</p>
+<p>Connection：publisher&#x2F;consumer和broker之间的TCP连接。</p>
+<p>Channel：作为轻量级的Connection极大减少了操作系统建立TCP connection的开销。</p>
+<p>Exchange：message到达broker的第一站，根据分发规则，匹配查询表中的routing key，分发消息到queue中去。常用的类型有：direct（point-to-point）、topic（publish-subscribe）和 fanout（multicast）。</p>
+<h3 id="4、案例"><a href="#4、案例" class="headerlink" title="4、案例"></a>4、案例</h3><ul>
+<li><input disabled type="checkbox"> 新建Producer.class；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Connection;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.ConnectionFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeoutException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 16:13</span></span><br><span class="line"><span class="comment"> * 生产者：发送消息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Producer</span> &#123;</span><br><span class="line">    <span class="comment">//队列名称</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发消息</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, TimeoutException &#123;</span><br><span class="line">        <span class="comment">//创建工厂</span></span><br><span class="line">        <span class="type">ConnectionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConnectionFactory</span>();</span><br><span class="line">        <span class="comment">//工厂IP 连接RabbitMQ的队列</span></span><br><span class="line">        factory.setHost(<span class="string">&quot;本地ip&quot;</span>);</span><br><span class="line">        <span class="comment">//用户名</span></span><br><span class="line">        factory.setUsername(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        <span class="comment">//密码</span></span><br><span class="line">        factory.setPassword(<span class="string">&quot;password&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建连接</span></span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> factory.newConnection();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//通过连接获取信道</span></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> connection.createChannel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 生成一个队列</span></span><br><span class="line"><span class="comment">         * 1.队列名称</span></span><br><span class="line"><span class="comment">         * 2.队列里面的消息是否持久化（磁盘） 默认情况消息存储在内存中</span></span><br><span class="line"><span class="comment">         * 3.该队列是否只供一个消费者进行消费 是否进行消息共享，</span></span><br><span class="line"><span class="comment">         * 4.是否自动删除 最后一个消费者端开连接后 该队列是否自动删除</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        channel.queueDeclare(QUEUE_NAME,<span class="literal">true</span>,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//发消息</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        * 1.发送到哪个交换机</span></span><br><span class="line"><span class="comment">        * 2.路由的key是哪个</span></span><br><span class="line"><span class="comment">        * 3.其它参数信息</span></span><br><span class="line"><span class="comment">        * 4.发送消息的消息体</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        channel.basicPublish(<span class="string">&quot;&quot;</span>,QUEUE_NAME,<span class="literal">null</span>,message.getBytes());</span><br><span class="line">        System.out.println(<span class="string">&quot;消息发送完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">消息发送完毕</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input disabled type="checkbox"> 新建Consumer.class</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeoutException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 16:36</span></span><br><span class="line"><span class="comment"> * 消费者:接收消息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Consumer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//队列的名称</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收消息</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, TimeoutException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建连接工厂</span></span><br><span class="line">        <span class="type">ConnectionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConnectionFactory</span>();</span><br><span class="line">        factory.setHost(<span class="string">&quot;本地IP&quot;</span>);</span><br><span class="line">        factory.setUsername(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        factory.setPassword(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> factory.newConnection();</span><br><span class="line"></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> connection.createChannel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//声明 接收消息</span></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag,message)-&gt;&#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(message.getBody()));</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//取消消息时的回调</span></span><br><span class="line">        <span class="type">CancelCallback</span> <span class="variable">cancelCallback</span> <span class="operator">=</span> consumerTag -&gt; &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;消息消费被中断&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        * 消费者接收消息</span></span><br><span class="line"><span class="comment">        * */</span></span><br><span class="line">        channel.basicConsume(QUEUE_NAME,<span class="literal">true</span>,deliverCallback,cancelCallback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+<p>后台控制器如图：</p>
+<p><img src="/../images/37.PNG" alt="37"></p>
+<h3 id="5、工作队列原理"><a href="#5、工作队列原理" class="headerlink" title="5、工作队列原理"></a>5、工作队列原理</h3><p><img src="/../images/38.PNG" alt="38"></p>
+<p>重复的连接工厂方法用工具类封装RabbitMqUtils.class</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd.rabbitmq.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Connection;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.ConnectionFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 18:27</span></span><br><span class="line"><span class="comment"> * 工具类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitMqUtils</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//得到一个连接的channel</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Channel <span class="title function_">getChannel</span><span class="params">()</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//创建一个连接工厂</span></span><br><span class="line">        <span class="type">ConnectionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConnectionFactory</span>();</span><br><span class="line">        factory.setHost(<span class="string">&quot;本地IP&quot;</span>);</span><br><span class="line">        factory.setUsername(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        factory.setPassword(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> factory.newConnection();</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> connection.createChannel();</span><br><span class="line">        <span class="keyword">return</span> channel;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>新建工作线程类Work01.class</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd.rabbitmq.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.CancelCallback;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.DeliverCallback;</span><br><span class="line"><span class="keyword">import</span> com.tzd.rabbitmq.util.RabbitMqUtils;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 18:38</span></span><br><span class="line"><span class="comment"> * 这是一个工作线程，相当于消费者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Worker01</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//队列名称</span></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收消息</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line"></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag,message)-&gt;&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;接收到的消息：&quot;</span>+<span class="keyword">new</span> <span class="title class_">String</span>(message.getBody()));</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="type">CancelCallback</span> <span class="variable">cancelCallback</span> <span class="operator">=</span> (consumerTag)-&gt;&#123;</span><br><span class="line">            System.out.println(consumerTag+<span class="string">&quot;消费者取消消费者接口回调逻辑&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//消息的接收</span></span><br><span class="line">        System.out.println(<span class="string">&quot;C2等待接收消息。。。。。&quot;</span>);</span><br><span class="line">        channel.basicConsume(QUEUE_NAME,<span class="literal">true</span>,deliverCallback,cancelCallback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>新建生产者类Task01.class</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd.rabbitmq.demo2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.tzd.rabbitmq.util.RabbitMqUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 18:55</span></span><br><span class="line"><span class="comment"> * 生产者发送大量的消息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Task01</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//队列名称</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line"></span><br><span class="line">        channel.queueDeclare(QUEUE_NAME,<span class="literal">true</span>,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">null</span>);</span><br><span class="line">        <span class="comment">//从控制台接收信息</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNext())&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> scanner.next();</span><br><span class="line">            channel.basicPublish(<span class="string">&quot;&quot;</span>,QUEUE_NAME,<span class="literal">null</span>,message.getBytes());</span><br><span class="line">            System.out.println(<span class="string">&quot;发送消息完成&quot;</span>+message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>Task01：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">AA</span><br><span class="line">发送消息完成AA</span><br><span class="line">BB</span><br><span class="line">发送消息完成BB</span><br><span class="line">CC</span><br><span class="line">发送消息完成CC</span><br><span class="line">DD</span><br><span class="line">发送消息完成DD</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Work01：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">C1等待接收消息。。。。。</span><br><span class="line">接收到的消息：AA</span><br><span class="line">接收到的消息：CC</span><br></pre></td></tr></table></figure>
+
+<p>Work01：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">C2等待接收消息。。。。。</span><br><span class="line">接收到的消息：BB</span><br><span class="line">接收到的消息：DD</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、消息应答"><a href="#6、消息应答" class="headerlink" title="6、消息应答"></a>6、消息应答</h3><p>为了保证消息在发送过程中不丢失，RabbitMQ引入消息应答机制，消息应答就是：消费者在接收到消息并且处理该消息之后，告诉RabbitMQ已经处理完毕，RabbitMQ可以删除该消息了。</p>
+<ul>
+<li><p><input disabled type="checkbox"> 
+自动应答</p>
+<p>仅适用在消费者可以高效并以某种速率能够处理这些消息的情况下使用。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+手动应答</p>
+<ul>
+<li><p>Channel.basicAck（用于肯定确认）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">basicAck</span><span class="params">(<span class="type">long</span> deliveryTag,</span></span><br><span class="line"><span class="params">                              <span class="type">boolean</span> multiple)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Channel.basicNack（用于否定确认）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">basicNack</span><span class="params">(<span class="type">long</span> deliveryTag,</span></span><br><span class="line"><span class="params">                               <span class="type">boolean</span> multiple,</span></span><br><span class="line"><span class="params">                               <span class="type">boolean</span> requeue)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Channel.basicReject（用于否定确认）与Channel.basicNack相比少了一个参数，不处理该消息直接拒绝，可以将其丢弃。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">basicReject</span><span class="params">(<span class="type">long</span> deliveryTag,</span></span><br><span class="line"><span class="params">                                 <span class="type">boolean</span> requeue)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><input disabled type="checkbox"> 
+Multiple的解释</p>
+<p>手动应答的好处是可以批量应答并且减少网络拥堵。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicAck(deliverTag,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p>true表示应答一次，就会应答所有进程里面的消息。</p>
+<p>false表示只会应答当前的消息。</p>
+<p><img src="/../images/39.PNG" alt="39"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="消息应答重新入队"><a href="#消息应答重新入队" class="headerlink" title="消息应答重新入队"></a>消息应答重新入队</h4><p><img src="/../images/40.PNG" alt="40"></p>
+<p>新建Task.class</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd.rabbitmq.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.tzd.rabbitmq.util.RabbitMqUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 20:18</span></span><br><span class="line"><span class="comment"> * 消息在手动应答时是不丢失的，放回队列中重新消费</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">task2</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TASK_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;ack_queue&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//声明队列</span></span><br><span class="line">        channel.queueDeclare(TASK_QUEUE_NAME,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">null</span>);</span><br><span class="line">        <span class="comment">//从控制台输入信息</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNext())&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> scanner.next();</span><br><span class="line">            channel.basicPublish(<span class="string">&quot;&quot;</span>,TASK_QUEUE_NAME,<span class="literal">null</span>,message.getBytes(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            System.out.println(<span class="string">&quot;生产者发出消息：&quot;</span>+message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>新建Work03.class</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd.rabbitmq.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.DeliverCallback;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Delivery;</span><br><span class="line"><span class="keyword">import</span> com.tzd.rabbitmq.util.RabbitMqUtils;</span><br><span class="line"><span class="keyword">import</span> com.tzd.rabbitmq.util.SleepUtils;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 20:26</span></span><br><span class="line"><span class="comment"> * 消息在手动应答时不允许丢失，放回队列中重新消费</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Work03</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TASK_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;ack_queue&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        System.out.println(<span class="string">&quot;C1等待接收消息处理时间较短&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag,message)-&gt;&#123;</span><br><span class="line">            <span class="comment">//沉睡1秒</span></span><br><span class="line">            SleepUtils.sleep(<span class="number">1</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;接收到的消息：&quot;</span>+<span class="keyword">new</span> <span class="title class_">String</span>(message.getBody(),<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            <span class="comment">//手动应答</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            * 1.消息的标记 tag</span></span><br><span class="line"><span class="comment">            * 2.是否批量应答</span></span><br><span class="line"><span class="comment">            * */</span></span><br><span class="line">                    channel.basicAck(message.getEnvelope().getDeliveryTag(),<span class="literal">false</span>);</span><br><span class="line">                    &#125;;</span><br><span class="line">                    <span class="comment">//采用手动应答</span></span><br><span class="line">                    <span class="type">boolean</span> <span class="variable">autoAck</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">                    channel.basicConsume(TASK_QUEUE_NAME,autoAck,deliverCallback,(consumerTag -&gt; &#123;</span><br><span class="line">                    System.out.println(consumerTag+<span class="string">&quot;消费者取消消费接口回调逻辑&quot;</span>);</span><br><span class="line">                    &#125;));</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>新建Work04.class</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd.rabbitmq.demo3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.DeliverCallback;</span><br><span class="line"><span class="keyword">import</span> com.tzd.rabbitmq.util.RabbitMqUtils;</span><br><span class="line"><span class="keyword">import</span> com.tzd.rabbitmq.util.SleepUtils;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 20:26</span></span><br><span class="line"><span class="comment"> * 消息在手动应答时不允许丢失，放回队列中重新消费</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Work04</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TASK_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;ack_queue&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        System.out.println(<span class="string">&quot;C2等待接收消息处理时间较长&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag,message)-&gt;&#123;</span><br><span class="line">            <span class="comment">//沉睡1秒</span></span><br><span class="line">            SleepUtils.sleep(<span class="number">30</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;接收到的消息：&quot;</span>+<span class="keyword">new</span> <span class="title class_">String</span>(message.getBody(),<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            <span class="comment">//手动应答</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            * 1.消息的标记 tag</span></span><br><span class="line"><span class="comment">            * 2.是否批量应答</span></span><br><span class="line"><span class="comment">            * */</span></span><br><span class="line">            channel.basicAck(message.getEnvelope().getDeliveryTag(),<span class="literal">false</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//采用手动应答</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">autoAck</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">        channel.basicConsume(TASK_QUEUE_NAME,autoAck,deliverCallback,(consumerTag -&gt; &#123;</span><br><span class="line">            System.out.println(consumerTag+<span class="string">&quot;消费者取消消费接口回调逻辑&quot;</span>);</span><br><span class="line">        &#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>封装睡眠工具类SleepUtils.class</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tzd.rabbitmq.util;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tianzedeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/3/15 - 20:34</span></span><br><span class="line"><span class="comment"> * 睡眠工具类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SleepUtils</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sleep</span><span class="params">(<span class="type">int</span> second)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>*second);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (InterruptedException _ignored)&#123;</span><br><span class="line">            Thread.currentThread().interrupt();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>Task2：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">aa</span><br><span class="line">生产者发出消息：aa</span><br><span class="line">bb</span><br><span class="line">生产者发出消息：bb</span><br><span class="line">cc</span><br><span class="line">生产者发出消息：cc</span><br><span class="line">dd</span><br><span class="line">生产者发出消息：dd</span><br></pre></td></tr></table></figure>
+
+<p>Work03：在Work04没有接受到消息之前，手动打断Work04时，消息不会丢失，会回调到Work3重新消费。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">C1等待接收消息处理时间较短</span><br><span class="line">接收到的消息：aa</span><br><span class="line">接收到的消息：cc</span><br><span class="line">接收到的消息：dd</span><br></pre></td></tr></table></figure>
+
+<p>Work04：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SLF4J: Failed to load class <span class="string">&quot;org.slf4j.impl.StaticLoggerBinder&quot;</span>.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span></span><br><span class="line">C2等待接收消息处理时间较长</span><br><span class="line">接收到的消息：bb</span><br><span class="line"></span><br><span class="line">Process finished with exit code -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7、RabbitMQ持久化"><a href="#7、RabbitMQ持久化" class="headerlink" title="7、RabbitMQ持久化"></a>7、RabbitMQ持久化</h3><h4 id="队列持久化（生产者告知）"><a href="#队列持久化（生产者告知）" class="headerlink" title="队列持久化（生产者告知）"></a>队列持久化（生产者告知）</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//让消息队列持久化</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">durable</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">channel.queueDeclare(ACK_QUEUE_NAME,durable,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/41.PNG" alt="41"></p>
+<h4 id="消息持久化（生产者就得提前告知队列要实行消息持久化，即要求保存在磁盘中）"><a href="#消息持久化（生产者就得提前告知队列要实行消息持久化，即要求保存在磁盘中）" class="headerlink" title="消息持久化（生产者就得提前告知队列要实行消息持久化，即要求保存在磁盘中）"></a>消息持久化（生产者就得提前告知队列要实行消息持久化，即要求保存在磁盘中）</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">channel.basicPublish(<span class="string">&quot;&quot;</span>,TASK_QUEUE_NAME,<span class="literal">null</span>,message.getBytes(<span class="string">&quot;UTF-8&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//当durable为true时</span></span><br><span class="line">channel.basicPublish(<span class="string">&quot;&quot;</span>,TASK_QUEUE_NAME,MessageProperties.PERSISTENT_TEXT_PLAIN,message.getBytes(<span class="string">&quot;UTF-8&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>RabbitMQ</category>
+      </categories>
+      <tags>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring源码解析</title>
+    <url>/2022/03/15/Spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
