@@ -1,6 +1,311 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JUC高并发编程</title>
+    <url>/2022/03/15/JUC%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>多线程与高并发</category>
+      </categories>
+      <tags>
+        <tag>多线程与高并发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JVM概述</title>
+    <url>/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[<h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><span id="more"></span>
+
+<h3 id="1、什么是JVM？"><a href="#1、什么是JVM？" class="headerlink" title="1、什么是JVM？"></a>1、什么是JVM？</h3><ul>
+<li>JVM是一种用于计算设备的规范，它是一个虚构出来的机器，是通过在实际的计算机上仿真模拟各种功能实现的。</li>
+<li>JVM包含一套字节码指令集，一组寄存器，一个栈，一个垃圾回收堆和一个存储方法域。</li>
+<li>JVM屏蔽了与具体操作系统平台相关的信息，使java程序只需要生成在java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。</li>
+</ul>
+<p>JVM在执行字节码时，实际上最终还是把字节码解释成具体平台上的机器指令执行。</p>
+<h3 id="2、JDK、JRE、JVM是什么关系？"><a href="#2、JDK、JRE、JVM是什么关系？" class="headerlink" title="2、JDK、JRE、JVM是什么关系？"></a>2、JDK、JRE、JVM是什么关系？</h3><ul>
+<li>JRE（Java Runtime Environment），也就是java平台。所有的java程序都要在JRE环境下才能运行。</li>
+<li>JDK（Java Development  Kit），是开发者用来编译、调试程序用的开发包。JDK也是JAVA程序需要在JRE上运行的。</li>
+<li>JVM（Java Virtual Machine），是JRE的一部分。它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。</li>
+</ul>
+<p>JVM有自己完善的硬件架构，如处理器、堆栈、寄存器等，还具有相应的指令系统。</p>
+<p>Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台。</p>
+<h3 id="3、JVM原理"><a href="#3、JVM原理" class="headerlink" title="3、JVM原理"></a>3、JVM原理</h3><ul>
+<li>jvm是java的核心和基础，在java编译器和os平台之间的虚拟处理器，可在上面执行字节码程序。</li>
+<li>java编译器只要面向jvm，生成jvm能理解的字节码文件。java源文件经编译成字节码程序，通过jvm将每条指令翻译成不同的机器码，通过特定平台运行。</li>
+</ul>
+<p><img src="/../images/26.png" alt="26"></p>
+<h3 id="4、JVM执行程序的过程"><a href="#4、JVM执行程序的过程" class="headerlink" title="4、JVM执行程序的过程"></a>4、JVM执行程序的过程</h3><ul>
+<li>加载.class文件</li>
+<li>管理并分配内存</li>
+<li>执行垃圾收集</li>
+</ul>
+<p>JRE（java运行时环境）由JVM构造的java程序的运行环，也是Java程序运行的环境，但是他同时一个操作系统的一个应用程序一个进程，因此他也有他自己的运行的生命周期，也有自己的代码和数据空间。JVM在整个jdk中处于最底层，负责于操作系统的交互，用来屏蔽操作系统环境，提供一个完整的Java运行环境，因此也就虚拟计算机。</p>
+<p>操作系统装入JVM是通过jdk中Java.exe来完成，<br>通过下面4步来完成JVM环境：</p>
+<ul>
+<li>创建JVM装载环境和配置</li>
+<li>装载JVM.dll</li>
+<li>初始化JVM.dll并挂界到JNIENV(JNI调用接口)实例</li>
+<li>调用JNIEnv实例装载并处理class类。</li>
+</ul>
+<h3 id="5、JVM的生命周期"><a href="#5、JVM的生命周期" class="headerlink" title="5、JVM的生命周期"></a>5、JVM的生命周期</h3><ul>
+<li><p>JVM实例对应了一个独立运行的java程序它是进程级别</p>
+<p>a) 启动。启动一个Java程序时，一个JVM实例就产生了，任何一个拥有public static void<br>main(String[] args)函数的class都可以作为JVM实例运行的起点。<br>b) 运行。main()作为该程序初始线程的起点，任何其他线程均由该线程启动。JVM内部有两种线程：守护线程和非守护线程，main()属于非守护线程，守护线程通常由JVM自己使用，java程序也可以表明自己创建的线程是守护线程。<br>c) 消亡。当程序中的所有非守护线程都终止时，JVM才退出；若安全管理器允许，程序也可以使用Runtime类或者System.exit()来退出。</p>
+</li>
+<li><p>JVM执行引擎实例则对应了属于用户运行程序的线程它是线程级别的。</p>
+</li>
+</ul>
+<h3 id="6、JVM内存模型"><a href="#6、JVM内存模型" class="headerlink" title="6、JVM内存模型"></a>6、JVM内存模型</h3><ul>
+<li>java代码具体执行过程如下图，</li>
+</ul>
+<p><img src="/../images/27.png" alt="27"></p>
+<ul>
+<li>运行时数据区，即jvm内存结构图如下图，</li>
+</ul>
+<p><img src="/../images/28.png" alt="28"></p>
+<ul>
+<li><p>运行时数据区存储了哪些数据？</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+程序计数器(PC寄存器)</p>
+<p>由于在JVM中，多线程是通过线程轮流切换来获得CPU执行时间的，因此，在任一具体时刻，一个CPU的内核只会执行一条线程中的指令，</p>
+<p>因此，为了能够使得每个线程都在线程切换后能够恢复在切换之前的程序执行位置，每个线程都需要有自己独立的程序计数器，并且不能互相被干扰，</p>
+<p>否则就会影响到程序的正常执行次序。因此，可以这么说，程序计数器是每个线程所私有的。由于程序计数器中存储的数据所占空间的大小不会随程序的执行而发生改变，</p>
+<p>因此，对于程序计数器是不会发生内存溢出现象(OutOfMemory)的。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+java栈</p>
+<p>Java栈中存放的是一个个的栈帧，每个栈帧对应一个被调用的方法，在栈帧中包括局部变量表(Local Variables)、操作数栈(Operand Stack)、</p>
+<p>指向当前方法所属的类的运行时常量池（运行时常量池的概念在方法区部分会谈到）的引用(Reference to runtime constant pool)、</p>
+</li>
+</ul>
+<p>**方法返回地址(Return Address)**和一些额外的附加信息。当线程执行一个方法时，就会随之创建一个对应的栈帧，并将建立的栈帧压栈。当方法执行完毕之后，便会将栈帧出栈。</p>
+<p><img src="/../images/29.png" alt="29"></p>
+<ul>
+<li><p><input disabled type="checkbox"> 
+本地方法栈</p>
+<p>本地方法栈与Java栈的作用和原理非常相似。区别只不过是Java栈是为执行Java方法服务的，而本地方法栈则是为执行本地方法（Native Method）服务的。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+堆</p>
+<p>Java中的堆是用来存储对象本身的以及数组（数组引用是存放在Java栈中的）。堆是被所有线程共享的，在JVM中只有一个堆。</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+方法区</p>
+<p>与堆一样，是被线程共享的区域。在方法区中，存储了每个类的信息（包括类的名称、方法信息、字段信息）、静态变量、常量以及编译器编译后的代码等。</p>
+<p>在Class文件中除了类的字段、方法、接口等描述信息外，还有一项信息是常量池，用来存储编译期间生成的字面量和符号引用。</p>
+</li>
+</ul>
+<p>在方法区中有一个非常重要的部分就是运行时常量池，它是每一个类或接口的常量池的运行时表示形式，在类和接口被加载到JVM后，</p>
+<p>对应的运行时常量池就被创建出来。当然并非Class文件常量池中的内容才能进入运行时常量池，在运行期间也可将新的常量放入运行时常量池中，比如String的intern方法。</p>
+<h3 id="7、JVM内存溢出的情况"><a href="#7、JVM内存溢出的情况" class="headerlink" title="7、JVM内存溢出的情况"></a>7、JVM内存溢出的情况</h3><p><img src="/../images/30.png" alt="30"></p>
+<ul>
+<li><p>程序计数器（Program Counter Register）</p>
+<p>每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p>
+</li>
+<li><p>java虚拟机栈（Java Virtual Machine Stacks）</p>
+<p>在Java虚拟机规范中，对这个区域规定了两种异常情况：</p>
+<p>1、如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。</p>
+<p>2、如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。这两种情况存在着一些互相重叠的地方：当栈空间无法继续分配时，到底是内存太小，还是已使用的栈空间太大，其本质上只是对同一件事情的两种描述而已。</p>
+<p>在单线程的操作中，无论是由于栈帧太大，还是虚拟机栈空间太小，当栈空间无法分配时，虚拟机抛出的都是StackOverflowError异常，而不会得到OutOfMemoryError异常。</p>
+<p>而在多线程环境下，则会抛出OutOfMemoryError异常。</p>
+</li>
+<li><p>堆（Java Heap）</p>
+<p>Java Heap是Java虚拟机所管理的内存中最大的一块，它是所有线程共享的一块内存区域。几乎所有的对象实例和数组都在这类分配内存。Java Heap是垃圾收集器管理的主要区域，因此很多时候也被称为“GC堆”。</p>
+<p>根据Java虚拟机规范的规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可。如果在堆中没有内存可分配时，并且堆也无法扩展时，将会抛出OutOfMemoryError异常。   </p>
+</li>
+<li><p>方法区域（Method Area）</p>
+<p>方法区域，又被称为“永久代”，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring源码解析</title>
+    <url>/2022/03/15/Spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot自动配置的原理及实现</title>
+    <url>/2022/03/11/SpringBoot%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo+github搭建个人博客</title>
+    <url>/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）"><a href="#hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）" class="headerlink" title="hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）"></a>hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）</h3><span id="more"></span>
+
+<h4 id="1、前提条件"><a href="#1、前提条件" class="headerlink" title="1、前提条件"></a>1、前提条件</h4><p>（1）windows系统上安装node.js，自行百度。检验是否安装成功如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/1.PNG" alt="1"></p>
+<p>（2）安装hexo框架，检验是否安装成功如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i -g hexo #安装hexo</span><br><span class="line">hexo -v	#查看版本</span><br><span class="line">hexo init #初始化命令</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/2.PNG" alt="2"></p>
+<p>（3）Git安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/3.PNG" alt="3"></p>
+<h4 id="2、准备注册号的github账号，创建本地仓库（https-username-github-io）"><a href="#2、准备注册号的github账号，创建本地仓库（https-username-github-io）" class="headerlink" title="2、准备注册号的github账号，创建本地仓库（https://username.github.io）"></a>2、准备注册号的github账号，创建本地仓库（<a href="https://username.github.io)/">https://username.github.io）</a></h4><p>由于github是国外网站，这一步就得看运气了！</p>
+<p>（1）创建本地仓库</p>
+<p><img src="/../images/4.png" alt="4"></p>
+<p><img src="/../images/5.png" alt="5"></p>
+<h4 id="3、生成SSH秘钥（须记住）"><a href="#3、生成SSH秘钥（须记住）" class="headerlink" title="3、生成SSH秘钥（须记住）"></a>3、生成SSH秘钥（须记住）</h4><h4 id="4、生成个人博客"><a href="#4、生成个人博客" class="headerlink" title="4、生成个人博客"></a>4、生成个人博客</h4><h4 id="5、修改及配置博客主题（NEXT）"><a href="#5、修改及配置博客主题（NEXT）" class="headerlink" title="5、修改及配置博客主题（NEXT）"></a>5、修改及配置博客主题（NEXT）</h4>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>springcloud五大核心组件</title>
+    <url>/2022/03/03/springcloud/</url>
+    <content><![CDATA[<h3 id="SpringCloud五大核心组件"><a href="#SpringCloud五大核心组件" class="headerlink" title="SpringCloud五大核心组件"></a>SpringCloud五大核心组件</h3><span id="more"></span>
+
+<h4 id="1、Eureka（与之对应的是Dubbo框架的zookeeper）"><a href="#1、Eureka（与之对应的是Dubbo框架的zookeeper）" class="headerlink" title="1、Eureka（与之对应的是Dubbo框架的zookeeper）"></a>1、Eureka（与之对应的是Dubbo框架的zookeeper）</h4><p>作用：实现服务治理（服务注册与发现）</p>
+<p>简介：Spring Cloud Eureka是Spring Cloud Netflix项目下的服务治理模块。</p>
+<p>由两个组件组成：Eureka服务端和Eureka客户端。</p>
+<p>Eureka服务端用作服务注册中心。支持集群部署。</p>
+<p>Eureka客户端是一个java客户端，用来处理服务注册和发现。</p>
+<p>在应用启动时，Eureka客户端向服务端注册自己的服务信息，同时将服务端的服务信息缓存在本地。客户端和服务端周期性的进行心跳交互，以更新服务租约和服务信息。</p>
+<p><img src="/../images/6.png" alt="6"></p>
+<h4 id="2、Ribbon"><a href="#2、Ribbon" class="headerlink" title="2、Ribbon"></a>2、Ribbon</h4><p>作用：Ribbon，主要提供客户侧的软件负载均衡算法。</p>
+<p>简介：Spring Cloud Ribbon是一个基于HTTP和TCP的客户端负载均衡工具，它基于Netflix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST模版请求自动转换成客户端负载均衡的服务调用。</p>
+<p>注意，关键点就是将外界的rest调用，根据负载均衡策略转换为微服务调用。Ribbon有比较多的负载均衡策略。</p>
+<p><img src="/../images/7.png" alt="7"></p>
+<h4 id="3、Hystrix"><a href="#3、Hystrix" class="headerlink" title="3、Hystrix"></a>3、Hystrix</h4><p>作用：断路器，保护系统，控制故障范围。</p>
+<p>简介：为了保证其高可用，单个服务通常会集群部署。由于网络原因或者自身的原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会出现线程阻塞，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。</p>
+<p><img src="/../images/8.png" alt="8"></p>
+<h4 id="4、Zuul"><a href="#4、Zuul" class="headerlink" title="4、Zuul"></a>4、Zuul</h4><p>作用：api网关，路由，负载均衡等多种作用</p>
+<p>简介：类似nginx，反向代理的功能，不过netflix自己增加了一些配合其他组件的特性。</p>
+<p>在微服务架构中，后端服务往往不直接开放给调用端，而是通过一个API网关根据请求的url，路由到相应的服务。当添加API网关后，在第三方调用端和服务提供方之间就创建了一面墙，这面墙直接与调用方通信进行权限控制，后将请求均衡分发给后台服务端。</p>
+<p><img src="/../images/9.png" alt="9"></p>
+<h4 id="5、Config"><a href="#5、Config" class="headerlink" title="5、Config"></a>5、Config</h4><p>作用：配置管理</p>
+<p>简介：SpringCloud Config提供服务器端和客户端。服务器存储后端的默认实现使用git，因此它轻松支持标签版本的配置环境，以及可以访问用于管理内容的各种工具。</p>
+<p>这个还是静态的，得配合Spring Cloud Bus实现动态的配置更新。</p>
+<p><img src="/../images/10.png" alt="10"></p>
+]]></content>
+      <categories>
+        <category>springcloud</category>
+      </categories>
+      <tags>
+        <tag>springcloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>反向代理-Nginx</title>
+    <url>/2022/03/10/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Nginx/</url>
+    <content><![CDATA[<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><span id="more"></span>]]></content>
+      <categories>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库优化</title>
+    <url>/2022/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h3 id="数据库的优化（常见方法）"><a href="#数据库的优化（常见方法）" class="headerlink" title="数据库的优化（常见方法）"></a>数据库的优化（常见方法）</h3><span id="more"></span>
+
+<p>1、对查询进行优化，要尽量避免全表扫描，首先应该考虑在where以及order by涉及的列上建立索引。形如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tablename；#应该尽量避免这种方式</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、应该尽量避免在where字句中对字段进行null判断，否则将导致引擎放弃索引而进行全表扫描。形如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="keyword">is</span> <span class="keyword">null</span>；</span><br></pre></td></tr></table></figure>
+
+<p>最好不要给数据库留null，尽可能使用not null填充数据库。</p>
+<p>3、应该尽量避免在where子句中使用！&#x3D;或&lt;&gt;操作符，否则引擎将放弃使用索引进行全表扫描。</p>
+<p>4、应尽量避免在where子句中使用or来连接条件，如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描。形如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="operator">=</span> <span class="number">10</span> <span class="keyword">or</span> name <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="operator">=</span> <span class="number">10</span></span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>5、in和not in也要慎用，否则会全表扫描。形如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>对于连续的数值，能用between就不要用in</p>
+<p>修改为：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="keyword">between</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">3</span>; </span><br></pre></td></tr></table></figure>
+
+<p>6、使用索引。索引是提高数据库性能的常用方法，它可以令数据库服务器以比没有索引快得多的速度检索特定的行，尤其是在查询语句当中包含有MAX(),MIN()和ORDERBY这些命令的时候，性能提高更为明显。</p>
+<p>一般说来，索引应建立在那些将用于JOIN,WHERE判断和ORDERBY排序的字段上。尽量不要对数据库中某个含有大量重复的值的字段建立索引。对于一个ENUM类型的字段来说，出现大量重复值是很有可能的情况</p>
+<p>例如customerinfo中的“province”..字段，在这样的字段上建立索引将不会有什么帮助；相反，还有可能降低数据库的性能。我们在创建表的时候可以同时创建合适的索引，也可以使用ALTERTABLE或CREATEINDEX在以后创建索引。此外，MySQL从版本3.23.23开始支持全文索引和搜索。全文索引在MySQL中是一个FULLTEXT类型索引，但仅能用于MyISAM类型的表。对于一个大的数据库，将数据装载到一个没有FULLTEXT索引的表中，然后再使用ALTERTABLE或CREATEINDEX创建索引，将是非常快的。但如果将数据装载到一个已经有FULLTEXT索引的表中，执行过程将会非常慢。</p>
+<p>7、使用外键。锁定表的方法可以维护数据的完整性，但是它却不能保证数据的关联性。这个时候我们就可以使用外键。</p>
+<p>例如：外键可以保证每一条销售记录都指向某一个存在的客户。在这里，外键可以把customerinfo表中的CustomerID映射到salesinfo表中CustomerID，任何一条没有合法CustomerID的记录都不会被更新或插入到salesinfo中。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> customerinfo(CustomerIDINT <span class="keyword">NOT</span> <span class="keyword">NULL</span>,PRIMARYKEY(CustomerID))TYPE<span class="operator">=</span>INNODB;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> salesinfo(SalesIDNT <span class="keyword">NOT</span> <span class="keyword">NULL</span>,CustomerIDINT <span class="keyword">NOT</span> <span class="keyword">NULL</span>,PRIMARYKEY(CustomerID,SalesID),</span><br><span class="line">FOREIGNKEY(CustomerID) <span class="keyword">REFERENCES</span> customerinfo(CustomerID) <span class="keyword">ON</span> <span class="keyword">DELETE</span>  CASCADE)TYPE<span class="operator">=</span>INNODB;                       </span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈微服务、Spring Cloud、Spring Boot三者之间的关系</title>
+    <url>/2022/03/03/%E6%B5%85%E8%B0%88%E5%BE%AE%E6%9C%8D%E5%8A%A1%E3%80%81Spring-Cloud%E3%80%81Spring-Boot%E4%B8%89%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[<h3 id="微服务、Spring-Cloud、Spring-Boot三者之间的关系"><a href="#微服务、Spring-Cloud、Spring-Boot三者之间的关系" class="headerlink" title="微服务、Spring Cloud、Spring Boot三者之间的关系"></a>微服务、Spring Cloud、Spring Boot三者之间的关系</h3><span id="more"></span>
+
+<p>1、SpringBoot专注于快速方便的开发单个个体微服务。</p>
+<p>2、SpringCloud是关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来。</p>
+<p>3、为各个服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、精选决策、分布式会话等集成服务。</p>
+<p>4、SpringBoot可以离开SpringCloud独立开发项目，但是SpringCloud离不开SpringBoot，属于依赖关系。</p>
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式</title>
+    <url>/2022/03/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="JAVA常见的几种设计模式解读"><a href="#JAVA常见的几种设计模式解读" class="headerlink" title="JAVA常见的几种设计模式解读"></a>JAVA常见的几种设计模式解读</h3><h4 id="1、策略模式（Strategy-Pattern）"><a href="#1、策略模式（Strategy-Pattern）" class="headerlink" title="1、策略模式（Strategy Pattern）"></a>1、策略模式（Strategy Pattern）</h4>]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>版本控制-Git</title>
+    <url>/2022/03/10/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-Git/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis常见面试题（一）</title>
     <url>/2022/03/09/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<h3 id="Redis-常见面试题（一）"><a href="#Redis-常见面试题（一）" class="headerlink" title="Redis-常见面试题（一）"></a>Redis-常见面试题（一）</h3><span id="more"></span>
@@ -296,198 +601,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Redis常见面试题（二）</title>
-    <url>/2022/03/09/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<h3 id="Redis-常见面试题（二）"><a href="#Redis-常见面试题（二）" class="headerlink" title="Redis-常见面试题（二）"></a>Redis-常见面试题（二）</h3><span id="more"></span>
-
-<h3 id="内存相关"><a href="#内存相关" class="headerlink" title="内存相关"></a>内存相关</h3><h3 id="1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？"><a href="#1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？" class="headerlink" title="1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？"></a>1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？</h3><p>redis内存数据集大小上升到一定大小的时候，就会施行数据淘汰策略。</p>
-<h3 id="2、Redis的内存淘汰策略有哪些？"><a href="#2、Redis的内存淘汰策略有哪些？" class="headerlink" title="2、Redis的内存淘汰策略有哪些？"></a>2、Redis的内存淘汰策略有哪些？</h3><p>Redis的内存淘汰策略是指在Redis的用于缓存的内存不足时，怎么处理需要重新写入且需要申请额外空间的数据。</p>
-<p>全局的键空间选择性移除：</p>
-<ul>
-<li>noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。</li>
-<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key。（最常用）</li>
-<li>allkeys-random：当内存不足以容纳新写入数据时，在设置了过期时间的空间中，有更早过期时间的可以优先移除。</li>
-</ul>
-<p>设置过期时间的键空间选择性移除：</p>
-<ul>
-<li>volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key。</li>
-<li>volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key。</li>
-<li>volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除。</li>
-</ul>
-<p>总结：</p>
-<ul>
-<li>Redis的内存淘汰策略的选取并不会影响过期的key的处理。</li>
-<li>内存淘汰策略用于处理内存不足时的需要申请额外空间的数据。</li>
-<li>过期策略用于处理过期的缓存数据。</li>
-</ul>
-<h3 id="3、Redis主要消耗什么物理资源？（内存）"><a href="#3、Redis主要消耗什么物理资源？（内存）" class="headerlink" title="3、Redis主要消耗什么物理资源？（内存）"></a>3、Redis主要消耗什么物理资源？（内存）</h3><h3 id="4、Redis的内存用完了会发生什么？"><a href="#4、Redis的内存用完了会发生什么？" class="headerlink" title="4、Redis的内存用完了会发生什么？"></a>4、Redis的内存用完了会发生什么？</h3><p>如果达到设置的上限，Redis的写命令会返回错误信息（但是读命令还可以正常返回）或者你可以配置内存淘汰机制，当Redis达到内存上限时会冲刷掉旧的内容。</p>
-<h3 id="5、Redis如何做内存优化？"><a href="#5、Redis如何做内存优化？" class="headerlink" title="5、Redis如何做内存优化？"></a>5、Redis如何做内存优化？</h3><p>可以好好利用Hash，List，Zset，Set等数据结构，因为通常情况下，很多小的key-value可以用更紧凑的方式存放在一起。尽可能使用散列表，散列表使用的内存非常小，所以你应该尽可能的将你的数据模型抽象到一个散列表里面。例如，你的web系统中有一个用户对象，不要为这个用户的名称，姓氏，邮箱，密码设置单独的key，而是应该把这个用户的所有信息存储到一张散列表中。</p>
-<hr>
-<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><h3 id="6、Redis线程模型"><a href="#6、Redis线程模型" class="headerlink" title="6、Redis线程模型"></a>6、Redis线程模型</h3><p>Redis基于Reactor模式开发了网络事件处理器，这个处理器被称为文件事件处理器（file event handler）。它的组成结构为4部分：多个套接字、IO多路复用程序、文件事件分派器、事件处理器。因为文件事件分派器队列的消费是单线程的，所以Redis才叫单线程模型。</p>
-<ul>
-<li>文件事件处理器使用I&#x2F;O多路复用程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。</li>
-<li>当被监听的套接字准备好执行连接应答、读取、写入、关闭等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事情。</li>
-</ul>
-<p>虽然文件事件处理器以单线程方式运行，但通过使用I&#x2F;O多路复用程序来监听多个套接字，文件事件处理器既实现了高性能的网络通信模型，又可以很好的与redis服务器中其它同样以单线程方式运行的模块进行对接，这保持了Redis内部单线程设计的简单性。</p>
-<hr>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><h3 id="7、什么是事务？"><a href="#7、什么是事务？" class="headerlink" title="7、什么是事务？"></a>7、什么是事务？</h3><p>事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序执行。事务在执行过程中，不会被其它客户端发送来的命令请求所打断。</p>
-<p>事务是一个原子操作：事务中的命令要么全部被执行，要么全部不执行。</p>
-<h3 id="8、Redis事务的概念"><a href="#8、Redis事务的概念" class="headerlink" title="8、Redis事务的概念"></a>8、Redis事务的概念</h3><p>Redis事务的本质是是通过MULTI、EXEC、WATCH等一组命令的集合。事务一次执行多个命令 ，一个事务中所有的命令都会被序列化。在事务的执行过程中，会按照顺序串行化执行队列中的命令，其它客户端提交的命令请求不会插入到事务执行名列序列中。</p>
-<p>Redis事务就是一次性、顺序性、排他性的执行一个队列中的一系列命令。</p>
-<h3 id="9、Redis事务的三个阶段"><a href="#9、Redis事务的三个阶段" class="headerlink" title="9、Redis事务的三个阶段"></a>9、Redis事务的三个阶段</h3><ol>
-<li>事务开始MULTI</li>
-<li>命令入队</li>
-<li>事务执行EXEC</li>
-</ol>
-<p>事务执行过程中，如果服务端收到有EXEC、DISCARD、WATCH、MULTI之外的请求，将会把请求放入队列中排队。</p>
-<h3 id="10、事务管理概述（ACID）"><a href="#10、事务管理概述（ACID）" class="headerlink" title="10、事务管理概述（ACID）"></a>10、事务管理概述（ACID）</h3><ul>
-<li>原子性（Automicity）</li>
-</ul>
-<p>原子性是指事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生。</p>
-<ul>
-<li>一致性（Consistency）</li>
-</ul>
-<p>事务前后数据的完整性必须保证一致。</p>
-<ul>
-<li>隔离性（Isolation）</li>
-</ul>
-<p>多个事务并行执行时，一个事务的执行不应影响其他事务的执行。</p>
-<ul>
-<li>持久性</li>
-</ul>
-<p>持久性是指一个事务一旦被提交，它对数据库中的数据的改变是永久性的，接下来即使数据库发生故障也不应该对其有任何影响。</p>
-<p>Redis的事务总是具有ACID中的一致性和隔离性，其他特性是不支持的。当服务器运行在AOF持久化模式下，并且appendfsync时，事务也具有耐久性。</p>
-<h3 id="11、Redis事务支持隔离性吗？"><a href="#11、Redis事务支持隔离性吗？" class="headerlink" title="11、Redis事务支持隔离性吗？"></a>11、Redis事务支持隔离性吗？</h3><p>Redis是单线程程序，并且它保证在执行事务时，不会对事务进行中断，事务可以运行直到执行完所有事务队列中的命令为止。</p>
-<h3 id="12、Redis事务保证原子性吗？支持回滚吗？"><a href="#12、Redis事务保证原子性吗？支持回滚吗？" class="headerlink" title="12、Redis事务保证原子性吗？支持回滚吗？"></a>12、Redis事务保证原子性吗？支持回滚吗？</h3><p>Redis中，单条命令是原子性执行的，但事务不保证原子性，且没有回滚。事务中任意命令执行失败，其余的命令仍会执行。</p>
-<h3 id="13、Redis事务其它实现"><a href="#13、Redis事务其它实现" class="headerlink" title="13、Redis事务其它实现"></a>13、Redis事务其它实现</h3><ul>
-<li>基于Lua脚本，Redis可以保证脚本内的命令一次性、按命令执行，其同时也不提供事务运行错误的回滚，执行过程中如果部分命令运行错误，剩下的，命令还是会继续执行。</li>
-<li>基于中间标记变量，通过另外的标记变量来标识事务是否完成，读取数据时先读取该标记变量，判断是否事务执行完成。但这样会需要额外写代码实现，比较繁琐。</li>
-</ul>
-<hr>
-<h3 id="集群方案"><a href="#集群方案" class="headerlink" title="集群方案"></a>集群方案</h3><h3 id="14、哨兵模式（sentinel）"><a href="#14、哨兵模式（sentinel）" class="headerlink" title="14、哨兵模式（sentinel）"></a>14、哨兵模式（sentinel）</h3><p><img src="/../images/19.png" alt="19"></p>
-<ol>
-<li><p>哨兵的介绍</p>
-<p>sentinel，中文名是哨兵。哨兵是redis集群机构中非常重要的一个组件，主要有一下功能：</p>
-<ul>
-<li>集群监控：负责监控redis master和slave进程是否正常工作。</li>
-<li>消息通知：如果某个redis实例有故障，那么哨兵负责发送消息作为警报通知给管理员。</li>
-<li>故障转移：如果master node挂掉，会自动转移到slave node上。</li>
-<li>配置中心：如果故障转移发生了，通知client客户端新的master地址。</li>
-</ul>
-</li>
-<li><p>哨兵用于实现redis集群的高可用，本身也是分布式的，作为一个哨兵集群去运行，互相协同工作</p>
-<ul>
-<li>故障转移时，判断一个master node是否宕机了，需要大部分的哨兵都同意才行，涉及到了分布式选举的问题。</li>
-<li>即使部分哨兵节点挂掉了，哨兵集群还是能正常工作的，因为如果一个作为高可用机制重要组成成分的故障转移系统本身是单点的，那就很坑了。</li>
-</ul>
-</li>
-<li><p>哨兵的核心知识</p>
-<ul>
-<li>哨兵至少需要3个实例，来保证自己的健壮性。</li>
-<li>哨兵+redis主从的部署架构，是不保证数据零丢失的，只能保证集群的高可用性。</li>
-<li>对于哨兵+redis主从这种复杂的部署结构，尽量在测试环境和生产环境，都进行充足的测试和演练。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="15、官方Redis-Cluster方案（服务端路由查询）"><a href="#15、官方Redis-Cluster方案（服务端路由查询）" class="headerlink" title="15、官方Redis Cluster方案（服务端路由查询）"></a>15、官方Redis Cluster方案（服务端路由查询）</h3><p><img src="/../images/20.png" alt="20"></p>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>Redis Cluster是一种服务算sharding技术。Redis Cluster并没有使用一致性hash，而是采用slot（槽）的概念，一共分成16384个槽。将求情发送到任意节点，接收到请求的节点会将查询请求发送到正确的节点上执行。</p>
-<h4 id="方案说明"><a href="#方案说明" class="headerlink" title="方案说明"></a>方案说明</h4><ol>
-<li>通过hash的方式，将数据分片，每个节点均分存储一定哈希槽的数据，默认分配了16384个槽位。</li>
-<li>每份数据分片会存储在多个互为主从的多节点上。</li>
-<li>数据写入先写主节点，在同步到从节点（支持配置为阻塞同步）。</li>
-<li>同一分片多个节点的数据不保持一致性。</li>
-<li>读取数据时，当客户端的key没有分配在该节点时，redis会返回转向指令，指向正确的节点。</li>
-<li>扩容时需要把旧节点的数据迁移到新节点。</li>
-</ol>
-<p>在redis cluster架构下，每个redis要放开两个端口号，比如一个是6379，另一个是加1w的端口号，比如16379。</p>
-<p>16379端口号是用来进行节点间通信的，也就是cluster bus的东西，cluster bus的通信，用来进行故障检测，配置更新，故障转移授权。cluster bus用了另外一种二进制的协议，gossip协议，用于节点间进行高效的数据交换，占用更少的网络带宽和处理时间。</p>
-<h4 id="节点间的内部通信机制"><a href="#节点间的内部通信机制" class="headerlink" title="节点间的内部通信机制"></a>节点间的内部通信机制</h4><p>基本通信原理</p>
-<p>集群元数据的维护有两种方式：集中式、Gossip式。</p>
-<p>分布式寻址算法</p>
-<ul>
-<li>hash算法（大量缓存重建）</li>
-<li>一致性hash算法（自动缓存迁移）+虚拟节点（自动负载均衡）</li>
-<li>redis cluster的hash slot算法</li>
-</ul>
-<p>优点</p>
-<ul>
-<li>无中心结构，支持动态扩容，对业务透明</li>
-<li>只能使用0号数据库</li>
-<li>不支持批量操作（pipeline管道操作）</li>
-<li>分布式逻辑和存储模块耦合</li>
-</ul>
-<h3 id="16、基于客户端分配"><a href="#16、基于客户端分配" class="headerlink" title="16、基于客户端分配"></a>16、基于客户端分配</h3><p><img src="/../images/21.jpeg" alt="21"></p>
-<h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>Redis Sharding是Redis Cluster出来之前，业界普遍使用的多Redis实例集群方法。其主要思想是采用哈希算法将Redis数据的key进行散列，通过hash函数，特定的key会映射到特定的Redis节点上。java redis客户端驱动jedis，支持Redis Sharding功能。</p>
-<p>优点</p>
-<ul>
-<li>优势在于非常简单，服务端的Redis实例彼此独立，相互关联，每个Redis实例像单服务器一样运行，非常容易线性扩展，系统的灵活性很强。</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li>由于sharding处理放到客户端，规模进一步扩大时给运维带来挑战。</li>
-<li>客户端sharding不支持动态增删节点。服务端Redis实例群拓扑结构有变化时，每个客户都需要更新调整。连接不能共享，当应用规模增大时，资源浪费制约优化。</li>
-</ul>
-<h3 id="17、基于代理服务器分片"><a href="#17、基于代理服务器分片" class="headerlink" title="17、基于代理服务器分片"></a>17、基于代理服务器分片</h3><p><img src="/../images/22.jpeg" alt="22"></p>
-<h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>客户端发送请求到一个代理组件，代理解析客户端的数据，并将请求转发至正确的节点，最后将结果回复给客户端。</p>
-<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><ul>
-<li>透明接入，业务程序不用关心后端Redis实例，切换成本低</li>
-<li>Proxy的逻辑和存储的逻辑是隔离的</li>
-<li>代理层多了一次转发，性能有所损耗</li>
-</ul>
-<h4 id="业务开源方案"><a href="#业务开源方案" class="headerlink" title="业务开源方案"></a>业务开源方案</h4><ul>
-<li>Twitter开源的Twenproxy</li>
-<li>豌豆荚开源的Codis</li>
-</ul>
-<h3 id="18、Redis的主从架构"><a href="#18、Redis的主从架构" class="headerlink" title="18、Redis的主从架构"></a>18、Redis的主从架构</h3><p>单机的redis，能够承载的QPS大概就在上千万到几万不等。对于缓存来说，一般都支持读高并发的。因此架构做成主从（master-slave）架构，一主多从，主负责写，并且将数据复制到其他的slave节点，从节点负责读。所有的读请求全部走从节点。这样也可以很轻松实现水平扩容，支持读高并发。</p>
-<p><img src="/../images/23.png" alt="23"></p>
-<p>redis replication-&gt;主从架构-&gt;读写分离-&gt;水平扩容支持读高并发</p>
-<h4 id="redis-replication的核心机制"><a href="#redis-replication的核心机制" class="headerlink" title="redis replication的核心机制"></a>redis replication的核心机制</h4><ul>
-<li>redis采用异步方式复制数据到slave节点，不过从redis2.8开始，slave node会周期性地确认自己每次复制的数据量。</li>
-<li>一个master node是可以配置多个slave node的。</li>
-<li>slave node可以连接其他的slave node。</li>
-<li>slave node做复制的时候，不会block master node的正常工作。</li>
-<li>slave node在做复制的时候，也不会对自己的查询的操作，他会用旧的数据集来提供服务；但是复制完成的时候，需要删除数据集，加载新的数据集，这个时候，就会暂停对外服务。</li>
-<li>slave node主要用来进行横向扩容，做读写分离，扩容的slave node可以提纲哦吞吐量。</li>
-</ul>
-<p>注意，如果采用了主从架构，那么建议必须开启 master node 的持久化，不建议用 slave node 作为 master node 的数据热备，因为那样的话，如果你关掉 master 的持久化，可能在 master 宕机重启的时候数据是空的，然后可能一经过复制， slave node 的数据也丢了。</p>
-<p>另外，master 的各种备份方案，也需要做。万一本地的所有文件丢失了，从备份中挑选一份 rdb 去恢复master，这样才能确保启动的时候，是有数据的，即使采用了后续讲解的高可用机制，slave node 可以自动接管 master node，但也可能 sentinel 还没检测到 master failure，master node 就自动重启了，还是可能导致上面所有的 slave node 数据被清空。</p>
-<h4 id="redis主从复制的核心原理"><a href="#redis主从复制的核心原理" class="headerlink" title="redis主从复制的核心原理"></a>redis主从复制的核心原理</h4><p>当启动一个slave node的时候，它会发送一个<code>PSYNC</code>命令给master node。</p>
-<p>如果这是slave node初次连接到master node，那么会触发一次<code>full resynchronization</code>全量复制。此时，master会启动一个后台程序，开始生成一份<code>RDB</code>快照文件，同时还会将从客户端client新收到的所有写命令缓存在内存中。<code>RDB</code>文件生成完毕后，master会将这个<code>RDB</code>发送给slave，slave会写入本地磁盘，然后再从本地磁盘加载到内存中，接着master会将内存中缓存的写命令发送给slave，slave也会同步这些数据。slave node如果跟master node有网络故障，断开了连接，会自动重连，连接之后master node仅会复制给slave部分缺失的数据。</p>
-<p><img src="/../images/24.png" alt="24"></p>
-<p>过程原理</p>
-<ul>
-<li>当从库和主库建立MS关系后，会向主数据库发送<code>SYNC</code>命令。</li>
-<li>主库接收到SYNC命令后，会开始在后台保存快照（RDB持久化过程），并将期间接收到的命令缓存起来。</li>
-<li>当快照完成后，主Redis会将快照文件和所有缓存的写命令发送给从Redis。</li>
-<li>从Redis接收到后，会载入快照文件并且执行收到的缓存命令。</li>
-<li>主Redis每当接收到写命令时就会将命令发送给从Redis，从而保证数据的一致。</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li>所有的slave节点数据的复制和同步都由master节点处理，会造成master节点压力过大。</li>
-</ul>
-<h3 id="19、Redis集群的主从复制模型是怎样的？"><a href="#19、Redis集群的主从复制模型是怎样的？" class="headerlink" title="19、Redis集群的主从复制模型是怎样的？"></a>19、Redis集群的主从复制模型是怎样的？</h3><p>为了使在部分节点失败或者大部分节点无法通信的情况下集群仍然可用，所以集群使用了主从复制模型，每个节点都会有N-1个复制品。</p>
-<h3 id="20、生产环境中redis是怎么部署的？"><a href="#20、生产环境中redis是怎么部署的？" class="headerlink" title="20、生产环境中redis是怎么部署的？"></a>20、生产环境中redis是怎么部署的？</h3><p>redis cluster，10 台机器，5 台机器部署了 redis 主实例，另外 5 台机器部署了 redis 的从实例，每个主实例挂了一个从实例，5 个节点对外提供读写服务，每个节点的读写高峰qps可能可以达到每秒 5 万，5 台机器最多是 25 万读写请求&#x2F;s。</p>
-<p>机器是什么配置？32G 内存+ 8 核 CPU + 1T 磁盘，但是分配给 redis 进程的是10g内存，一般线上生产环境，redis 的内存尽量不要超过 10g，超过 10g 可能会有问题。</p>
-<p>5 台机器对外提供读写，一共有 50g 内存。</p>
-<p>因为每个主实例都挂了一个从实例，所以是高可用的，任何一个主实例宕机，都会自动故障迁移，redis 从实例会自动变成主实例继续提供读写服务。</p>
-<p>你往内存里写的是什么数据？每条数据的大小是多少？商品数据，每条数据是 10kb。100 条数据是 1mb，10 万条数据是 1g。常驻内存的是 200 万条商品数据，占用内存是 20g，仅仅不到总内存的 50%。目前高峰期每秒就是 3500 左右的请求量。</p>
-<p>其实大型的公司，会有基础架构的 team 负责缓存集群的运维。</p>
-<h3 id="21、说说Redis哈希槽的概念？"><a href="#21、说说Redis哈希槽的概念？" class="headerlink" title="21、说说Redis哈希槽的概念？"></a>21、说说Redis哈希槽的概念？</h3><p>Redis集群没有使用一致性hash,而是引入了哈希槽的概念，Redis集群有16384个哈希槽，每个key通过CRC16校验后对16384取模来决定放置哪个槽，集群的每个节点负责一部分hash槽。</p>
-<h3 id="22、Redis集群会有写操作丢失吗？"><a href="#22、Redis集群会有写操作丢失吗？" class="headerlink" title="22、Redis集群会有写操作丢失吗？"></a>22、Redis集群会有写操作丢失吗？</h3><p>Redis并不能保证数据的强一致性，这意味这在实际中集群在特定的条件下可能会丢失写操作。</p>
-<h3 id="23、Redis集群之间是如何复制的？"><a href="#23、Redis集群之间是如何复制的？" class="headerlink" title="23、Redis集群之间是如何复制的？"></a>23、Redis集群之间是如何复制的？</h3><p>异步复制。</p>
-<h3 id="24、Redis集群最大节点个数是多少？"><a href="#24、Redis集群最大节点个数是多少？" class="headerlink" title="24、Redis集群最大节点个数是多少？"></a>24、Redis集群最大节点个数是多少？</h3><p>16384个。</p>
-<h3 id="25、Redis集群如何选择数据库？"><a href="#25、Redis集群如何选择数据库？" class="headerlink" title="25、Redis集群如何选择数据库？"></a>25、Redis集群如何选择数据库？</h3><p>Redis集群目前无法做数据库选择，默认在0数据库。</p>
-]]></content>
-      <categories>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis常见面试题（三）</title>
     <url>/2022/03/11/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%B8%89%EF%BC%89/</url>
     <content><![CDATA[<h3 id="Redis-常见面试题（三）"><a href="#Redis-常见面试题（三）" class="headerlink" title="Redis-常见面试题（三）"></a>Redis-常见面试题（三）</h3><span id="more"></span>
@@ -708,216 +821,195 @@
       </tags>
   </entry>
   <entry>
-    <title>JVM概述</title>
-    <url>/2022/03/14/JVM-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><span id="more"></span>
+    <title>Redis常见面试题（二）</title>
+    <url>/2022/03/09/Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<h3 id="Redis-常见面试题（二）"><a href="#Redis-常见面试题（二）" class="headerlink" title="Redis-常见面试题（二）"></a>Redis-常见面试题（二）</h3><span id="more"></span>
 
-<h3 id="1、什么是JVM？"><a href="#1、什么是JVM？" class="headerlink" title="1、什么是JVM？"></a>1、什么是JVM？</h3><ul>
-<li>JVM是一种用于计算设备的规范，它是一个虚构出来的机器，是通过在实际的计算机上仿真模拟各种功能实现的。</li>
-<li>JVM包含一套字节码指令集，一组寄存器，一个栈，一个垃圾回收堆和一个存储方法域。</li>
-<li>JVM屏蔽了与具体操作系统平台相关的信息，使java程序只需要生成在java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。</li>
-</ul>
-<p>JVM在执行字节码时，实际上最终还是把字节码解释成具体平台上的机器指令执行。</p>
-<h3 id="2、JDK、JRE、JVM是什么关系？"><a href="#2、JDK、JRE、JVM是什么关系？" class="headerlink" title="2、JDK、JRE、JVM是什么关系？"></a>2、JDK、JRE、JVM是什么关系？</h3><ul>
-<li>JRE（Java Runtime Environment），也就是java平台。所有的java程序都要在JRE环境下才能运行。</li>
-<li>JDK（Java Development  Kit），是开发者用来编译、调试程序用的开发包。JDK也是JAVA程序需要在JRE上运行的。</li>
-<li>JVM（Java Virtual Machine），是JRE的一部分。它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。</li>
-</ul>
-<p>JVM有自己完善的硬件架构，如处理器、堆栈、寄存器等，还具有相应的指令系统。</p>
-<p>Java语言最重要的特点就是跨平台运行。使用JVM就是为了支持与操作系统无关，实现跨平台。</p>
-<h3 id="3、JVM原理"><a href="#3、JVM原理" class="headerlink" title="3、JVM原理"></a>3、JVM原理</h3><ul>
-<li>jvm是java的核心和基础，在java编译器和os平台之间的虚拟处理器，可在上面执行字节码程序。</li>
-<li>java编译器只要面向jvm，生成jvm能理解的字节码文件。java源文件经编译成字节码程序，通过jvm将每条指令翻译成不同的机器码，通过特定平台运行。</li>
-</ul>
-<p><img src="/../images/26.png" alt="26"></p>
-<h3 id="4、JVM执行程序的过程"><a href="#4、JVM执行程序的过程" class="headerlink" title="4、JVM执行程序的过程"></a>4、JVM执行程序的过程</h3><ul>
-<li>加载.class文件</li>
-<li>管理并分配内存</li>
-<li>执行垃圾收集</li>
-</ul>
-<p>JRE（java运行时环境）由JVM构造的java程序的运行环，也是Java程序运行的环境，但是他同时一个操作系统的一个应用程序一个进程，因此他也有他自己的运行的生命周期，也有自己的代码和数据空间。JVM在整个jdk中处于最底层，负责于操作系统的交互，用来屏蔽操作系统环境，提供一个完整的Java运行环境，因此也就虚拟计算机。</p>
-<p>操作系统装入JVM是通过jdk中Java.exe来完成，<br>通过下面4步来完成JVM环境：</p>
+<h3 id="内存相关"><a href="#内存相关" class="headerlink" title="内存相关"></a>内存相关</h3><h3 id="1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？"><a href="#1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？" class="headerlink" title="1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？"></a>1、MySQL里有2000w数据，redis中只存20w的数据，如何保证redis的数据都是热点数据？</h3><p>redis内存数据集大小上升到一定大小的时候，就会施行数据淘汰策略。</p>
+<h3 id="2、Redis的内存淘汰策略有哪些？"><a href="#2、Redis的内存淘汰策略有哪些？" class="headerlink" title="2、Redis的内存淘汰策略有哪些？"></a>2、Redis的内存淘汰策略有哪些？</h3><p>Redis的内存淘汰策略是指在Redis的用于缓存的内存不足时，怎么处理需要重新写入且需要申请额外空间的数据。</p>
+<p>全局的键空间选择性移除：</p>
 <ul>
-<li>创建JVM装载环境和配置</li>
-<li>装载JVM.dll</li>
-<li>初始化JVM.dll并挂界到JNIENV(JNI调用接口)实例</li>
-<li>调用JNIEnv实例装载并处理class类。</li>
+<li>noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。</li>
+<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key。（最常用）</li>
+<li>allkeys-random：当内存不足以容纳新写入数据时，在设置了过期时间的空间中，有更早过期时间的可以优先移除。</li>
 </ul>
-<h3 id="5、JVM的生命周期"><a href="#5、JVM的生命周期" class="headerlink" title="5、JVM的生命周期"></a>5、JVM的生命周期</h3><ul>
-<li><p>JVM实例对应了一个独立运行的java程序它是进程级别</p>
-<p>a) 启动。启动一个Java程序时，一个JVM实例就产生了，任何一个拥有public static void<br>main(String[] args)函数的class都可以作为JVM实例运行的起点。<br>b) 运行。main()作为该程序初始线程的起点，任何其他线程均由该线程启动。JVM内部有两种线程：守护线程和非守护线程，main()属于非守护线程，守护线程通常由JVM自己使用，java程序也可以表明自己创建的线程是守护线程。<br>c) 消亡。当程序中的所有非守护线程都终止时，JVM才退出；若安全管理器允许，程序也可以使用Runtime类或者System.exit()来退出。</p>
-</li>
-<li><p>JVM执行引擎实例则对应了属于用户运行程序的线程它是线程级别的。</p>
-</li>
-</ul>
-<h3 id="6、JVM内存模型"><a href="#6、JVM内存模型" class="headerlink" title="6、JVM内存模型"></a>6、JVM内存模型</h3><ul>
-<li>java代码具体执行过程如下图，</li>
-</ul>
-<p><img src="/../images/27.png" alt="27"></p>
+<p>设置过期时间的键空间选择性移除：</p>
 <ul>
-<li>运行时数据区，即jvm内存结构图如下图，</li>
+<li>volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key。</li>
+<li>volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key。</li>
+<li>volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除。</li>
 </ul>
-<p><img src="/../images/28.png" alt="28"></p>
+<p>总结：</p>
 <ul>
-<li><p>运行时数据区存储了哪些数据？</p>
-</li>
-<li><p><input disabled type="checkbox"> 
-程序计数器(PC寄存器)</p>
-<p>由于在JVM中，多线程是通过线程轮流切换来获得CPU执行时间的，因此，在任一具体时刻，一个CPU的内核只会执行一条线程中的指令，</p>
-<p>因此，为了能够使得每个线程都在线程切换后能够恢复在切换之前的程序执行位置，每个线程都需要有自己独立的程序计数器，并且不能互相被干扰，</p>
-<p>否则就会影响到程序的正常执行次序。因此，可以这么说，程序计数器是每个线程所私有的。由于程序计数器中存储的数据所占空间的大小不会随程序的执行而发生改变，</p>
-<p>因此，对于程序计数器是不会发生内存溢出现象(OutOfMemory)的。</p>
-</li>
-<li><p><input disabled type="checkbox"> 
-java栈</p>
-<p>Java栈中存放的是一个个的栈帧，每个栈帧对应一个被调用的方法，在栈帧中包括局部变量表(Local Variables)、操作数栈(Operand Stack)、</p>
-<p>指向当前方法所属的类的运行时常量池（运行时常量池的概念在方法区部分会谈到）的引用(Reference to runtime constant pool)、</p>
-</li>
+<li>Redis的内存淘汰策略的选取并不会影响过期的key的处理。</li>
+<li>内存淘汰策略用于处理内存不足时的需要申请额外空间的数据。</li>
+<li>过期策略用于处理过期的缓存数据。</li>
 </ul>
-<p>**方法返回地址(Return Address)**和一些额外的附加信息。当线程执行一个方法时，就会随之创建一个对应的栈帧，并将建立的栈帧压栈。当方法执行完毕之后，便会将栈帧出栈。</p>
-<p><img src="/../images/29.png" alt="29"></p>
+<h3 id="3、Redis主要消耗什么物理资源？（内存）"><a href="#3、Redis主要消耗什么物理资源？（内存）" class="headerlink" title="3、Redis主要消耗什么物理资源？（内存）"></a>3、Redis主要消耗什么物理资源？（内存）</h3><h3 id="4、Redis的内存用完了会发生什么？"><a href="#4、Redis的内存用完了会发生什么？" class="headerlink" title="4、Redis的内存用完了会发生什么？"></a>4、Redis的内存用完了会发生什么？</h3><p>如果达到设置的上限，Redis的写命令会返回错误信息（但是读命令还可以正常返回）或者你可以配置内存淘汰机制，当Redis达到内存上限时会冲刷掉旧的内容。</p>
+<h3 id="5、Redis如何做内存优化？"><a href="#5、Redis如何做内存优化？" class="headerlink" title="5、Redis如何做内存优化？"></a>5、Redis如何做内存优化？</h3><p>可以好好利用Hash，List，Zset，Set等数据结构，因为通常情况下，很多小的key-value可以用更紧凑的方式存放在一起。尽可能使用散列表，散列表使用的内存非常小，所以你应该尽可能的将你的数据模型抽象到一个散列表里面。例如，你的web系统中有一个用户对象，不要为这个用户的名称，姓氏，邮箱，密码设置单独的key，而是应该把这个用户的所有信息存储到一张散列表中。</p>
+<hr>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><h3 id="6、Redis线程模型"><a href="#6、Redis线程模型" class="headerlink" title="6、Redis线程模型"></a>6、Redis线程模型</h3><p>Redis基于Reactor模式开发了网络事件处理器，这个处理器被称为文件事件处理器（file event handler）。它的组成结构为4部分：多个套接字、IO多路复用程序、文件事件分派器、事件处理器。因为文件事件分派器队列的消费是单线程的，所以Redis才叫单线程模型。</p>
 <ul>
-<li><p><input disabled type="checkbox"> 
-本地方法栈</p>
-<p>本地方法栈与Java栈的作用和原理非常相似。区别只不过是Java栈是为执行Java方法服务的，而本地方法栈则是为执行本地方法（Native Method）服务的。</p>
-</li>
-<li><p><input disabled type="checkbox"> 
-堆</p>
-<p>Java中的堆是用来存储对象本身的以及数组（数组引用是存放在Java栈中的）。堆是被所有线程共享的，在JVM中只有一个堆。</p>
-</li>
-<li><p><input disabled type="checkbox"> 
-方法区</p>
-<p>与堆一样，是被线程共享的区域。在方法区中，存储了每个类的信息（包括类的名称、方法信息、字段信息）、静态变量、常量以及编译器编译后的代码等。</p>
-<p>在Class文件中除了类的字段、方法、接口等描述信息外，还有一项信息是常量池，用来存储编译期间生成的字面量和符号引用。</p>
-</li>
+<li>文件事件处理器使用I&#x2F;O多路复用程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。</li>
+<li>当被监听的套接字准备好执行连接应答、读取、写入、关闭等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事情。</li>
 </ul>
-<p>在方法区中有一个非常重要的部分就是运行时常量池，它是每一个类或接口的常量池的运行时表示形式，在类和接口被加载到JVM后，</p>
-<p>对应的运行时常量池就被创建出来。当然并非Class文件常量池中的内容才能进入运行时常量池，在运行期间也可将新的常量放入运行时常量池中，比如String的intern方法。</p>
-<h3 id="7、JVM内存溢出的情况"><a href="#7、JVM内存溢出的情况" class="headerlink" title="7、JVM内存溢出的情况"></a>7、JVM内存溢出的情况</h3><p><img src="/../images/30.png" alt="30"></p>
+<p>虽然文件事件处理器以单线程方式运行，但通过使用I&#x2F;O多路复用程序来监听多个套接字，文件事件处理器既实现了高性能的网络通信模型，又可以很好的与redis服务器中其它同样以单线程方式运行的模块进行对接，这保持了Redis内部单线程设计的简单性。</p>
+<hr>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><h3 id="7、什么是事务？"><a href="#7、什么是事务？" class="headerlink" title="7、什么是事务？"></a>7、什么是事务？</h3><p>事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序执行。事务在执行过程中，不会被其它客户端发送来的命令请求所打断。</p>
+<p>事务是一个原子操作：事务中的命令要么全部被执行，要么全部不执行。</p>
+<h3 id="8、Redis事务的概念"><a href="#8、Redis事务的概念" class="headerlink" title="8、Redis事务的概念"></a>8、Redis事务的概念</h3><p>Redis事务的本质是是通过MULTI、EXEC、WATCH等一组命令的集合。事务一次执行多个命令 ，一个事务中所有的命令都会被序列化。在事务的执行过程中，会按照顺序串行化执行队列中的命令，其它客户端提交的命令请求不会插入到事务执行名列序列中。</p>
+<p>Redis事务就是一次性、顺序性、排他性的执行一个队列中的一系列命令。</p>
+<h3 id="9、Redis事务的三个阶段"><a href="#9、Redis事务的三个阶段" class="headerlink" title="9、Redis事务的三个阶段"></a>9、Redis事务的三个阶段</h3><ol>
+<li>事务开始MULTI</li>
+<li>命令入队</li>
+<li>事务执行EXEC</li>
+</ol>
+<p>事务执行过程中，如果服务端收到有EXEC、DISCARD、WATCH、MULTI之外的请求，将会把请求放入队列中排队。</p>
+<h3 id="10、事务管理概述（ACID）"><a href="#10、事务管理概述（ACID）" class="headerlink" title="10、事务管理概述（ACID）"></a>10、事务管理概述（ACID）</h3><ul>
+<li>原子性（Automicity）</li>
+</ul>
+<p>原子性是指事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生。</p>
 <ul>
-<li><p>程序计数器（Program Counter Register）</p>
-<p>每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p>
-</li>
-<li><p>java虚拟机栈（Java Virtual Machine Stacks）</p>
-<p>在Java虚拟机规范中，对这个区域规定了两种异常情况：</p>
-<p>1、如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。</p>
-<p>2、如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。这两种情况存在着一些互相重叠的地方：当栈空间无法继续分配时，到底是内存太小，还是已使用的栈空间太大，其本质上只是对同一件事情的两种描述而已。</p>
-<p>在单线程的操作中，无论是由于栈帧太大，还是虚拟机栈空间太小，当栈空间无法分配时，虚拟机抛出的都是StackOverflowError异常，而不会得到OutOfMemoryError异常。</p>
-<p>而在多线程环境下，则会抛出OutOfMemoryError异常。</p>
-</li>
-<li><p>堆（Java Heap）</p>
-<p>Java Heap是Java虚拟机所管理的内存中最大的一块，它是所有线程共享的一块内存区域。几乎所有的对象实例和数组都在这类分配内存。Java Heap是垃圾收集器管理的主要区域，因此很多时候也被称为“GC堆”。</p>
-<p>根据Java虚拟机规范的规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可。如果在堆中没有内存可分配时，并且堆也无法扩展时，将会抛出OutOfMemoryError异常。   </p>
-</li>
-<li><p>方法区域（Method Area）</p>
-<p>方法区域，又被称为“永久代”，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p>
-</li>
+<li>一致性（Consistency）</li>
 </ul>
+<p>事务前后数据的完整性必须保证一致。</p>
+<ul>
+<li>隔离性（Isolation）</li>
+</ul>
+<p>多个事务并行执行时，一个事务的执行不应影响其他事务的执行。</p>
+<ul>
+<li>持久性</li>
+</ul>
+<p>持久性是指一个事务一旦被提交，它对数据库中的数据的改变是永久性的，接下来即使数据库发生故障也不应该对其有任何影响。</p>
+<p>Redis的事务总是具有ACID中的一致性和隔离性，其他特性是不支持的。当服务器运行在AOF持久化模式下，并且appendfsync时，事务也具有耐久性。</p>
+<h3 id="11、Redis事务支持隔离性吗？"><a href="#11、Redis事务支持隔离性吗？" class="headerlink" title="11、Redis事务支持隔离性吗？"></a>11、Redis事务支持隔离性吗？</h3><p>Redis是单线程程序，并且它保证在执行事务时，不会对事务进行中断，事务可以运行直到执行完所有事务队列中的命令为止。</p>
+<h3 id="12、Redis事务保证原子性吗？支持回滚吗？"><a href="#12、Redis事务保证原子性吗？支持回滚吗？" class="headerlink" title="12、Redis事务保证原子性吗？支持回滚吗？"></a>12、Redis事务保证原子性吗？支持回滚吗？</h3><p>Redis中，单条命令是原子性执行的，但事务不保证原子性，且没有回滚。事务中任意命令执行失败，其余的命令仍会执行。</p>
+<h3 id="13、Redis事务其它实现"><a href="#13、Redis事务其它实现" class="headerlink" title="13、Redis事务其它实现"></a>13、Redis事务其它实现</h3><ul>
+<li>基于Lua脚本，Redis可以保证脚本内的命令一次性、按命令执行，其同时也不提供事务运行错误的回滚，执行过程中如果部分命令运行错误，剩下的，命令还是会继续执行。</li>
+<li>基于中间标记变量，通过另外的标记变量来标识事务是否完成，读取数据时先读取该标记变量，判断是否事务执行完成。但这样会需要额外写代码实现，比较繁琐。</li>
+</ul>
+<hr>
+<h3 id="集群方案"><a href="#集群方案" class="headerlink" title="集群方案"></a>集群方案</h3><h3 id="14、哨兵模式（sentinel）"><a href="#14、哨兵模式（sentinel）" class="headerlink" title="14、哨兵模式（sentinel）"></a>14、哨兵模式（sentinel）</h3><p><img src="/../images/19.png" alt="19"></p>
+<ol>
+<li><p>哨兵的介绍</p>
+<p>sentinel，中文名是哨兵。哨兵是redis集群机构中非常重要的一个组件，主要有一下功能：</p>
+<ul>
+<li>集群监控：负责监控redis master和slave进程是否正常工作。</li>
+<li>消息通知：如果某个redis实例有故障，那么哨兵负责发送消息作为警报通知给管理员。</li>
+<li>故障转移：如果master node挂掉，会自动转移到slave node上。</li>
+<li>配置中心：如果故障转移发生了，通知client客户端新的master地址。</li>
+</ul>
+</li>
+<li><p>哨兵用于实现redis集群的高可用，本身也是分布式的，作为一个哨兵集群去运行，互相协同工作</p>
+<ul>
+<li>故障转移时，判断一个master node是否宕机了，需要大部分的哨兵都同意才行，涉及到了分布式选举的问题。</li>
+<li>即使部分哨兵节点挂掉了，哨兵集群还是能正常工作的，因为如果一个作为高可用机制重要组成成分的故障转移系统本身是单点的，那就很坑了。</li>
+</ul>
+</li>
+<li><p>哨兵的核心知识</p>
+<ul>
+<li>哨兵至少需要3个实例，来保证自己的健壮性。</li>
+<li>哨兵+redis主从的部署架构，是不保证数据零丢失的，只能保证集群的高可用性。</li>
+<li>对于哨兵+redis主从这种复杂的部署结构，尽量在测试环境和生产环境，都进行充足的测试和演练。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="15、官方Redis-Cluster方案（服务端路由查询）"><a href="#15、官方Redis-Cluster方案（服务端路由查询）" class="headerlink" title="15、官方Redis Cluster方案（服务端路由查询）"></a>15、官方Redis Cluster方案（服务端路由查询）</h3><p><img src="/../images/20.png" alt="20"></p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>Redis Cluster是一种服务算sharding技术。Redis Cluster并没有使用一致性hash，而是采用slot（槽）的概念，一共分成16384个槽。将求情发送到任意节点，接收到请求的节点会将查询请求发送到正确的节点上执行。</p>
+<h4 id="方案说明"><a href="#方案说明" class="headerlink" title="方案说明"></a>方案说明</h4><ol>
+<li>通过hash的方式，将数据分片，每个节点均分存储一定哈希槽的数据，默认分配了16384个槽位。</li>
+<li>每份数据分片会存储在多个互为主从的多节点上。</li>
+<li>数据写入先写主节点，在同步到从节点（支持配置为阻塞同步）。</li>
+<li>同一分片多个节点的数据不保持一致性。</li>
+<li>读取数据时，当客户端的key没有分配在该节点时，redis会返回转向指令，指向正确的节点。</li>
+<li>扩容时需要把旧节点的数据迁移到新节点。</li>
+</ol>
+<p>在redis cluster架构下，每个redis要放开两个端口号，比如一个是6379，另一个是加1w的端口号，比如16379。</p>
+<p>16379端口号是用来进行节点间通信的，也就是cluster bus的东西，cluster bus的通信，用来进行故障检测，配置更新，故障转移授权。cluster bus用了另外一种二进制的协议，gossip协议，用于节点间进行高效的数据交换，占用更少的网络带宽和处理时间。</p>
+<h4 id="节点间的内部通信机制"><a href="#节点间的内部通信机制" class="headerlink" title="节点间的内部通信机制"></a>节点间的内部通信机制</h4><p>基本通信原理</p>
+<p>集群元数据的维护有两种方式：集中式、Gossip式。</p>
+<p>分布式寻址算法</p>
+<ul>
+<li>hash算法（大量缓存重建）</li>
+<li>一致性hash算法（自动缓存迁移）+虚拟节点（自动负载均衡）</li>
+<li>redis cluster的hash slot算法</li>
+</ul>
+<p>优点</p>
+<ul>
+<li>无中心结构，支持动态扩容，对业务透明</li>
+<li>只能使用0号数据库</li>
+<li>不支持批量操作（pipeline管道操作）</li>
+<li>分布式逻辑和存储模块耦合</li>
+</ul>
+<h3 id="16、基于客户端分配"><a href="#16、基于客户端分配" class="headerlink" title="16、基于客户端分配"></a>16、基于客户端分配</h3><p><img src="/../images/21.jpeg" alt="21"></p>
+<h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>Redis Sharding是Redis Cluster出来之前，业界普遍使用的多Redis实例集群方法。其主要思想是采用哈希算法将Redis数据的key进行散列，通过hash函数，特定的key会映射到特定的Redis节点上。java redis客户端驱动jedis，支持Redis Sharding功能。</p>
+<p>优点</p>
+<ul>
+<li>优势在于非常简单，服务端的Redis实例彼此独立，相互关联，每个Redis实例像单服务器一样运行，非常容易线性扩展，系统的灵活性很强。</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>由于sharding处理放到客户端，规模进一步扩大时给运维带来挑战。</li>
+<li>客户端sharding不支持动态增删节点。服务端Redis实例群拓扑结构有变化时，每个客户都需要更新调整。连接不能共享，当应用规模增大时，资源浪费制约优化。</li>
+</ul>
+<h3 id="17、基于代理服务器分片"><a href="#17、基于代理服务器分片" class="headerlink" title="17、基于代理服务器分片"></a>17、基于代理服务器分片</h3><p><img src="/../images/22.jpeg" alt="22"></p>
+<h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>客户端发送请求到一个代理组件，代理解析客户端的数据，并将请求转发至正确的节点，最后将结果回复给客户端。</p>
+<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><ul>
+<li>透明接入，业务程序不用关心后端Redis实例，切换成本低</li>
+<li>Proxy的逻辑和存储的逻辑是隔离的</li>
+<li>代理层多了一次转发，性能有所损耗</li>
+</ul>
+<h4 id="业务开源方案"><a href="#业务开源方案" class="headerlink" title="业务开源方案"></a>业务开源方案</h4><ul>
+<li>Twitter开源的Twenproxy</li>
+<li>豌豆荚开源的Codis</li>
+</ul>
+<h3 id="18、Redis的主从架构"><a href="#18、Redis的主从架构" class="headerlink" title="18、Redis的主从架构"></a>18、Redis的主从架构</h3><p>单机的redis，能够承载的QPS大概就在上千万到几万不等。对于缓存来说，一般都支持读高并发的。因此架构做成主从（master-slave）架构，一主多从，主负责写，并且将数据复制到其他的slave节点，从节点负责读。所有的读请求全部走从节点。这样也可以很轻松实现水平扩容，支持读高并发。</p>
+<p><img src="/../images/23.png" alt="23"></p>
+<p>redis replication-&gt;主从架构-&gt;读写分离-&gt;水平扩容支持读高并发</p>
+<h4 id="redis-replication的核心机制"><a href="#redis-replication的核心机制" class="headerlink" title="redis replication的核心机制"></a>redis replication的核心机制</h4><ul>
+<li>redis采用异步方式复制数据到slave节点，不过从redis2.8开始，slave node会周期性地确认自己每次复制的数据量。</li>
+<li>一个master node是可以配置多个slave node的。</li>
+<li>slave node可以连接其他的slave node。</li>
+<li>slave node做复制的时候，不会block master node的正常工作。</li>
+<li>slave node在做复制的时候，也不会对自己的查询的操作，他会用旧的数据集来提供服务；但是复制完成的时候，需要删除数据集，加载新的数据集，这个时候，就会暂停对外服务。</li>
+<li>slave node主要用来进行横向扩容，做读写分离，扩容的slave node可以提纲哦吞吐量。</li>
+</ul>
+<p>注意，如果采用了主从架构，那么建议必须开启 master node 的持久化，不建议用 slave node 作为 master node 的数据热备，因为那样的话，如果你关掉 master 的持久化，可能在 master 宕机重启的时候数据是空的，然后可能一经过复制， slave node 的数据也丢了。</p>
+<p>另外，master 的各种备份方案，也需要做。万一本地的所有文件丢失了，从备份中挑选一份 rdb 去恢复master，这样才能确保启动的时候，是有数据的，即使采用了后续讲解的高可用机制，slave node 可以自动接管 master node，但也可能 sentinel 还没检测到 master failure，master node 就自动重启了，还是可能导致上面所有的 slave node 数据被清空。</p>
+<h4 id="redis主从复制的核心原理"><a href="#redis主从复制的核心原理" class="headerlink" title="redis主从复制的核心原理"></a>redis主从复制的核心原理</h4><p>当启动一个slave node的时候，它会发送一个<code>PSYNC</code>命令给master node。</p>
+<p>如果这是slave node初次连接到master node，那么会触发一次<code>full resynchronization</code>全量复制。此时，master会启动一个后台程序，开始生成一份<code>RDB</code>快照文件，同时还会将从客户端client新收到的所有写命令缓存在内存中。<code>RDB</code>文件生成完毕后，master会将这个<code>RDB</code>发送给slave，slave会写入本地磁盘，然后再从本地磁盘加载到内存中，接着master会将内存中缓存的写命令发送给slave，slave也会同步这些数据。slave node如果跟master node有网络故障，断开了连接，会自动重连，连接之后master node仅会复制给slave部分缺失的数据。</p>
+<p><img src="/../images/24.png" alt="24"></p>
+<p>过程原理</p>
+<ul>
+<li>当从库和主库建立MS关系后，会向主数据库发送<code>SYNC</code>命令。</li>
+<li>主库接收到SYNC命令后，会开始在后台保存快照（RDB持久化过程），并将期间接收到的命令缓存起来。</li>
+<li>当快照完成后，主Redis会将快照文件和所有缓存的写命令发送给从Redis。</li>
+<li>从Redis接收到后，会载入快照文件并且执行收到的缓存命令。</li>
+<li>主Redis每当接收到写命令时就会将命令发送给从Redis，从而保证数据的一致。</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>所有的slave节点数据的复制和同步都由master节点处理，会造成master节点压力过大。</li>
+</ul>
+<h3 id="19、Redis集群的主从复制模型是怎样的？"><a href="#19、Redis集群的主从复制模型是怎样的？" class="headerlink" title="19、Redis集群的主从复制模型是怎样的？"></a>19、Redis集群的主从复制模型是怎样的？</h3><p>为了使在部分节点失败或者大部分节点无法通信的情况下集群仍然可用，所以集群使用了主从复制模型，每个节点都会有N-1个复制品。</p>
+<h3 id="20、生产环境中redis是怎么部署的？"><a href="#20、生产环境中redis是怎么部署的？" class="headerlink" title="20、生产环境中redis是怎么部署的？"></a>20、生产环境中redis是怎么部署的？</h3><p>redis cluster，10 台机器，5 台机器部署了 redis 主实例，另外 5 台机器部署了 redis 的从实例，每个主实例挂了一个从实例，5 个节点对外提供读写服务，每个节点的读写高峰qps可能可以达到每秒 5 万，5 台机器最多是 25 万读写请求&#x2F;s。</p>
+<p>机器是什么配置？32G 内存+ 8 核 CPU + 1T 磁盘，但是分配给 redis 进程的是10g内存，一般线上生产环境，redis 的内存尽量不要超过 10g，超过 10g 可能会有问题。</p>
+<p>5 台机器对外提供读写，一共有 50g 内存。</p>
+<p>因为每个主实例都挂了一个从实例，所以是高可用的，任何一个主实例宕机，都会自动故障迁移，redis 从实例会自动变成主实例继续提供读写服务。</p>
+<p>你往内存里写的是什么数据？每条数据的大小是多少？商品数据，每条数据是 10kb。100 条数据是 1mb，10 万条数据是 1g。常驻内存的是 200 万条商品数据，占用内存是 20g，仅仅不到总内存的 50%。目前高峰期每秒就是 3500 左右的请求量。</p>
+<p>其实大型的公司，会有基础架构的 team 负责缓存集群的运维。</p>
+<h3 id="21、说说Redis哈希槽的概念？"><a href="#21、说说Redis哈希槽的概念？" class="headerlink" title="21、说说Redis哈希槽的概念？"></a>21、说说Redis哈希槽的概念？</h3><p>Redis集群没有使用一致性hash,而是引入了哈希槽的概念，Redis集群有16384个哈希槽，每个key通过CRC16校验后对16384取模来决定放置哪个槽，集群的每个节点负责一部分hash槽。</p>
+<h3 id="22、Redis集群会有写操作丢失吗？"><a href="#22、Redis集群会有写操作丢失吗？" class="headerlink" title="22、Redis集群会有写操作丢失吗？"></a>22、Redis集群会有写操作丢失吗？</h3><p>Redis并不能保证数据的强一致性，这意味这在实际中集群在特定的条件下可能会丢失写操作。</p>
+<h3 id="23、Redis集群之间是如何复制的？"><a href="#23、Redis集群之间是如何复制的？" class="headerlink" title="23、Redis集群之间是如何复制的？"></a>23、Redis集群之间是如何复制的？</h3><p>异步复制。</p>
+<h3 id="24、Redis集群最大节点个数是多少？"><a href="#24、Redis集群最大节点个数是多少？" class="headerlink" title="24、Redis集群最大节点个数是多少？"></a>24、Redis集群最大节点个数是多少？</h3><p>16384个。</p>
+<h3 id="25、Redis集群如何选择数据库？"><a href="#25、Redis集群如何选择数据库？" class="headerlink" title="25、Redis集群如何选择数据库？"></a>25、Redis集群如何选择数据库？</h3><p>Redis集群目前无法做数据库选择，默认在0数据库。</p>
 ]]></content>
       <categories>
-        <category>JVM</category>
+        <category>Redis</category>
       </categories>
       <tags>
-        <tag>JVM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot自动配置的原理及实现</title>
-    <url>/2022/03/11/SpringBoot%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>版本控制-Git</title>
-    <url>/2022/03/10/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-Git/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>反向代理-Nginx</title>
-    <url>/2022/03/10/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Nginx/</url>
-    <content><![CDATA[<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><span id="more"></span>]]></content>
-      <categories>
-        <category>Nginx</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据库优化</title>
-    <url>/2022/03/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<h3 id="数据库的优化（常见方法）"><a href="#数据库的优化（常见方法）" class="headerlink" title="数据库的优化（常见方法）"></a>数据库的优化（常见方法）</h3><span id="more"></span>
-
-<p>1、对查询进行优化，要尽量避免全表扫描，首先应该考虑在where以及order by涉及的列上建立索引。形如：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tablename；#应该尽量避免这种方式</span><br></pre></td></tr></table></figure>
-
-<p>修改为：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>2、应该尽量避免在where字句中对字段进行null判断，否则将导致引擎放弃索引而进行全表扫描。形如：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="keyword">is</span> <span class="keyword">null</span>；</span><br></pre></td></tr></table></figure>
-
-<p>最好不要给数据库留null，尽可能使用not null填充数据库。</p>
-<p>3、应该尽量避免在where子句中使用！&#x3D;或&lt;&gt;操作符，否则引擎将放弃使用索引进行全表扫描。</p>
-<p>4、应尽量避免在where子句中使用or来连接条件，如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描。形如：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="operator">=</span> <span class="number">10</span> <span class="keyword">or</span> name <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>修改为：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="operator">=</span> <span class="number">10</span></span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>5、in和not in也要慎用，否则会全表扫描。形如：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-
-<p>对于连续的数值，能用between就不要用in</p>
-<p>修改为：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> tablename <span class="keyword">where</span> num <span class="keyword">between</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">3</span>; </span><br></pre></td></tr></table></figure>
-
-<p>6、使用索引。索引是提高数据库性能的常用方法，它可以令数据库服务器以比没有索引快得多的速度检索特定的行，尤其是在查询语句当中包含有MAX(),MIN()和ORDERBY这些命令的时候，性能提高更为明显。</p>
-<p>一般说来，索引应建立在那些将用于JOIN,WHERE判断和ORDERBY排序的字段上。尽量不要对数据库中某个含有大量重复的值的字段建立索引。对于一个ENUM类型的字段来说，出现大量重复值是很有可能的情况</p>
-<p>例如customerinfo中的“province”..字段，在这样的字段上建立索引将不会有什么帮助；相反，还有可能降低数据库的性能。我们在创建表的时候可以同时创建合适的索引，也可以使用ALTERTABLE或CREATEINDEX在以后创建索引。此外，MySQL从版本3.23.23开始支持全文索引和搜索。全文索引在MySQL中是一个FULLTEXT类型索引，但仅能用于MyISAM类型的表。对于一个大的数据库，将数据装载到一个没有FULLTEXT索引的表中，然后再使用ALTERTABLE或CREATEINDEX创建索引，将是非常快的。但如果将数据装载到一个已经有FULLTEXT索引的表中，执行过程将会非常慢。</p>
-<p>7、使用外键。锁定表的方法可以维护数据的完整性，但是它却不能保证数据的关联性。这个时候我们就可以使用外键。</p>
-<p>例如：外键可以保证每一条销售记录都指向某一个存在的客户。在这里，外键可以把customerinfo表中的CustomerID映射到salesinfo表中CustomerID，任何一条没有合法CustomerID的记录都不会被更新或插入到salesinfo中。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> customerinfo(CustomerIDINT <span class="keyword">NOT</span> <span class="keyword">NULL</span>,PRIMARYKEY(CustomerID))TYPE<span class="operator">=</span>INNODB;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> salesinfo(SalesIDNT <span class="keyword">NOT</span> <span class="keyword">NULL</span>,CustomerIDINT <span class="keyword">NOT</span> <span class="keyword">NULL</span>,PRIMARYKEY(CustomerID,SalesID),</span><br><span class="line">FOREIGNKEY(CustomerID) <span class="keyword">REFERENCES</span> customerinfo(CustomerID) <span class="keyword">ON</span> <span class="keyword">DELETE</span>  CASCADE)TYPE<span class="operator">=</span>INNODB;                       </span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计模式</title>
-    <url>/2022/03/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="JAVA常见的几种设计模式解读"><a href="#JAVA常见的几种设计模式解读" class="headerlink" title="JAVA常见的几种设计模式解读"></a>JAVA常见的几种设计模式解读</h3><h4 id="1、策略模式（Strategy-Pattern）"><a href="#1、策略模式（Strategy-Pattern）" class="headerlink" title="1、策略模式（Strategy Pattern）"></a>1、策略模式（Strategy Pattern）</h4>]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JUC高并发编程</title>
-    <url>/2022/03/15/JUC%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>多线程与高并发</category>
-      </categories>
-      <tags>
-        <tag>多线程与高并发</tag>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -1075,98 +1167,6 @@ Multiple的解释</p>
       </categories>
       <tags>
         <tag>RabbitMQ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring源码解析</title>
-    <url>/2022/03/15/Spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Spring</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈微服务、Spring Cloud、Spring Boot三者之间的关系</title>
-    <url>/2022/03/03/%E6%B5%85%E8%B0%88%E5%BE%AE%E6%9C%8D%E5%8A%A1%E3%80%81Spring-Cloud%E3%80%81Spring-Boot%E4%B8%89%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
-    <content><![CDATA[<h3 id="微服务、Spring-Cloud、Spring-Boot三者之间的关系"><a href="#微服务、Spring-Cloud、Spring-Boot三者之间的关系" class="headerlink" title="微服务、Spring Cloud、Spring Boot三者之间的关系"></a>微服务、Spring Cloud、Spring Boot三者之间的关系</h3><span id="more"></span>
-
-<p>1、SpringBoot专注于快速方便的开发单个个体微服务。</p>
-<p>2、SpringCloud是关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来。</p>
-<p>3、为各个服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、精选决策、分布式会话等集成服务。</p>
-<p>4、SpringBoot可以离开SpringCloud独立开发项目，但是SpringCloud离不开SpringBoot，属于依赖关系。</p>
-]]></content>
-      <categories>
-        <category>spring</category>
-      </categories>
-      <tags>
-        <tag>spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>springcloud五大核心组件</title>
-    <url>/2022/03/03/springcloud/</url>
-    <content><![CDATA[<h3 id="SpringCloud五大核心组件"><a href="#SpringCloud五大核心组件" class="headerlink" title="SpringCloud五大核心组件"></a>SpringCloud五大核心组件</h3><span id="more"></span>
-
-<h4 id="1、Eureka（与之对应的是Dubbo框架的zookeeper）"><a href="#1、Eureka（与之对应的是Dubbo框架的zookeeper）" class="headerlink" title="1、Eureka（与之对应的是Dubbo框架的zookeeper）"></a>1、Eureka（与之对应的是Dubbo框架的zookeeper）</h4><p>作用：实现服务治理（服务注册与发现）</p>
-<p>简介：Spring Cloud Eureka是Spring Cloud Netflix项目下的服务治理模块。</p>
-<p>由两个组件组成：Eureka服务端和Eureka客户端。</p>
-<p>Eureka服务端用作服务注册中心。支持集群部署。</p>
-<p>Eureka客户端是一个java客户端，用来处理服务注册和发现。</p>
-<p>在应用启动时，Eureka客户端向服务端注册自己的服务信息，同时将服务端的服务信息缓存在本地。客户端和服务端周期性的进行心跳交互，以更新服务租约和服务信息。</p>
-<p><img src="/../images/6.png" alt="6"></p>
-<h4 id="2、Ribbon"><a href="#2、Ribbon" class="headerlink" title="2、Ribbon"></a>2、Ribbon</h4><p>作用：Ribbon，主要提供客户侧的软件负载均衡算法。</p>
-<p>简介：Spring Cloud Ribbon是一个基于HTTP和TCP的客户端负载均衡工具，它基于Netflix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST模版请求自动转换成客户端负载均衡的服务调用。</p>
-<p>注意，关键点就是将外界的rest调用，根据负载均衡策略转换为微服务调用。Ribbon有比较多的负载均衡策略。</p>
-<p><img src="/../images/7.png" alt="7"></p>
-<h4 id="3、Hystrix"><a href="#3、Hystrix" class="headerlink" title="3、Hystrix"></a>3、Hystrix</h4><p>作用：断路器，保护系统，控制故障范围。</p>
-<p>简介：为了保证其高可用，单个服务通常会集群部署。由于网络原因或者自身的原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会出现线程阻塞，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。</p>
-<p><img src="/../images/8.png" alt="8"></p>
-<h4 id="4、Zuul"><a href="#4、Zuul" class="headerlink" title="4、Zuul"></a>4、Zuul</h4><p>作用：api网关，路由，负载均衡等多种作用</p>
-<p>简介：类似nginx，反向代理的功能，不过netflix自己增加了一些配合其他组件的特性。</p>
-<p>在微服务架构中，后端服务往往不直接开放给调用端，而是通过一个API网关根据请求的url，路由到相应的服务。当添加API网关后，在第三方调用端和服务提供方之间就创建了一面墙，这面墙直接与调用方通信进行权限控制，后将请求均衡分发给后台服务端。</p>
-<p><img src="/../images/9.png" alt="9"></p>
-<h4 id="5、Config"><a href="#5、Config" class="headerlink" title="5、Config"></a>5、Config</h4><p>作用：配置管理</p>
-<p>简介：SpringCloud Config提供服务器端和客户端。服务器存储后端的默认实现使用git，因此它轻松支持标签版本的配置环境，以及可以访问用于管理内容的各种工具。</p>
-<p>这个还是静态的，得配合Spring Cloud Bus实现动态的配置更新。</p>
-<p><img src="/../images/10.png" alt="10"></p>
-]]></content>
-      <categories>
-        <category>springcloud</category>
-      </categories>
-      <tags>
-        <tag>springcloud</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo+github搭建个人博客</title>
-    <url>/2022/03/02/hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）"><a href="#hexo-github保姆级教程搭建个人博客（适合windows系统，linux类似）" class="headerlink" title="hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）"></a>hexo+github保姆级教程搭建个人博客（适合windows系统，linux类似）</h3><span id="more"></span>
-
-<h4 id="1、前提条件"><a href="#1、前提条件" class="headerlink" title="1、前提条件"></a>1、前提条件</h4><p>（1）windows系统上安装node.js，自行百度。检验是否安装成功如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/1.PNG" alt="1"></p>
-<p>（2）安装hexo框架，检验是否安装成功如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i -g hexo #安装hexo</span><br><span class="line">hexo -v	#查看版本</span><br><span class="line">hexo init #初始化命令</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/2.PNG" alt="2"></p>
-<p>（3）Git安装。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../images/3.PNG" alt="3"></p>
-<h4 id="2、准备注册号的github账号，创建本地仓库（https-username-github-io）"><a href="#2、准备注册号的github账号，创建本地仓库（https-username-github-io）" class="headerlink" title="2、准备注册号的github账号，创建本地仓库（https://username.github.io）"></a>2、准备注册号的github账号，创建本地仓库（<a href="https://username.github.io)/">https://username.github.io）</a></h4><p>由于github是国外网站，这一步就得看运气了！</p>
-<p>（1）创建本地仓库</p>
-<p><img src="/../images/4.png" alt="4"></p>
-<p><img src="/../images/5.png" alt="5"></p>
-<h4 id="3、生成SSH秘钥（须记住）"><a href="#3、生成SSH秘钥（须记住）" class="headerlink" title="3、生成SSH秘钥（须记住）"></a>3、生成SSH秘钥（须记住）</h4><h4 id="4、生成个人博客"><a href="#4、生成个人博客" class="headerlink" title="4、生成个人博客"></a>4、生成个人博客</h4><h4 id="5、修改及配置博客主题（NEXT）"><a href="#5、修改及配置博客主题（NEXT）" class="headerlink" title="5、修改及配置博客主题（NEXT）"></a>5、修改及配置博客主题（NEXT）</h4>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
