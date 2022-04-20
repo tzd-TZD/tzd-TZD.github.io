@@ -24,20 +24,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tzd-tzd.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Nginx">
+    <meta name="description" content="NginxNginx(“engine x”)是一款是由俄罗斯的程序设计师Igor Sysoev所开发高性能的 Web和 反向代理 服务器，也是一个 IMAP&#x2F;POP3&#x2F;SMTP 代理服务器。 在高连接并发的情况下，Nginx是Apache服务器不错的替代品。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反向代理-Nginx">
 <meta property="og:url" content="http://tzd-tzd.github.io/2022/03/10/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Nginx/index.html">
 <meta property="og:site_name" content="菜登の博客">
-<meta property="og:description" content="Nginx">
+<meta property="og:description" content="NginxNginx(“engine x”)是一款是由俄罗斯的程序设计师Igor Sysoev所开发高性能的 Web和 反向代理 服务器，也是一个 IMAP&#x2F;POP3&#x2F;SMTP 代理服务器。 在高连接并发的情况下，Nginx是Apache服务器不错的替代品。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2015/01/nginx.jpg">
 <meta property="article:published_time" content="2022-03-10T08:50:00.000Z">
-<meta property="article:modified_time" content="2022-03-11T01:31:58.580Z">
+<meta property="article:modified_time" content="2022-03-29T11:35:05.465Z">
 <meta property="article:author" content="田泽登">
 <meta property="article:tag" content="Nginx">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2015/01/nginx.jpg">
 
 
 <link rel="canonical" href="http://tzd-tzd.github.io/2022/03/10/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Nginx/">
@@ -156,7 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx"><span class="nav-number">1.</span> <span class="nav-text">Nginx</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx"><span class="nav-number">1.</span> <span class="nav-text">Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E8%AF%B7%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AFNginx"><span class="nav-number">2.</span> <span class="nav-text">1、请解释一下什么是Nginx?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E8%AF%B7%E5%88%97%E4%B8%BENginx%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%80%A7%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">2、请列举Nginx的一些特性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81nginx%E5%92%8Capache%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">3、nginx和apache的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81nginx%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">4、nginx是如何实现高并发的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E8%AF%B7%E8%A7%A3%E9%87%8ANginx%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86HTTP%E8%AF%B7%E6%B1%82%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">5、请解释Nginx如何处理HTTP请求？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%9C%A8Nginx%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%9C%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8D%E7%A7%B0%E6%9D%A5%E9%98%BB%E6%AD%A2%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">6、在Nginx中，如何使用未定义的服务器名称来阻止处理请求？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BC%98%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">7、使用反向代理服务器的优点是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E8%AF%B7%E5%88%97%E4%B8%BENginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E7%94%A8%E9%80%94%E3%80%82"><span class="nav-number">9.</span> <span class="nav-text">8、请列举Nginx服务器的最佳用途。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E8%AF%B7%E8%A7%A3%E9%87%8ANginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Master%E5%92%8CWorker%E8%BF%9B%E7%A8%8B%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">9、请解释Nginx服务器上的Master和Worker进程分别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E8%AF%B7%E8%A7%A3%E9%87%8A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%8D%E5%90%8C80%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%BC%80%E5%90%AFNginx%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">10、请解释如何通过不同80的端口开启Nginx？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E8%AF%B7%E8%A7%A3%E9%87%8A%E6%98%AF%E5%90%A6%E6%9C%89%E5%8F%AF%E8%83%BD%E5%B0%86Nginx%E7%9A%84%E9%94%99%E8%AF%AF%E6%9B%BF%E6%8D%A2%E4%B8%BA502%E9%94%99%E8%AF%AF%EF%BC%8C503%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">11、请解释是否有可能将Nginx的错误替换为502错误，503？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E5%9C%A8Nginx%E4%B8%AD%EF%BC%8C%E8%A7%A3%E9%87%8A%E5%A6%82%E4%BD%95%E5%9C%A8URL%E4%B8%AD%E4%BF%9D%E7%95%99%E5%8F%8C%E6%96%9C%E7%BA%BF%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">12、在Nginx中，解释如何在URL中保留双斜线？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13%E3%80%81%E8%AF%B7%E8%A7%A3%E9%87%8Angx-http-upstream-module%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">13、请解释ngx_http_upstream_module的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14%E3%80%81%E8%AF%B7%E8%A7%A3%E9%87%8A%E4%BB%80%E4%B9%88%E6%98%AFC10K%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">14、请解释什么是C10K问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15%E3%80%81%E8%AF%B7%E9%99%88%E8%BF%B0stub-status%E5%92%8Csub-filter%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">16.</span> <span class="nav-text">15、请陈述stub_status和sub_filter指令的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16%E3%80%81%E8%A7%A3%E9%87%8ANginx%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%E5%B0%86%E8%AF%B7%E6%B1%82%E5%8E%8B%E7%BC%A9%E5%88%B0%E4%B8%8A%E6%B8%B8%EF%BC%9F"><span class="nav-number">17.</span> <span class="nav-text">16、解释Nginx是否支持将请求压缩到上游？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17%E3%80%81%E8%A7%A3%E9%87%8A%E5%A6%82%E4%BD%95%E5%9C%A8Nginx%E4%B8%AD%E8%8E%B7%E5%BE%97%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%EF%BC%9F"><span class="nav-number">18.</span> <span class="nav-text">17、解释如何在Nginx中获得当前时间？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18%E3%80%81%E7%94%A8Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A7%A3%E9%87%8A-s%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">19.</span> <span class="nav-text">18、用Nginx服务器解释-s的目的是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19%E3%80%81%E8%A7%A3%E9%87%8A%E5%A6%82%E4%BD%95%E5%9C%A8Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97%EF%BC%9F"><span class="nav-number">20.</span> <span class="nav-text">19、解释如何在Nginx服务器上添加模块？</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -171,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -235,12 +233,7 @@
 
 <div class="post-block">
   
-  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-    
-    <div class="post-gallery-image">
-      <img src="https://www.runoob.com/wp-content/uploads/2015/01/nginx.jpg" itemprop="contentUrl">
-    </div>
-    </div>
+  
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://tzd-tzd.github.io/2022/03/10/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-Nginx/">
@@ -260,12 +253,6 @@
       <meta itemprop="description" content="">
     </span>
     <span class='post-time'>
-      
-      <span class="post-meta-item-icon">
-      <i class="fa fa-thumb-tack"></i>
-      </span>
-      <font color=red>置顶</font>
-      <span class="post-meta-divider">|</span>
       
     </span>
       <header class="post-header">
@@ -288,7 +275,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-11 09:31:58" itemprop="dateModified" datetime="2022-03-11T09:31:58+08:00">2022-03-11</time>
+      <time title="修改时间：2022-03-29 19:35:05" itemprop="dateModified" datetime="2022-03-29T19:35:05+08:00">2022-03-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,14 +294,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5</span>
+      <span>2.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -325,7 +312,54 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><span id="more"></span>
+        <h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>Nginx(“engine x”)是一款是由俄罗斯的程序设计师Igor Sysoev所开发高性能的 Web和 反向代理 服务器，也是一个 IMAP&#x2F;POP3&#x2F;SMTP 代理服务器。</p>
+<p>在高连接并发的情况下，Nginx是Apache服务器不错的替代品。</p>
+<span id="more"></span>
+
+<h3 id="1、请解释一下什么是Nginx"><a href="#1、请解释一下什么是Nginx" class="headerlink" title="1、请解释一下什么是Nginx?"></a>1、请解释一下什么是Nginx?</h3><p>Nginx是一个web服务器和反向代理服务器，用于HTTP、HTTPS、SMTP、POP3和IMAP协议。</p>
+<h3 id="2、请列举Nginx的一些特性？"><a href="#2、请列举Nginx的一些特性？" class="headerlink" title="2、请列举Nginx的一些特性？"></a>2、请列举Nginx的一些特性？</h3><ul>
+<li>反向代理&#x2F;L7负载均衡器</li>
+<li>嵌入式Perl解释器</li>
+<li>动态二进制升级</li>
+<li>可用于重新编写URL。具有非常好的PCRE</li>
+</ul>
+<h3 id="3、nginx和apache的区别？"><a href="#3、nginx和apache的区别？" class="headerlink" title="3、nginx和apache的区别？"></a>3、nginx和apache的区别？</h3><ul>
+<li>轻量级，同样起web 服务，比apache 占用更少的内存及资源</li>
+<li>抗并发，nginx 处理请求是异步非阻塞的，而apache 则是阻塞型的，在高并发下nginx 能保持低资源低消耗高性能</li>
+<li>高度模块化的设计，编写模块相对简单</li>
+<li>最核心的区别在于apache是同步多进程模型，一个连接对应一个进程；nginx是异步的，多个连接（万级别）可以对应一个进程</li>
+</ul>
+<h3 id="4、nginx是如何实现高并发的？"><a href="#4、nginx是如何实现高并发的？" class="headerlink" title="4、nginx是如何实现高并发的？"></a>4、nginx是如何实现高并发的？</h3><p>一个主进程，多个工作进程，每个工作进程可以处理多个请求，每进来一个request，会有一个worker进程去处理。但不是全程的处理，处理到可能发生阻塞的地方，比如向上游（后端）服务器转发request，并等待请求返回。那么，这个处理的worker继续处理其他请求，而一旦上游服务器返回了，就会触发这个事件，worker才会来接手，这个request才会接着往下走。由于web server的工作性质决定了每个request的大部份生命都是在网络传输中，实际上花费在server机器上的时间片不多。这是几个进程就解决高并发的秘密所在。即@skoo所说的webserver刚好属于网络io密集型应用，不算是计算密集型。</p>
+<h3 id="5、请解释Nginx如何处理HTTP请求？"><a href="#5、请解释Nginx如何处理HTTP请求？" class="headerlink" title="5、请解释Nginx如何处理HTTP请求？"></a>5、请解释Nginx如何处理HTTP请求？</h3><p>Nginx使用反应器模式。主事件循环等待操作系统发出准备事件的信号，这样数据就可以从套接字读取，在该实例中读取到缓冲区并进行处理。单个线程可以提供数万个并发连接。</p>
+<h3 id="6、在Nginx中，如何使用未定义的服务器名称来阻止处理请求？"><a href="#6、在Nginx中，如何使用未定义的服务器名称来阻止处理请求？" class="headerlink" title="6、在Nginx中，如何使用未定义的服务器名称来阻止处理请求？"></a>6、在Nginx中，如何使用未定义的服务器名称来阻止处理请求？</h3><p>只需将请求删除的服务器就可以定义为： </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Server&#123;</span><br><span class="line">	listen 80;server_name &quot;&quot;;</span><br><span class="line">	return 444;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里，服务器名被保留为一个空字符串，它将在没有“主机”头字段的情况下匹配请求，而一个特殊的Nginx的非标准代码444被返回，从而终止连接。</p>
+<h3 id="7、使用反向代理服务器的优点是什么？"><a href="#7、使用反向代理服务器的优点是什么？" class="headerlink" title="7、使用反向代理服务器的优点是什么？"></a>7、使用反向代理服务器的优点是什么？</h3><p>反向代理服务器可以隐藏源服务器的存在和特征。它充当互联网云和web服务器之间的中间层。这对于安全方面来说是很好的，特别是当您使用web托管服务时。</p>
+<h3 id="8、请列举Nginx服务器的最佳用途。"><a href="#8、请列举Nginx服务器的最佳用途。" class="headerlink" title="8、请列举Nginx服务器的最佳用途。"></a>8、请列举Nginx服务器的最佳用途。</h3><p>Nginx服务器的最佳用法是在网络上部署动态HTTP内容，使用SCGI、WSGI应用程序服务器、用于脚本的FastCGI处理程序。它还可以作为负载均衡器。</p>
+<h3 id="9、请解释Nginx服务器上的Master和Worker进程分别是什么？"><a href="#9、请解释Nginx服务器上的Master和Worker进程分别是什么？" class="headerlink" title="9、请解释Nginx服务器上的Master和Worker进程分别是什么？"></a>9、请解释Nginx服务器上的Master和Worker进程分别是什么？</h3><p>Master进程：读取及评估配置和维持 </p>
+<p> Worker进程：处理请求</p>
+<h3 id="10、请解释如何通过不同80的端口开启Nginx？"><a href="#10、请解释如何通过不同80的端口开启Nginx？" class="headerlink" title="10、请解释如何通过不同80的端口开启Nginx？"></a>10、请解释如何通过不同80的端口开启Nginx？</h3><p>为了通过一个不同的端口开启Nginx，你必须进入&#x2F;etc&#x2F;Nginx&#x2F;sites-enabled&#x2F;，如果这是默认文件，那么你必须打开名为“default”的文件。编辑文件，并放置在你想要的端口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Like server&#123;</span><br><span class="line">	listen 81;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="11、请解释是否有可能将Nginx的错误替换为502错误，503？"><a href="#11、请解释是否有可能将Nginx的错误替换为502错误，503？" class="headerlink" title="11、请解释是否有可能将Nginx的错误替换为502错误，503？"></a>11、请解释是否有可能将Nginx的错误替换为502错误，503？</h3><p>502 &#x3D;错误网关 503 &#x3D;服务器超载 有可能，但是您可以确保fastcgi_intercept_errors被设置为ON，并使用错误页面指令。 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Location / &#123;</span><br><span class="line">	fastcgi_pass 127.0.0.1:9001;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	error_page 502=503/error_page.html;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="12、在Nginx中，解释如何在URL中保留双斜线？"><a href="#12、在Nginx中，解释如何在URL中保留双斜线？" class="headerlink" title="12、在Nginx中，解释如何在URL中保留双斜线？"></a>12、在Nginx中，解释如何在URL中保留双斜线？</h3><p>要在URL中保留双斜线，就必须使用merge_slashes_off; </p>
+<p> 语法:merge_slashes [on&#x2F;off] </p>
+<p> 默认值: merge_slashes on </p>
+<p> 环境: http，server</p>
+<h3 id="13、请解释ngx-http-upstream-module的作用是什么？"><a href="#13、请解释ngx-http-upstream-module的作用是什么？" class="headerlink" title="13、请解释ngx_http_upstream_module的作用是什么？"></a>13、请解释ngx_http_upstream_module的作用是什么？</h3><p>ngx_http_upstream_module用于定义可通过fastcgi传递、proxy传递、uwsgi传递、memcached传递和scgi传递指令来引用的服务器组。</p>
+<h3 id="14、请解释什么是C10K问题？"><a href="#14、请解释什么是C10K问题？" class="headerlink" title="14、请解释什么是C10K问题？"></a>14、请解释什么是C10K问题？</h3><p>C10K问题是指无法同时处理大量客户端(10,000)的网络套接字。</p>
+<h3 id="15、请陈述stub-status和sub-filter指令的作用是什么？"><a href="#15、请陈述stub-status和sub-filter指令的作用是什么？" class="headerlink" title="15、请陈述stub_status和sub_filter指令的作用是什么？"></a>15、请陈述stub_status和sub_filter指令的作用是什么？</h3><ul>
+<li>Stub_status指令：该指令用于了解Nginx当前状态的当前状态，如当前的活动连接，接受和处理当前读&#x2F;写&#x2F;等待连接的总数</li>
+<li>Sub_filter指令：它用于搜索和替换响应中的内容，并快速修复陈旧的数据</li>
+</ul>
+<h3 id="16、解释Nginx是否支持将请求压缩到上游？"><a href="#16、解释Nginx是否支持将请求压缩到上游？" class="headerlink" title="16、解释Nginx是否支持将请求压缩到上游？"></a>16、解释Nginx是否支持将请求压缩到上游？</h3><p>您可以使用Nginx模块gunzip将请求压缩到上游。gunzip模块是一个过滤器，它可以对不支持“gzip”编码方法的客户机或服务器使用“内容编码:gzip”来解压缩响应。</p>
+<h3 id="17、解释如何在Nginx中获得当前时间？"><a href="#17、解释如何在Nginx中获得当前时间？" class="headerlink" title="17、解释如何在Nginx中获得当前时间？"></a>17、解释如何在Nginx中获得当前时间？</h3><p>要获得Nginx的当前时间，必须使用SSI模块、$date_gmt和$date_local的变量。Proxy_set_header THE-TIME $date_gmt;</p>
+<h3 id="18、用Nginx服务器解释-s的目的是什么？"><a href="#18、用Nginx服务器解释-s的目的是什么？" class="headerlink" title="18、用Nginx服务器解释-s的目的是什么？"></a>18、用Nginx服务器解释-s的目的是什么？</h3><p>用于运行Nginx -s参数的可执行文件。</p>
+<h3 id="19、解释如何在Nginx服务器上添加模块？"><a href="#19、解释如何在Nginx服务器上添加模块？" class="headerlink" title="19、解释如何在Nginx服务器上添加模块？"></a>19、解释如何在Nginx服务器上添加模块？</h3><p>在编译过程中，必须选择Nginx模块，因为Nginx不支持模块的运行时间选择。</p>
+
     </div>
 
     
@@ -427,14 +461,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">171k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:36</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
